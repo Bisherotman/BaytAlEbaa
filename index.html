@@ -572,7 +572,19 @@ mark{background:var(--mark); padding:0 .1em}
     });
   }
   function normalize(s){return (s||'').toLowerCase().trim()}
-  function filterTiles(){
+  <script>
+(function(){
+  // ضيف هالسطر لتصفير البحث مع كل تحميل
+  document.getElementById('searchBox').value = '';
+
+  document.querySelectorAll('.tile').forEach(tile=>{
+    const src=tile.getAttribute('data-img'); const img=tile.querySelector('img'); if(src&&img) img.src=src;
+  });
+  // ... باقي السكربت كما هو ...
+  filterTiles();
+})();
+</script>
+function filterTiles(){
     const q=normalize(searchBox.value);
     highlight(q);
     let any=false;
@@ -619,3 +631,4 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
+
