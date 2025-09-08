@@ -19,7 +19,7 @@ a{color:inherit; text-decoration:none}
 .main-nav a:hover{color:#111827; border-color:#cbd5e1}
 .header-spacer{flex:1}
 
-/* Search (same style) */
+/* Search */
 .header-search{position:relative; width:min(520px, 46vw); transition:transform .15s}
 @media(hover:hover) and (pointer:fine){.header-search:hover{transform:scale(1.02)}}
 .header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s, background-color .15s}
@@ -63,7 +63,7 @@ a{color:inherit; text-decoration:none}
 
 mark{background:var(--mark); padding:0 .1em}
 
-/* زر بحث عائم */
+/* Floating search */
 .search-fab{position:fixed; right:18px; bottom:18px; z-index:90; width:50px; height:50px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); display:grid; place-items:center; cursor:pointer; transition:transform .12s}
 .search-fab:hover{transform:translateY(-2px)}
 .search-fab svg{width:22px; height:22px; color:#374151}
@@ -98,7 +98,7 @@ mark{background:var(--mark); padding:0 .1em}
 <nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">8</span></div></nav>
 <section class="grid" id="grid"></section>
 
-<!-- زر بحث عائم -->
+<!-- Floating search -->
 <button class="search-fab" id="searchFab" aria-label="Search">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -160,7 +160,7 @@ mark{background:var(--mark); padding:0 .1em}
 
   function buildResults(q){
     q=norm(q); if(!q) return [];
-    const out=[];
+    const out=[]; const seen=new Set();
     CATALOG.forEach(c=>{
       c.subs.forEach(s=>{
         const combo=(c.cat+' - '+s);
@@ -168,9 +168,12 @@ mark{background:var(--mark); padding:0 .1em}
         if(lc.startsWith(q)) score+=3; else if(lc.includes(q)) score+=1;
         if(c.cat.toLowerCase().startsWith(q)) score+=2;
         if(s.toLowerCase().startsWith(q)) score+=2;
-        if(score>0) out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`});
+        if(score>0 && !seen.has(combo)){ seen.add(combo); out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`}); }
       });
-      if(c.cat.toLowerCase().includes(q)) out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`});
+      if(c.cat.toLowerCase().includes(q)){
+        const key=`#${c.id}`;
+        if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`}); }
+      }
     });
     return out.sort((a,b)=>b.score-a.score).slice(0,12);
   }
@@ -192,7 +195,7 @@ mark{background:var(--mark); padding:0 .1em}
   searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
   clearBtn.addEventListener('click',()=>{ searchBox.value=''; renderSuggest(''); searchBox.focus(); });
   searchBox.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){ clearBtn.click(); }
+    if(e.key==='Escape'){ suggest.hidden=true; }
     else if(e.key==='Enter'){
       const items=suggest.querySelectorAll('.item');
       if(items.length){ location.href=items[0].dataset.url; }
