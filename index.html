@@ -13,6 +13,8 @@
 *{box-sizing:border-box}
 body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
 a{color:inherit; text-decoration:none}
+
+/* Header */
 .site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
 .brand{display:flex; align-items:center; gap:12px}
@@ -21,6 +23,8 @@ a{color:inherit; text-decoration:none}
 .main-nav a{color:#111827; font-weight:600; font-size:15px; border-bottom:2px solid transparent; padding-bottom:2px; transition:color .15s, border-color .15s}
 .main-nav a:hover{color:var(--accent); border-color:var(--accent-2)}
 .header-spacer{flex:1}
+
+/* Search */
 .header-search{position:relative; width:min(520px, 46vw); transition:transform .15s}
 @media(hover:hover) and (pointer:fine){.header-search:hover{transform:scale(1.02)}}
 .header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s, background-color .15s}
@@ -31,17 +35,23 @@ a{color:inherit; text-decoration:none}
 .header-search .clear:hover{background:#eef1f6}
 .header-search .clear.pressed{transform:translateY(-50%) scale(.92)}
 .header-search .clear svg{width:14px; height:14px}
+
+/* Suggestions */
 .search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:65}
 .search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px; color:#0f172a}
 .search-suggest .item:hover{background:#f2f4f8}
 .search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
+
+/* Breadcrumb */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
 .page-head .wrap{max-width:1200px; margin:0 auto; padding:18px 24px 14px; display:flex; flex-direction:column; gap:8px}
 .breadcrumb{display:flex; align-items:center; gap:10px; color:#6b7280; font-size:13px}
 .breadcrumb .home-ico{width:18px; height:18px; color:#6b7280}
 .breadcrumb a{color:#4b5563; border-bottom:1px solid transparent}
 .breadcrumb a:hover{border-color:#9ca3af}
+
+/* Drawer opener */
 .side-open{position:fixed; left:0; top:50%; transform:translate(-40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease}
 .side-open span{font-weight:800; color:#374151; font-size:15px; letter-spacing:.2px}
 .side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s ease}
@@ -50,21 +60,29 @@ a{color:inherit; text-decoration:none}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(55,65,81,.25)}70%{box-shadow:0 0 0 12px rgba(55,65,81,0)}100%{box-shadow:0 0 0 0 rgba(55,65,81,0)}}
 body.is-side-open .side-open svg{transform:rotate(90deg)}
 body.is-side-open .side-open{animation:pulse 1.4s ease}
+
+/* Drawer + overlay */
 .sidebar-drawer{position:fixed; inset:0 auto 0 0; width:min(320px, 86vw); background:var(--side-bg); border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
 .sidebar-drawer .inner{padding:14px; overflow:auto; height:100%}
 .backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:75}
 body.is-side-open .sidebar-drawer{transform:translateX(0)}
 body.is-side-open .backdrop{opacity:1; pointer-events:auto}
+
+/* Drawer content */
 .side-group{margin:6px 0}
 .side-group>button{width:100%; text-align:left; background:transparent; border:none; padding:10px 10px; font-weight:800; color:#111; border-radius:8px; cursor:pointer; transition:background-color .15s}
 .side-group>button:hover{background:var(--hover-bg)}
 .side-sub{margin:6px 0 10px; padding-left:6px; list-style:none}
 .side-sub li a{display:flex; justify-content:space-between; gap:10px; color:#1f2937; padding:8px 10px; border-radius:8px; transition:background-color .15s}
 .side-sub li a:hover{background:#e9edf3}
+
+/* Tiles */
 .layout{max-width:1200px; margin:0 auto; padding:0 24px}
 .catalog-tiles{padding:20px 0 40px}
 .tiles-head{margin:8px 0 14px; display:flex; align-items:center; justify-content:space-between; gap:12px}
 .tiles-head h2{margin:0; font-size:20px; font-weight:700; color:#0f172a}
+
+/* Show all switch */
 .switch{display:inline-flex; align-items:center; gap:10px; cursor:pointer; background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 12px; box-shadow:0 2px 8px rgba(0,0,0,.06); font-weight:700; color:var(--ink); transition:transform .12s ease, background-color .15s ease}
 .switch:hover{transform:translateY(-1px)}
 .switch:active{transform:translateY(0)}
@@ -73,40 +91,63 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 .switch-track .knob{position:absolute; top:3px; left:3px; width:20px; height:20px; background:#fff; border-radius:999px; box-shadow:0 1px 3px rgba(0,0,0,.2); transition:transform .15s}
 .switch[aria-pressed="true"] .switch-track{background:#9ca3af}
 .switch[aria-pressed="true"] .knob{transform:translateX(20px)}
+
+/* all-open: افتح كل القوائم فعليًا */
+body.all-open .sublist li{display:list-item !important}
+body.all-open .tile-toggle svg{transform:rotate(180deg)}
+body.all-open .tile{border-color:#dfe4ea}
+
+/* Grid + tiles */
 .tiles-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; align-items:stretch}
 @media(max-width:980px){.tiles-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.tiles-grid{grid-template-columns:1fr}}
+
 .tile{background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; transition:border-color .15s, transform .15s, box-shadow .15s; position:relative; display:flex; flex-direction:column; min-height:100%}
 .tile:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--hover-bg)}
 @media(hover:hover) and (pointer:fine){.tile:hover{transform:translateY(-2px) scale(1.01); box-shadow:0 10px 26px rgba(0,0,0,.08)}}
+
 .tile-media{width:100%; aspect-ratio:16/10; background:#dfe4ea; position:relative; flex:none}
 .tile-media img{width:100%; height:100%; object-fit:cover; display:block}
+
 .tile-body{flex:1; padding:14px 14px 20px; position:relative; background:#f3f4f6; display:flex; flex-direction:column}
 .tile-title{margin:0 0 8px; font-size:18px; font-weight:900; color:#0f172a; display:flex; align-items:center; gap:8px}
 .tile-title .nolink{color:inherit}
+
 .sublist{margin:0; padding:0; list-style:none}
 .sublist li{margin:8px 0}
 .tile:not(.is-open) .sublist li:nth-child(n+4){display:none}
 @media(hover:hover) and (pointer:fine){.tile:hover .sublist li{display:list-item !important}}
 .sublist a{display:block; color:var(--ink); padding:8px 10px; border-radius:10px; border:1px solid transparent; transition:background-color .15s, border-color .15s, color .15s}
 .sublist a:hover,.sublist a:focus-visible{background:var(--hover-bg); border-color:var(--accent-2); outline:none; color:var(--accent)}
+
 .tile-toggle{position:absolute; right:12px; bottom:12px; width:42px; height:42px; border:1px solid var(--line); border-radius:999px; background:#fff; color:#1b2433; cursor:pointer; display:grid; place-items:center; transition:filter .15s, transform .15s, border-color .15s, background-color .15s, box-shadow .15s; box-shadow:0 2px 10px rgba(0,0,0,.08)}
 .tile-toggle:hover{filter:brightness(.98); background:#eef2f7; border-color:#d9dfea}
 .tile-toggle svg{transition:transform .2s; transform:rotate(0deg)}
 .tile.is-open .tile-toggle svg{transform:rotate(180deg)}
+
 .no-results{padding:22px; color:#555; font-size:14px}
 mark{background:var(--mark); padding:0 .1em}
+
+/* زر بحث عائم */
+.search-fab{position:fixed; right:18px; bottom:18px; z-index:90; width:50px; height:50px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); display:grid; place-items:center; cursor:pointer; transition:transform .12s}
+.search-fab:hover{transform:translateY(-2px)}
+.search-fab svg{width:22px; height:22px; color:#374151}
+
 @media(prefers-reduced-motion:reduce){
-  .tile,.tile-toggle svg,.sublist a,.header-search .icon,.header-search .clear,.header-search,.sidebar-drawer,.backdrop,.side-open,.search-suggest{transition:none}
+  .tile,.tile-toggle svg,.sublist a,.header-search .icon,.header-search .clear,.header-search,.sidebar-drawer,.backdrop,.side-open,.search-suggest,.search-fab{transition:none}
 }
 </style>
 </head>
 <body>
+
+<!-- Drawer trigger -->
 <button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
   <span>Menu</span>
 </button>
 <div class="backdrop" id="backdrop" hidden></div>
+
+<!-- Drawer -->
 <aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Catalogue navigation" id="drawer" aria-hidden="true">
   <div class="inner">
     <div class="side-group"><button type="button">WC</button>
@@ -121,18 +162,21 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=WC%20-%20Handicapped">Handicapped</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Bidet</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Bidet%20-%20Floor-Standing">Floor-Standing</a></li>
         <li><a href="subcategory.html?title=Bidet%20-%20Wall-hung">Wall-hung</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Urinal</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Urinal%20-%20Top%20inlet">Top inlet</a></li>
         <li><a href="subcategory.html?title=Urinal%20-%20Rear%20inlet">Rear inlet</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Wash Basins</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals">Wall-mount &amp; Pedestals</a></li>
@@ -144,6 +188,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Wash%20Basins%20-%20Cabinet">Cabinet</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Showers & Bathtubs</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">Free-standing</a></li>
@@ -153,6 +198,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet">Shower cabinet</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Faucets</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">Basin Mixers</a></li>
@@ -165,6 +211,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Faucets%20-%20Taps">Taps</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Fittings</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Fittings%20-%20Angle%20Valves">Angle Valves</a></li>
@@ -175,6 +222,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Fittings%20-%20Pop-ups">Pop-ups</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Sinks</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls">Stainless steel bowls</a></li>
@@ -183,6 +231,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Sinks%20-%20Service">Service</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Drains</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Drains%20-%20Floor%20drains">Floor drains</a></li>
@@ -190,6 +239,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Drains%20-%20Shower%20Channels">Shower Channels</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Cisterns</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs">Concealed for WCs</a></li>
@@ -200,6 +250,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Cisterns%20-%20Actuator%20plates">Actuator plates</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Accessories</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Accessories%20-%20Sets">Sets</a></li>
@@ -209,6 +260,7 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=Accessories%20-%20Handicapped">Handicapped</a></li>
       </ul>
     </div>
+
     <div class="side-group"><button type="button">Water Heater</button>
       <ul class="side-sub">
         <li><a href="subcategory.html?title=Water%20Heater%20-%20Wall-hung">Wall-hung</a></li>
@@ -221,7 +273,9 @@ mark{background:var(--mark); padding:0 .1em}
 
 <header class="site-header" role="banner">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa"><img src="https://vectorseek.com/wp-content/uploads/2024/02/Baytalebaa-Logo-Vector.svg-.png" alt="Bayt Al Ebaa Logo" loading="lazy"></a>
+    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
+      <img src="https://vectorseek.com/wp-content/uploads/2024/02/Baytalebaa-Logo-Vector.svg-.png" alt="Bayt Al Ebaa Logo" loading="lazy">
+    </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="index.html" id="goProduct">Product category</a>
@@ -229,11 +283,15 @@ mark{background:var(--mark); padding:0 .1em}
     <div class="header-spacer"></div>
     <form class="header-search" role="search" aria-label="Catalogue search" onsubmit="return false;">
       <div class="icon" id="searchTrigger" title="Search">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
       <input id="searchBox" type="text" placeholder="Search" autocomplete="off" />
       <button type="button" class="clear" id="clearBtn" aria-label="Clear search" title="Clear">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
       <div id="searchSuggest" class="search-suggest" hidden></div>
     </form>
@@ -243,7 +301,9 @@ mark{background:var(--mark); padding:0 .1em}
 <section class="page-head" aria-label="Page header">
   <div class="wrap">
     <div class="breadcrumb">
-      <svg class="home-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1v-10.5Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="home-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1v-10.5Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
       <a href="index.html">Home</a><span aria-hidden="true">/</span><span>Product category</span>
     </div>
   </div>
@@ -253,6 +313,8 @@ mark{background:var(--mark); padding:0 .1em}
   <main class="catalog-tiles" aria-label="Bathroom categories">
     <div class="tiles-head">
       <h2>All categories</h2>
+
+      <!-- Show all switch -->
       <button id="showAllBtn" class="switch" type="button" aria-pressed="false" title="Show all subcategories">
         <span class="switch-label">Show all categories</span>
         <span class="switch-track" aria-hidden="true"><span class="knob"></span></span>
@@ -260,6 +322,8 @@ mark{background:var(--mark); padding:0 .1em}
     </div>
 
     <div id="tilesGrid" class="tiles-grid">
+
+      <!-- WC -->
       <article id="cat-wc" class="tile" data-img="https://www.aquantindia.com/product_images/6868/1821-1.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="wc-list" aria-expanded="false"><img alt="WC cover" loading="lazy"></div>
         <div class="tile-body">
@@ -280,6 +344,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Bidet -->
       <article id="cat-bidet" class="tile" data-img="https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/98/36/DAS_1919836_20201012_114444.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="bidet-list" aria-expanded="false"><img alt="Bidet cover" loading="lazy"></div>
         <div class="tile-body">
@@ -294,6 +359,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Urinal -->
       <article id="cat-urinal" class="tile" data-img="https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/04/28/DAS_390428_20170925_151731.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="urinal-list" aria-expanded="false"><img alt="Urinal cover" loading="lazy"></div>
         <div class="tile-body">
@@ -308,6 +374,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Wash Basins -->
       <article id="cat-wash" class="tile" data-img="https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/70/60/DAS_387060_20180920_102302.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="wash-list" aria-expanded="false"><img alt="Wash Basins cover" loading="lazy"></div>
         <div class="tile-body">
@@ -327,6 +394,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Showers and Bathtubs -->
       <article id="cat-bath" class="tile" data-img="https://shop.saudiceramics.com/media/catalog/product/cache/f8db39d5bc796bd32e8643dcd6e13255/1/3/130430150075200.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="bathtubs-list" aria-expanded="false"><img alt="Showers and Bathtubs cover" loading="lazy"></div>
         <div class="tile-body">
@@ -344,6 +412,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Faucets -->
       <article id="cat-mixers" class="tile" data-img="https://kludi-prod-bucket.s3.eu-central-1.amazonaws.com/klb_422660575_4c_druck_f29814c8bc.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="mixers-list" aria-expanded="false"><img alt="Faucets cover" loading="lazy"></div>
         <div class="tile-body">
@@ -364,6 +433,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Fittings -->
       <article id="cat-fittings" class="tile" data-img="https://www.parker.com/content/dam/Parker-com/Online/Product-Images/Category/Fittings/Pipe-fittings.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="fittings-list" aria-expanded="false"><img alt="Fittings cover" loading="lazy"></div>
         <div class="tile-body">
@@ -382,6 +452,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Sinks -->
       <article id="cat-sinks" class="tile" data-img="https://rodihome.com/wp-content/uploads/2019/03/Xeron116_Produto.png">
         <div class="tile-media" role="button" tabindex="0" aria-controls="sinks-list" aria-expanded="false"><img alt="Sinks cover" loading="lazy"></div>
         <div class="tile-body">
@@ -398,6 +469,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Drains -->
       <article id="cat-drains" class="tile" data-img="https://cdn.salla.sa/zWyrO/ZLMkQV0vgcJHznsqEOAbi8DN6vjtRY9NYdGAjdaC.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="drains-list" aria-expanded="false"><img alt="Drains cover" loading="lazy"></div>
         <div class="tile-body">
@@ -413,6 +485,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Cisterns -->
       <article id="cat-cisterns" class="tile" data-img="https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/25/86/DAS_3952586_20240424_082630.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="cisterns-list" aria-expanded="false"><img alt="Cisterns cover" loading="lazy"></div>
         <div class="tile-body">
@@ -431,6 +504,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Accessories -->
       <article id="cat-acc" class="tile" data-img="https://cdn.cloud.grohe.com/prod/40/40/40344001/480/40344001_1_1.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="acc-list" aria-expanded="false"><img alt="Accessories cover" loading="lazy"></div>
         <div class="tile-body">
@@ -448,6 +522,7 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Water Heater -->
       <article id="cat-wh" class="tile" data-img="https://m.media-amazon.com/images/I/41BnNsSnK1L._UF1000,1000_QL80_.jpg">
         <div class="tile-media" role="button" tabindex="0" aria-controls="wh-list" aria-expanded="false"><img alt="Water Heater cover" loading="lazy"></div>
         <div class="tile-body">
@@ -468,12 +543,37 @@ mark{background:var(--mark); padding:0 .1em}
   </main>
 </div>
 
+<!-- زر بحث عائم -->
+<button class="search-fab" id="searchFab" aria-label="Search">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <script>
 (function(){
-  const CATALOG=[{id:'wc',cat:'WC',img:'https://www.aquantindia.com/product_images/6868/1821-1.jpg',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},{id:'bidet',cat:'Bidet',img:'https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/98/36/DAS_1919836_20201012_114444.jpg',subs:['Floor-Standing','Wall-hung']},{id:'urinal',cat:'Urinal',img:'https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/04/28/DAS_390428_20170925_151731.jpg',subs:['Top inlet','Rear inlet']},{id:'wash',cat:'Wash Basins',img:'https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/70/60/DAS_387060_20180920_102302.jpg',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},{id:'bath',cat:'Showers and Bathtubs',img:'https://shop.saudiceramics.com/media/catalog/product/cache/f8db39d5bc796bd32e8643dcd6e13255/1/3/130430150075200.jpg',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},{id:'mixers',cat:'Faucets',img:'https://kludi-prod-bucket.s3.eu-central-1.amazonaws.com/klb_422660575_4c_druck_f29814c8bc.jpg',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},{id:'fittings',cat:'Fittings',img:'https://www.parker.com/content/dam/Parker-com/Online/Product-Images/Category/Fittings/Pipe-fittings.jpg',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},{id:'sinks',cat:'Sinks',img:'https://rodihome.com/wp-content/uploads/2019/03/Xeron116_Produto.png',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},{id:'drains',cat:'Drains',img:'https://cdn.salla.sa/zWyrO/ZLMkQV0vgcJHznsqEOAbi8DN6vjtRY9NYdGAjdaC.jpg',subs:['Floor drains','Clean-outs','Shower Channels']},{id:'cisterns',cat:'Cisterns',img:'https://images.data.geberit.com/image/upload/f_auto,t_ProductLarge/25/86/DAS_3952586_20240424_082630.jpg',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},{id:'acc',cat:'Accessories',img:'https://cdn.cloud.grohe.com/prod/40/40/40344001/480/40344001_1_1.jpg',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},{id:'wh',cat:'Water Heater',img:'https://m.media-amazon.com/images/I/41BnNsSnK1L._UF1000,1000_QL80_.jpg',subs:['Wall-hung','Central','Solar']}];
+  const CATALOG=[
+    {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
+    {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
+    {id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},
+    {id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},
+    {id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},
+    {id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},
+    {id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},
+    {id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},
+    {id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},
+    {id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},
+    {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
+    {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
+  ];
 
+  // reset search each load
   document.getElementById('searchBox').value='';
-  document.querySelectorAll('.tile').forEach(t=>{const s=t.getAttribute('data-img');const i=t.querySelector('img');if(s&&i)i.src=s});
+
+  // set images
+  document.querySelectorAll('.tile').forEach(t=>{
+    const s=t.getAttribute('data-img'); const i=t.querySelector('img'); if(s&&i) i.src=s;
+  });
 
   const tiles=[...document.querySelectorAll('.tile')];
   const toggles=[...document.querySelectorAll('.tile-toggle')];
@@ -483,42 +583,164 @@ mark{background:var(--mark); padding:0 .1em}
   const noResults=document.getElementById('noResults');
   const searchTrigger=document.getElementById('searchTrigger');
   const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
+
   const hlNodes=[...document.querySelectorAll('.hl')];
   hlNodes.forEach(n=>n.dataset.orig=n.textContent);
 
-  function setExpanded(el,o){if(el)el.setAttribute('aria-expanded',o?'true':'false')}
-  function openOnly(target){tiles.forEach(t=>{const o=t===target;t.classList.toggle('is-open',o);setExpanded(t.querySelector('.tile-toggle'),o);setExpanded(t.querySelector('.tile-media'),o)})}
-  function toggleFrom(el){const tile=el.closest('.tile');const willOpen=!tile.classList.contains('is-open');openOnly(willOpen?tile:null)}
+  function setExpanded(el,o){ if(el) el.setAttribute('aria-expanded',o?'true':'false'); }
+  function openOnly(target){
+    tiles.forEach(t=>{
+      const o=(t===target);
+      t.classList.toggle('is-open',o);
+      setExpanded(t.querySelector('.tile-toggle'),o);
+      setExpanded(t.querySelector('.tile-media'),o);
+    });
+  }
+  function toggleFrom(el){
+    const tile=el.closest('.tile');
+    const willOpen=!tile.classList.contains('is-open');
+    openOnly(willOpen ? tile : null);
+  }
   toggles.forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();toggleFrom(b)}));
-  medias.forEach(m=>{m.addEventListener('click',e=>{e.preventDefault();toggleFrom(m)});m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleFrom(m)}})});
-  const isDesktop=matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if(isDesktop){tiles.forEach(tile=>{tile.addEventListener('mouseenter',()=>{setExpanded(tile.querySelector('.tile-toggle'),true);setExpanded(tile.querySelector('.tile-media'),true)});tile.addEventListener('mouseleave',()=>{if(!tile.classList.contains('is-open')){setExpanded(tile.querySelector('.tile-toggle'),false);setExpanded(tile.querySelector('.tile-media'),false)}})})}
+  medias.forEach(m=>{
+    m.addEventListener('click',e=>{e.preventDefault();toggleFrom(m)});
+    m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleFrom(m)}})
+  });
 
+  const isDesktop=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(isDesktop){
+    tiles.forEach(tile=>{
+      tile.addEventListener('mouseenter',()=>{ setExpanded(tile.querySelector('.tile-toggle'),true); setExpanded(tile.querySelector('.tile-media'),true); });
+      tile.addEventListener('mouseleave',()=>{ if(!tile.classList.contains('is-open')){ setExpanded(tile.querySelector('.tile-toggle'),false); setExpanded(tile.querySelector('.tile-media'),false); } });
+    });
+  }
+
+  // highlight helpers
   function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
-  function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
-  function highlight(q){hlNodes.forEach(n=>{const base=n.dataset.orig||n.textContent;n.innerHTML=q?mark(base,q):base})}
+  function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
+  function highlight(q){ hlNodes.forEach(n=>{ const base=n.dataset.orig||n.textContent; n.innerHTML=q?mark(base,q):base; }); }
   function norm(s){return (s||'').toLowerCase().trim()}
-  function filterTiles(){const q=norm(searchBox.value);highlight(q);let any=false;tiles.forEach(tile=>{const title=tile.querySelector('.tile-title')?.innerText||'';const items=[...tile.querySelectorAll('.sublist a')];const tileMatch=norm(title).includes(q);let count=0;items.forEach(a=>{const ok=norm(a.textContent).includes(q);a.parentElement.style.display=ok||q===''?'':'none';if(ok)count++});const match=q===''?true:(tileMatch||count>0);if(q!==''){tile.classList.add('is-open');setExpanded(tile.querySelector('.tile-toggle'),true);setExpanded(tile.querySelector('.tile-media'),true)}else{tile.classList.remove('is-open');setExpanded(tile.querySelector('.tile-toggle'),false);setExpanded(tile.querySelector('.tile-media'),false)}tile.style.display=match?'':'none';if(match)any=true;if(q===''){items.forEach(a=>a.parentElement.style.display='')}});noResults.style.display=any?'none':''}
-  function buildResults(q){q=norm(q);if(!q)return[];const out=[];CATALOG.forEach(c=>{c.subs.forEach(s=>{const combo=`${c.cat} - ${s}`;const lcombo=combo.toLowerCase();let score=0;if(lcombo.startsWith(q))score+=3;else if(lcombo.includes(q))score+=1;const lcat=c.cat.toLowerCase();const lsub=s.toLowerCase();if(lcat.startsWith(q))score+=2;if(lsub.startsWith(q))score+=2;if(score>0)out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(c.cat+' - '+s)}`})});if(c.cat.toLowerCase().includes(q))out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`})});return out.sort((a,b)=>b.score-a.score).slice(0,10)}
-  function renderSuggest(q){const items=buildResults(q);if(!q||items.length===0){suggest.hidden=true;suggest.innerHTML='';return}suggest.innerHTML=items.map(it=>`<div class="item" data-url="${it.url}"><div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div><div class="cat">${it.sub?it.cat:'Category'}</div></div>`).join('');suggest.hidden=false;[...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}))}
-  function handleInput(){filterTiles();renderSuggest(searchBox.value)}
+
+  // filtering tiles on page
+  function filterTiles(){
+    const q=norm(searchBox.value);
+    highlight(q);
+    let any=false;
+    tiles.forEach(tile=>{
+      const title=tile.querySelector('.tile-title')?.innerText||'';
+      const items=[...tile.querySelectorAll('.sublist a')];
+      const tileMatch=norm(title).includes(q);
+      let count=0;
+      items.forEach(a=>{
+        const ok=norm(a.textContent||'').includes(q);
+        a.parentElement.style.display=ok||q===''?'':'none';
+        if(ok)count++;
+      });
+      const match=q===''?true:(tileMatch||count>0);
+      if(q!==''){
+        tile.classList.add('is-open');
+        setExpanded(tile.querySelector('.tile-toggle'),true);
+        setExpanded(tile.querySelector('.tile-media'),true);
+      }else{
+        tile.classList.remove('is-open');
+        setExpanded(tile.querySelector('.tile-toggle'),false);
+        setExpanded(tile.querySelector('.tile-media'),false);
+      }
+      tile.style.display=match?'':'none';
+      if(match) any=true;
+      if(q===''){ items.forEach(a=>a.parentElement.style.display=''); }
+    });
+    noResults.style.display=any?'none':'';
+  }
+
+  // site-wide suggestions (categories + subcategories)
+  function buildResults(q){
+    q=norm(q); if(!q) return [];
+    const out=[];
+    CATALOG.forEach(c=>{
+      c.subs.forEach(s=>{
+        const combo=`${c.cat} - ${s}`;
+        const lcombo=combo.toLowerCase();
+        let score=0;
+        if(lcombo.startsWith(q)) score+=3;
+        else if(lcombo.includes(q)) score+=1;
+        if(c.cat.toLowerCase().startsWith(q)) score+=2;
+        if(s.toLowerCase().startsWith(q)) score+=2;
+        if(score>0) out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`});
+      });
+      if(c.cat.toLowerCase().includes(q)){
+        out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`});
+      }
+    });
+    return out.sort((a,b)=>b.score-a.score).slice(0,12);
+  }
+  function renderSuggest(q){
+    const items=buildResults(q);
+    if(!q || items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
+    suggest.innerHTML = items.map(it=>`
+      <div class="item" data-url="${it.url}">
+        <div class="sub">${mark(it.sub?it.sub:it.cat, q)}</div>
+        <div class="cat">${it.sub?it.cat:'Category'}</div>
+      </div>`).join('');
+    suggest.hidden=false;
+    [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
+  }
+
+  function handleInput(){ filterTiles(); renderSuggest(searchBox.value); }
+
   searchBox.addEventListener('input',handleInput);
   searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));
-  searchTrigger.addEventListener('click',()=>searchBox.focus());
-  clearBtn.addEventListener('click',()=>{clearBtn.classList.add('pressed');searchBox.value='';handleInput();setTimeout(()=>clearBtn.classList.remove('pressed'),120);searchBox.focus()});
-  searchBox.addEventListener('keydown',e=>{if(e.key==='Escape'){clearBtn.click()}else if(e.key==='Enter'){const items=suggest.querySelectorAll('.item');if(items.length){location.href=items[0].dataset.url}}});
-  document.addEventListener('click',e=>{if(!e.target.closest('.header-search')){suggest.hidden=true}});
+  searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+  clearBtn.addEventListener('click',()=>{
+    clearBtn.classList.add('pressed'); searchBox.value=''; handleInput();
+    setTimeout(()=>clearBtn.classList.remove('pressed'),120); searchBox.focus();
+  });
+  searchBox.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ clearBtn.click(); }
+    else if(e.key==='Enter'){
+      const items=suggest.querySelectorAll('.item');
+      if(items.length){ location.href = items[0].dataset.url; }
+    }
+  });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
 
-  document.getElementById('goProduct').addEventListener('click',e=>{e.preventDefault();location.href='index.html';});
-  const openBtn=document.getElementById('openDrawer');const drawer=document.getElementById('drawer');const backdrop=document.getElementById('backdrop');
-  function openDrawer(){document.body.classList.add('is-side-open');backdrop.hidden=false;openBtn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false')}
-  function closeDrawer(){document.body.classList.remove('is-side-open');backdrop.hidden=true;openBtn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true')}
-  openBtn.addEventListener('click',()=>{document.body.classList.contains('is-side-open')?closeDrawer():openDrawer()});backdrop.addEventListener('click',closeDrawer);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('is-side-open'))closeDrawer()});
+  // Product link
+  document.getElementById('goProduct').addEventListener('click',e=>{ e.preventDefault(); location.href='index.html'; });
 
+  // Drawer
+  const openBtn=document.getElementById('openDrawer');
+  const drawer=document.getElementById('drawer');
+  const backdrop=document.getElementById('backdrop');
+  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
+  backdrop.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
+
+  // Show all switch — افتح/سكر كل القوائم فعليًا
   const showAllBtn=document.getElementById('showAllBtn');
-  function setGlobalOpen(on){document.body.classList.toggle('all-open',on);showAllBtn.setAttribute('aria-pressed',on?'true':'false');tiles.forEach(t=>{const isOpen=on||t.classList.contains('is-open');setExpanded(t.querySelector('.tile-toggle'),isOpen);setExpanded(t.querySelector('.tile-media'),isOpen)})}
-  showAllBtn.addEventListener('click',()=>{const next=showAllBtn.getAttribute('aria-pressed')!=='true';setGlobalOpen(next)});
+  function setGlobalOpen(on){
+    document.body.classList.toggle('all-open', on);
+    showAllBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tiles.forEach(t=>{
+      t.classList.toggle('is-open', on); // افتح/سكر الكروت فعليًا
+      setExpanded(t.querySelector('.tile-toggle'), on);
+      setExpanded(t.querySelector('.tile-media'), on);
+    });
+  }
+  showAllBtn.addEventListener('click',()=>{
+    const next = showAllBtn.getAttribute('aria-pressed') !== 'true';
+    setGlobalOpen(next);
+  });
 
+  // Floating search button
+  searchFab.addEventListener('click',()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+    searchBox.focus();
+  });
+
+  // initial
   filterTiles();
 })();
 </script>
