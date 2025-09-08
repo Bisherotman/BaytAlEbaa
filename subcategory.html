@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Subcategory</title>
 <style>
-:root{--bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0; --accent:#374151; --hover-bg:rgba(156,163,175,.15)}
+:root{--bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0; --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3}
 *{box-sizing:border-box}
 body{margin:0; font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
 a{color:inherit; text-decoration:none}
+
+/* Header */
 .site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:50; border-bottom:1px solid var(--line)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
 .brand img{height:36px}
@@ -16,6 +18,8 @@ a{color:inherit; text-decoration:none}
 .main-nav a{color:#111827; font-weight:600; font-size:15px; border-bottom:2px solid transparent; padding-bottom:2px}
 .main-nav a:hover{color:#111827; border-color:#cbd5e1}
 .header-spacer{flex:1}
+
+/* Search (same style) */
 .header-search{position:relative; width:min(520px, 46vw); transition:transform .15s}
 @media(hover:hover) and (pointer:fine){.header-search:hover{transform:scale(1.02)}}
 .header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s, background-color .15s}
@@ -28,6 +32,8 @@ a{color:inherit; text-decoration:none}
 .search-suggest .item:hover{background:#f2f4f8}
 .search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
+
+/* Breadcrumb + title */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
 .page-head .wrap{max-width:1200px; margin:0 auto; padding:18px 24px}
 .breadcrumb{display:flex; align-items:center; gap:10px; color:#6b7280; font-size:13px}
@@ -37,6 +43,8 @@ a{color:inherit; text-decoration:none}
 .tab{position:relative; padding:10px 0 14px; font-weight:700; color:#0f172a; display:flex; align-items:center; gap:8px}
 .tab .cnt{font-size:12px; background:#eef2f7; padding:2px 8px; border-radius:999px}
 .tab:after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:#111827}
+
+/* Grid of products */
 .grid{max-width:1200px; margin:0 auto 60px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
@@ -52,7 +60,13 @@ a{color:inherit; text-decoration:none}
 .card p{margin:6px 0 0; color:#374151; font-size:13px}
 .card h3 a{color:#0f172a}
 .card h3 a:hover{text-decoration:underline}
-mark{background:#fff3a3; padding:0 .1em}
+
+mark{background:var(--mark); padding:0 .1em}
+
+/* زر بحث عائم */
+.search-fab{position:fixed; right:18px; bottom:18px; z-index:90; width:50px; height:50px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); display:grid; place-items:center; cursor:pointer; transition:transform .12s}
+.search-fab:hover{transform:translateY(-2px)}
+.search-fab svg{width:22px; height:22px; color:#374151}
 </style>
 </head>
 <body>
@@ -72,7 +86,11 @@ mark{background:#fff3a3; padding:0 .1em}
 
 <section class="page-head">
   <div class="wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html">Product category</a><span aria-hidden="true">/</span><span id="crumbTitle">Subcategory</span></div>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span aria-hidden="true">/</span>
+      <a href="index.html">Product category</a><span aria-hidden="true">/</span>
+      <span id="crumbTitle">Subcategory</span>
+    </div>
   </div>
 </section>
 
@@ -80,27 +98,113 @@ mark{background:#fff3a3; padding:0 .1em}
 <nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">8</span></div></nav>
 <section class="grid" id="grid"></section>
 
+<!-- زر بحث عائم -->
+<button class="search-fab" id="searchFab" aria-label="Search">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <script>
 (function(){
-  const CATALOG=[{id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},{id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},{id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},{id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},{id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},{id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},{id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},{id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},{id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},{id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},{id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},{id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}];
+  const CATALOG=[
+    {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
+    {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
+    {id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},
+    {id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},
+    {id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},
+    {id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},
+    {id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},
+    {id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},
+    {id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},
+    {id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},
+    {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
+    {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
+  ];
 
+  // read title from query
   function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
-  const title=getParam('title');document.title=title+' – Catalogue';document.getElementById('pageTitle').textContent=title;document.getElementById('crumbTitle').textContent=title;
+  const title=getParam('title');
+  document.title=title+' – Catalogue';
+  document.getElementById('pageTitle').textContent=title;
+  document.getElementById('crumbTitle').textContent=title;
 
-  const sample=Array.from({length:8}).map((_,i)=>({img:`https://placehold.co/800x600?text=${encodeURIComponent(title)}+${i+1}`,name:`${title} – Model ${i+1}`,meta:`${1+((i*2)%5)} Articles`,desc:`Short description area for ${title} model ${i+1}.`}));
-  const grid=document.getElementById('grid');grid.innerHTML=sample.map(it=>`<article class="card"><a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy"></a><div class="meta">Category • ${title}</div><h3><a href="#">${it.name}</a></h3><p>${it.desc}</p></article>`).join('');document.getElementById('prodCount').textContent=sample.length;
+  // demo products
+  const sample=Array.from({length:8}).map((_,i)=>({
+    img:`https://placehold.co/800x600?text=${encodeURIComponent(title)}+${i+1}`,
+    name:`${title} – Model ${i+1}`,
+    meta:`${1+((i*2)%5)} Articles`,
+    desc:`Short description area for ${title} model ${i+1}.`
+  }));
+  const grid=document.getElementById('grid');
+  grid.innerHTML=sample.map(it=>`
+    <article class="card">
+      <a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy"></a>
+      <div class="meta">Category • ${title}</div>
+      <h3><a href="#">${it.name}</a></h3>
+      <p>${it.desc}</p>
+    </article>`).join('');
+  document.getElementById('prodCount').textContent=sample.length;
 
-  const searchBox=document.getElementById('searchBox');const clearBtn=document.getElementById('clearBtn');const searchTrigger=document.getElementById('searchTrigger');const suggest=document.getElementById('searchSuggest');searchBox.value='';
+  // unified search (same behavior as index)
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const searchTrigger=document.getElementById('searchTrigger');
+  const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
+  searchBox.value='';
+
   function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
   function norm(s){return (s||'').toLowerCase().trim()}
   function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
-  function buildResults(q){q=norm(q);if(!q)return[];const out=[];CATALOG.forEach(c=>{c.subs.forEach(s=>{const combo=(c.cat+' - '+s).toLowerCase();let score=0;if(combo.startsWith(q))score+=3;else if(combo.includes(q))score+=1;if(c.cat.toLowerCase().startsWith(q))score+=2;if(s.toLowerCase().startsWith(q))score+=2;if(score>0)out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(c.cat+' - '+s)}`})});if(c.cat.toLowerCase().includes(q))out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`})});return out.sort((a,b)=>b.score-a.score).slice(0,10)}
-  function renderSuggest(q){const items=buildResults(q);if(!q||items.length===0){suggest.hidden=true;suggest.innerHTML='';return}suggest.innerHTML=items.map(it=>`<div class="item" data-url="${it.url}"><div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div><div class="cat">${it.sub?it.cat:'Category'}</div></div>`).join('');suggest.hidden=false;[...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}))}
-  function handleInput(){renderSuggest(searchBox.value)}
-  searchBox.addEventListener('input',handleInput);searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));searchTrigger.addEventListener('click',()=>searchBox.focus());
-  clearBtn.addEventListener('click',()=>{searchBox.value='';renderSuggest('');searchBox.focus()});
-  searchBox.addEventListener('keydown',e=>{if(e.key==='Escape'){clearBtn.click()}else if(e.key==='Enter'){const items=suggest.querySelectorAll('.item');if(items.length){location.href=items[0].dataset.url}}});
-  document.addEventListener('click',e=>{if(!e.target.closest('.header-search')){suggest.hidden=true}});
+
+  function buildResults(q){
+    q=norm(q); if(!q) return [];
+    const out=[];
+    CATALOG.forEach(c=>{
+      c.subs.forEach(s=>{
+        const combo=(c.cat+' - '+s);
+        const lc=combo.toLowerCase(); let score=0;
+        if(lc.startsWith(q)) score+=3; else if(lc.includes(q)) score+=1;
+        if(c.cat.toLowerCase().startsWith(q)) score+=2;
+        if(s.toLowerCase().startsWith(q)) score+=2;
+        if(score>0) out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`});
+      });
+      if(c.cat.toLowerCase().includes(q)) out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`});
+    });
+    return out.sort((a,b)=>b.score-a.score).slice(0,12);
+  }
+  function renderSuggest(q){
+    const items=buildResults(q);
+    if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
+    suggest.innerHTML=items.map(it=>`
+      <div class="item" data-url="${it.url}">
+        <div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div>
+        <div class="cat">${it.sub?it.cat:'Category'}</div>
+      </div>`).join('');
+    suggest.hidden=false;
+    [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
+  }
+  function handleInput(){ renderSuggest(searchBox.value); }
+
+  searchBox.addEventListener('input',handleInput);
+  searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));
+  searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+  clearBtn.addEventListener('click',()=>{ searchBox.value=''; renderSuggest(''); searchBox.focus(); });
+  searchBox.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ clearBtn.click(); }
+    else if(e.key==='Enter'){
+      const items=suggest.querySelectorAll('.item');
+      if(items.length){ location.href=items[0].dataset.url; }
+    }
+  });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
+
+  // Floating search button
+  searchFab.addEventListener('click',()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+    searchBox.focus();
+  });
 })();
 </script>
 </body>
