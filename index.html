@@ -18,7 +18,11 @@ a{color:inherit; text-decoration:none}
 .site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
 .brand{display:flex; align-items:center; gap:12px}
-.brand img{height:36px; width:auto; display:block}
+..brand img{
+  height:76px;           
+  position:relative;
+  top:5px;               
+}
 .main-nav{display:flex; align-items:center; gap:22px}
 .main-nav a{color:#111827; font-weight:600; font-size:15px; border-bottom:2px solid transparent; padding-bottom:2px; transition:color .15s, border-color .15s}
 .main-nav a:hover{color:var(--accent); border-color:var(--accent-2)}
@@ -636,4 +640,5 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
+
 
