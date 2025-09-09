@@ -4,57 +4,68 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Subcategory</title>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
-<style>
-:root{--brand:#003353; --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0; --overlay:rgba(0,0,0,.35); --side-bg:#f1f3f6; --mark:#fff3a3}
-*{box-sizing:border-box} html,body{margin:0; font-family:"Inter","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
-a{color:inherit; text-decoration:none} img{max-width:100%; display:block}
 
-/* header unified */
-.site-header{background:#fff; position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line); box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.site-header .wrap{max-width:1200px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:16px}
-.brand img{height:60px}
-.main-nav{display:flex; gap:18px}
-.main-nav a{font-weight:700; color:#0b1222; border-bottom:2px solid transparent; padding-bottom:2px; transition:.2s}
-.main-nav a:hover{border-color:#cbd5e1; color:var(--brand)}
+<!-- UPDATE: Fonts + preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0; --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  /* UPDATE: unified typography */
+  font-family:"Tajawal","Poppins",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color:var(--ink); background:var(--bg)
+}
+a{color:inherit; text-decoration:none}
+
+/* UPDATE: focus-visible */
+:where(a,button,[role="button"],.tab,.clear,.icon):focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px; border-radius:8px;
+}
+
+/* Header */
+.site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:50; border-bottom:1px solid var(--line)}
+.site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
+.brand img{
+  height:76px;
+  position:relative;
+  top:5px;
+}
+.main-nav{display:flex; align-items:center; gap:22px}
+.main-nav a{color:#111827; font-weight:700; font-size:15px; border-bottom:2px solid transparent; padding-bottom:2px; transition:color .15s, border-color .15s}
+.main-nav a:hover{color:#111827; border-color:#cbd5e1}
 .header-spacer{flex:1}
-/* search unified */
-.header-search{position:relative; width:min(520px, 46vw)}
-.header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit}
-.header-search .icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--brand)}
-.header-search .clear{position:absolute; right:10px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--line); border-radius:9px; background:#f6f7f9}
+
+/* Search */
+.header-search{position:relative; width:min(520px, 46vw); transition:transform .15s}
+@media(hover:hover) and (pointer:fine){.header-search:hover{transform:scale(1.02)}}
+.header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s, background-color .15s}
+.header-search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--hover-bg)}
+.header-search .icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:#374151; display:grid; place-items:center; border-radius:999px; cursor:pointer}
+.header-search .clear{position:absolute; right:10px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--line); border-radius:9px; background:#f6f7f9; color:#555; cursor:pointer}
 .header-search .clear svg{width:14px; height:14px}
-.search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:65}
-.search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px}
+.search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:55}
+.search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px; color:#0f172a}
 .search-suggest .item:hover{background:#f2f4f8}
-.search-suggest .sub{color:#111; font-weight:700}
+.search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
-/* lang switch */
-.lang-switch{display:flex; gap:10px; align-items:center}
-.lang-switch button{border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:10px; cursor:pointer; font-weight:700}
-.lang-switch button.is-active{background:var(--brand); color:#fff; border-color:var(--brand)}
-/* drawer trigger & positions */
-.side-open{position:fixed; right:0; top:50%; transform:translate(40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-right:none; border-radius:14px 0 0 14px; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
-.side-open span{font-weight:800; color:#374151; font-size:15px}
-.side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s}
-body.is-side-open .side-open svg{transform:rotate(-90deg)}
-html[dir="rtl"] .side-open{left:0; right:auto; transform:translate(-40%, -50%); border-right:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0}
-/* drawer + overlay */
-.sidebar-drawer{position:fixed; inset:0 0 0 auto; width:min(320px, 86vw); background:var(--side-bg); border-left:1px solid var(--line); transform:translateX(100%); transition:transform .2s; z-index:80; display:flex; flex-direction:column}
-.sidebar-drawer .inner{padding:14px; overflow:auto; height:100%}
-.backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s; z-index:75}
-body.is-side-open .sidebar-drawer{transform:translateX(0)}
-body.is-side-open .backdrop{opacity:1; pointer-events:auto}
-html[dir="rtl"] .sidebar-drawer{inset:0 auto 0 0; border-left:none; border-right:1px solid var(--line); transform:translateX(-100%)}
-html[dir="rtl"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
-/* breadcrumb + title */
+
+/* Breadcrumb + title */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
 .page-head .wrap{max-width:1200px; margin:0 auto; padding:18px 24px}
 .breadcrumb{display:flex; align-items:center; gap:10px; color:#6b7280; font-size:13px}
 .title-row{max-width:1200px; margin:0 auto; padding:8px 24px 0}
-.title-row h1{margin:6px 0 8px; font-size:26px}
-/* grid */
-.grid{max-width:1200px; margin:0 auto 14px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
+.title-row h1{margin:6px 0 8px; font-size:26px; letter-spacing:.2px; font-weight:800}
+.tabs{max-width:1200px; margin:6px auto 18px; padding:0 24px; display:flex; gap:26px; border-bottom:1px solid var(--line)}
+.tab{position:relative; padding:10px 0 14px; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:8px}
+.tab .cnt{font-size:12px; background:#eef2f7; padding:2px 8px; border-radius:999px}
+.tab:after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:#111827}
+
+/* Grid of products */
+.grid{max-width:1200px; margin:0 auto 60px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
@@ -62,150 +73,136 @@ html[dir="rtl"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 .card:nth-child(4n){border-right:none}
 @media(max-width:1100px){ .card:nth-child(4n){border-right:1px solid var(--line)} .card:nth-child(3n){border-right:none} }
 @media(max-width:820px){ .card:nth-child(3n){border-right:1px solid var(--line)} .card:nth-child(2n){border-right:none} }
-.card .pic{width:100%; aspect-ratio:4/3; background:#e5e7eb; border-radius:10px; overflow:hidden}
-.card .pic img{width:100%; height:100%; object-fit:contain}
-.card h3{margin:10px 0 6px; font-size:15px}
+
+/* UPDATE: keep consistent imagery behavior */
+.card .pic{width:100%; aspect-ratio:4/3; background:#e5e7eb; border-radius:10px; overflow:hidden; display:block}
+.card .pic img{width:100%; height:100%; object-fit:contain; display:block}
+
+.meta{margin-top:10px; color:#6b7280; font-size:12px}
+.card h3{margin:6px 0 6px; font-size:15px; line-height:1.25; font-weight:800}
 .card p{margin:6px 0 0; color:#374151; font-size:13px}
-/* hide old category line */
-.meta{display:none}
-/* pagination */
-.pagination{max-width:1200px; margin:0 auto 50px; padding:0 24px 10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
-.pagination a,.pagination span{border:1px solid var(--line); background:#fff; padding:8px 12px; border-radius:10px; font-size:14px}
-.pagination .active{background:#eef2f7; font-weight:800}
+.card h3 a{color:#0f172a}
+.card h3 a:hover{text-decoration:underline}
+
 mark{background:var(--mark); padding:0 .1em}
+
+/* Floating search */
+.search-fab{position:fixed; right:18px; bottom:18px; z-index:90; width:50px; height:50px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); display:grid; place-items:center; cursor:pointer; transition:transform .12s}
+.search-fab:hover{transform:translateY(-2px)}
+.search-fab svg{width:22px; height:22px; color:#374151}
+
+@media(prefers-reduced-motion:reduce){
+  .search-fab,.main-nav a,.header-search, .card a, .card .pic img{transition:none !important}
+}
 </style>
 </head>
 <body>
-
-<!-- Drawer trigger -->
-<button class="side-open" id="openDrawer" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-txt-en="Menu" data-txt-ar="القائمة">Menu</span></button>
-<div class="backdrop" id="backdrop" hidden></div>
-<aside class="sidebar-drawer" id="drawer" aria-hidden="true"><div class="inner" id="drawerInner"></div></aside>
-
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa"><img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy"></a>
-    <nav class="main-nav" aria-label="Primary">
-      <a href="index.html" data-txt-en="Home" data-txt-ar="الرئيسية">Home</a>
-      <a href="product-category.html" data-txt-en="Products" data-txt-ar="التصنيفات">Products</a>
-    </nav>
+    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
+      <!-- UPDATE: decoding="async" -->
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy" decoding="async">
+    </a>
+    <nav class="main-nav"><a href="index.html">Home</a><a href="index.html">Product category</a></nav>
     <div class="header-spacer"></div>
-    <form class="header-search" role="search" onsubmit="return false;">
-      <div class="icon" id="searchTrigger"><svg viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <form class="header-search" role="search" aria-label="Search" onsubmit="return false;">
+      <div class="icon" id="searchTrigger"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <input id="searchBox" type="text" placeholder="Search" autocomplete="off" />
-      <button type="button" class="clear" id="clearBtn" aria-label="Clear"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="clear" id="clearBtn" aria-label="Clear"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div id="searchSuggest" class="search-suggest" hidden></div>
     </form>
-    <div class="lang-switch" aria-label="Language"><button id="btnEn" class="is-active">EN</button><button id="btnAr">ع</button></div>
   </div>
 </header>
 
 <section class="page-head">
   <div class="wrap">
     <div class="breadcrumb">
-      <a href="index.html" data-txt-en="Home" data-txt-ar="الرئيسية">Home</a><span aria-hidden="true">/</span>
-      <a href="product-category.html" data-txt-en="Products" data-txt-ar="التصنيفات">Products</a><span aria-hidden="true">/</span>
+      <a href="index.html">Home</a><span aria-hidden="true">/</span>
+      <a href="index.html">Product category</a><span aria-hidden="true">/</span>
       <span id="crumbTitle">Subcategory</span>
     </div>
   </div>
 </section>
 
 <div class="title-row"><h1 id="pageTitle">Subcategory</h1></div>
-<nav class="tabs" aria-label="Products tabs"><div class="tab" data-txt-en="Products" data-txt-ar="المنتجات">Products <span class="cnt" id="prodCount">0</span></div></nav>
+<nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">8</span></div></nav>
 <section class="grid" id="grid"></section>
-<div class="pagination" id="pagination"></div>
+
+<!-- Floating search -->
+<button class="search-fab" id="searchFab" aria-label="Search">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
 
 <script>
 (function(){
-  const PER_PAGE=16;
-  // populate drawer (full)
-  const drawerInner=document.getElementById('drawerInner');
-  drawerInner.innerHTML = `
-    ${group('WC',[['Floor-Standing','subcategory.html?title=WC%20-%20Floor-Standing'],['Close-coupled','subcategory.html?title=WC%20-%20Close-coupled'],['Wall-Hung','subcategory.html?title=WC%20-%20Wall-Hung'],['Concealed tank','subcategory.html?title=WC%20-%20Concealed%20tank'],['Flush valve (Ex.)','subcategory.html?title=WC%20-%20Flush%20valve%20(Ex.)'],['Seats & covers','subcategory.html?title=WC%20-%20Seats%20%26%20covers'],['Eastern','subcategory.html?title=WC%20-%20Eastern'],['Handicapped','subcategory.html?title=WC%20-%20Handicapped']])}
-    ${group('Bidet',[['Floor-Standing','subcategory.html?title=Bidet%20-%20Floor-Standing'],['Wall-hung','subcategory.html?title=Bidet%20-%20Wall-hung']])}
-    ${group('Urinal',[['Top inlet','subcategory.html?title=Urinal%20-%20Top%20inlet'],['Rear inlet','subcategory.html?title=Urinal%20-%20Rear%20inlet']])}
-    ${group('Wash Basins',[['Wall-mount & Pedestals','subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals'],['One piece','subcategory.html?title=Wash%20Basins%20-%20One%20piece'],['Floor-standing','subcategory.html?title=Wash%20Basins%20-%20Floor-standing'],['Over counter','subcategory.html?title=Wash%20Basins%20-%20Over%20counter'],['Under counter','subcategory.html?title=Wash%20Basins%20-%20Under%20counter'],['Top counter','subcategory.html?title=Wash%20Basins%20-%20Top%20counter'],['Cabinet','subcategory.html?title=Wash%20Basins%20-%20Cabinet']])}
-    ${group('Showers and Bathtubs',[['Free-standing','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing'],['Drop-in','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Drop-in'],['Hydromassage','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Hydromassage'],['Shower tray','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20tray'],['Shower cabinet','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet']])}
-    ${group('Faucets',[['Basin Mixers','subcategory.html?title=Faucets%20-%20Basin%20Mixers'],['Bath & Shower Mixers','subcategory.html?title=Faucets%20-%20Bath%20%26%20Shower%20Mixers'],['Shower systems','subcategory.html?title=Faucets%20-%20Shower%20systems'],['Shower Jets','subcategory.html?title=Faucets%20-%20Shower%20Jets'],['Kitchen Mixers','subcategory.html?title=Faucets%20-%20Kitchen%20Mixers'],['Bidet Mixers','subcategory.html?title=Faucets%20-%20Bidet%20Mixers'],['Ablution Mixers','subcategory.html?title=Faucets%20-%20Ablution%20Mixers'],['Taps','subcategory.html?title=Faucets%20-%20Taps']])}
-    ${group('Fittings',[['Angle Valves','subcategory.html?title=Fittings%20-%20Angle%20Valves'],['Showers','subcategory.html?title=Fittings%20-%20Showers'],['Flexible hoses','subcategory.html?title=Fittings%20-%20Flexible%20hoses'],['Traps','subcategory.html?title=Fittings%20-%20Traps'],['Strainers','subcategory.html?title=Fittings%20-%20Strainers'],['Pop-ups','subcategory.html?title=Fittings%20-%20Pop-ups']])}
-    ${group('Sinks',[['Stainless steel bowls','subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls'],['Cast iron bowls','subcategory.html?title=Sinks%20-%20Cast%20iron%20bowls'],['Vitreous China','subcategory.html?title=Sinks%20-%20Vitreous%20China'],['Service','subcategory.html?title=Sinks%20-%20Service']])}
-    ${group('Drains',[['Floor drains','subcategory.html?title=Drains%20-%20Floor%20drains'],['Clean-outs','subcategory.html?title=Drains%20-%20Clean-outs'],['Shower Channels','subcategory.html?title=Drains%20-%20Shower%20Channels']])}
-    ${group('Cisterns',[['Concealed for WCs','subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs'],['Concealed for Urinals','subcategory.html?title=Cisterns%20-%20Concealed%20for%20Urinals'],['Exposed','subcategory.html?title=Cisterns%20-%20Exposed'],['Elements','subcategory.html?title=Cisterns%20-%20Elements'],['Flush Valves','subcategory.html?title=Cisterns%20-%20Flush%20Valves'],['Actuator plates','subcategory.html?title=Cisterns%20-%20Actuator%20plates']])}
-    ${group('Accessories',[['Sets','subcategory.html?title=Accessories%20-%20Sets'],['Singles','subcategory.html?title=Accessories%20-%20Singles'],['Electronic','subcategory.html?title=Accessories%20-%20Electronic'],['Mirrors','subcategory.html?title=Accessories%20-%20Mirrors'],['Handicapped','subcategory.html?title=Accessories%20-%20Handicapped']])}
-    ${group('Water Heater',[['Wall-hung','subcategory.html?title=Water%20Heater%20-%20Wall-hung'],['Central','subcategory.html?title=Water%20Heater%20-%20Central'],['Solar','subcategory.html?title=Water%20Heater%20-%20Solar']])}
-  `;
-  function group(title, items){ return `<div class="side-group"><button type="button">${title}</button><ul class="side-sub">${items.map(([t,h])=>`<li><a href="${h}">${t}</a></li>`).join('')}</ul></div>`;}
+  const CATALOG=[
+    {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
+    {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
+    {id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},
+    {id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},
+    {id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},
+    {id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},
+    {id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},
+    {id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},
+    {id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},
+    {id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},
+    {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
+    {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
+  ];
 
-  // titles
-  const params=new URL(location.href).searchParams;
-  const title=params.get('title')||'Subcategory';
+  // read title from query
+  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
+  const title=getParam('title');
   document.title=title+' – Catalogue';
   document.getElementById('pageTitle').textContent=title;
   document.getElementById('crumbTitle').textContent=title;
 
-  // sample data (20 => 2 pages)
-  const TOTAL_ITEMS=20;
-  const sample = Array.from({length:TOTAL_ITEMS}).map((_,i)=>({
+  // demo products
+  const sample=Array.from({length:8}).map((_,i)=>({
     img:`https://placehold.co/800x600?text=${encodeURIComponent(title)}+${i+1}`,
-    name:`Model ${i+1}`, brand:`Brand ${((i%5)+1)}`,
-    fcode:`FAC-${String(i+1).padStart(4,'0')}`,
-    sap:`SAP-${100000+i+1}`
+    name:`${title} – Model ${i+1}`,
+    meta:`${1+((i*2)%5)} Articles`,
+    desc:`Short description area for ${title} model ${i+1}.`
   }));
+  const grid=document.getElementById('grid');
+  grid.innerHTML=sample.map(it=>`
+    <article class="card">
+      <a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy" decoding="async"></a>
+      <div class="meta">Category • ${title}</div>
+      <h3><a href="#">${it.name}</a></h3>
+      <p>${it.desc}</p>
+    </article>`).join('');
+  document.getElementById('prodCount').textContent=sample.length;
 
-  const PER_PAGE=16;
-  const page=Math.max(1, parseInt(params.get('page')||'1',10));
-  function renderGrid(){
-    const grid=document.getElementById('grid');
-    const start=(page-1)*PER_PAGE, end=Math.min(sample.length,start+PER_PAGE);
-    const slice=sample.slice(start,end);
-    grid.innerHTML = slice.map(it=>`
-      <article class="card">
-        <a class="pic" href="#"><img src="${it.img}" alt="${title} ${it.name}" loading="lazy"></a>
-        <h3><a href="#">${it.name} – ${it.brand}</a></h3>
-        <p>Factory Code: ${it.fcode}<br>SAP Code: ${it.sap}</p>
-      </article>`).join('');
-    document.getElementById('prodCount').textContent=sample.length;
-    renderPagination(sample.length, PER_PAGE, page);
-  }
-  function renderPagination(total, per, current){
-    const pages=Math.max(1, Math.ceil(total/per));
-    const holder=document.getElementById('pagination');
-    if(pages<=1){ holder.innerHTML=''; return; }
-    const base=new URL(location.href);
-    holder.innerHTML = Array.from({length:pages}).map((_,i)=>{base.searchParams.set('page',String(i+1)); const href=base.toString(); return (i+1)===current?`<span class="active">${i+1}</span>`:`<a href="${href}">${i+1}</a>`;}).join('');
-  }
-
-  // drawer toggle
-  const openBtn=document.getElementById('openDrawer'), drawer=document.getElementById('drawer'), backdrop=document.getElementById('backdrop');
-  function openDrawer(){document.body.classList.add('is-side-open');backdrop.hidden=false; drawer.setAttribute('aria-hidden','false');}
-  function closeDrawer(){document.body.classList.remove('is-side-open');backdrop.hidden=true; drawer.setAttribute('aria-hidden','true');}
-  openBtn.addEventListener('click',()=>{document.body.classList.contains('is-side-open')?closeDrawer():openDrawer()});
-  backdrop.addEventListener('click',closeDrawer);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('is-side-open'))closeDrawer();});
-
-  // search + suggestions (same data model as الصفحات الأخرى)
-  const CATALOG=[{id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},{id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},{id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},{id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},{id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},{id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},{id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},{id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},{id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},{id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},{id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},{id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}];
-  const esc=s=>s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'); const norm=s=>(s||'').toLowerCase().trim();
-  const searchBox=document.getElementById('searchBox'), clearBtn=document.getElementById('clearBtn'), suggest=document.getElementById('searchSuggest'), searchTrigger=document.getElementById('searchTrigger');
+  // unified search (same behavior as index)
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const searchTrigger=document.getElementById('searchTrigger');
+  const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
   searchBox.value='';
-  function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
+
+  function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+  function norm(s){return (s||'').toLowerCase().trim()}
+  function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
+
   function buildResults(q){
     q=norm(q); if(!q) return [];
     const out=[]; const seen=new Set();
     CATALOG.forEach(c=>{
       c.subs.forEach(s=>{
-        const combo=`${c.cat} - ${s}`, l=combo.toLowerCase(); let score=0;
-        if(l.startsWith(q)) score+=3; else if(l.includes(q)) score+=1;
-        if(c.cat.toLowerCase().startsWith(q)) score+=2; if(s.toLowerCase().startsWith(q)) score+=2;
-        const lcombo=combo.toLowerCase(); let score=0;
-        if(lcombo.startsWith(q)) score+=3; else if(lcombo.includes(q)) score+=1;
+        const combo=(c.cat+' - '+s);
+        const lc=combo.toLowerCase(); let score=0;
+        if(lc.startsWith(q)) score+=3; else if(lc.includes(q)) score+=1;
         if(c.cat.toLowerCase().startsWith(q)) score+=2;
         if(s.toLowerCase().startsWith(q)) score+=2;
         if(score>0 && !seen.has(combo)){ seen.add(combo); out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`}); }
       });
       if(c.cat.toLowerCase().includes(q)){
         const key=`#${c.id}`;
-        if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`product-category.html#cat-${c.id}`}); }
+        if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`}); }
       }
     });
     return out.sort((a,b)=>b.score-a.score).slice(0,12);
@@ -215,13 +212,14 @@ mark{background:var(--mark); padding:0 .1em}
     if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
     suggest.innerHTML=items.map(it=>`
       <div class="item" data-url="${it.url}">
-        <div class="sub">${mark(it.sub?it.sub:it.cat, q)}</div>
+        <div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div>
         <div class="cat">${it.sub?it.cat:'Category'}</div>
       </div>`).join('');
     suggest.hidden=false;
     [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
   }
   function handleInput(){ renderSuggest(searchBox.value); }
+
   searchBox.addEventListener('input',handleInput);
   searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));
   searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
@@ -235,45 +233,12 @@ mark{background:var(--mark); padding:0 .1em}
   });
   document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
 
-  // Floating search
-  searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
-
-  // ====== Drawer logic ======
-  const openBtn=document.getElementById('openDrawer');
-  const drawer=document.getElementById('drawer');
-  const backdrop=document.getElementById('backdrop');
-  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
-  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
-  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
-  backdrop.addEventListener('click',closeDrawer);
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
-
-  // ====== Language toggle (default EN) ======
-  const btnEn=document.getElementById('btnEn'), btnAr=document.getElementById('btnAr');
-  function setLang(code){
-    const isAr = code==='ar';
-    document.documentElement.lang = isAr?'ar':'en';
-    document.documentElement.dir  = isAr?'rtl':'ltr';
-    // swap text for nodes with data-txt-*
-    document.querySelectorAll('[data-txt-en]').forEach(el=>{
-      if(isAr && el.getAttribute('data-txt-ar')) el.textContent = el.getAttribute('data-txt-ar');
-      else el.textContent = el.getAttribute('data-txt-en');
-    });
-    // input placeholder
-    const ph = isAr ? 'بحث' : 'Search';
-    document.getElementById('searchBox').setAttribute('placeholder', ph);
-    btnEn.classList.toggle('is-active', !isAr);
-    btnAr.classList.toggle('is-active', isAr);
-  }
-  btnEn.addEventListener('click',()=>setLang('en'));
-  btnAr.addEventListener('click',()=>setLang('ar'));
-  // initialize as English
-  setLang('en');
-
-  // ====== Render now ======
-  renderGrid();
+  // Floating search button
+  searchFab.addEventListener('click',()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+    searchBox.focus();
+  });
 })();
 </script>
 </body>
 </html>
-
