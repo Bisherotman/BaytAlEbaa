@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Subcategory</title>
 
-<!-- (10) تحسينات أمان أساسية -->
+<!-- CSP: سماح بالـ inline scripts عشان يشتغل السكربت اللي يرسُم المنتجات -->
 <meta http-equiv="Content-Security-Policy"
-  content="default-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https:;">
+  content="default-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;">
 <meta name="robots" content="index,follow" />
 
-<!-- (4) تحسين تحميل الخطوط -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
@@ -45,7 +44,6 @@ a{color:inherit; text-decoration:none}
 .header-search .clear svg{width:14px; height:14px}
 .search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:55}
 .search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px; color:#0f172a}
-.search-suggest .item[aria-selected="true"]{background:#eef2f7}
 .search-suggest .item:hover{background:#f2f4f8}
 .search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
@@ -97,8 +95,7 @@ mark{background:var(--mark); padding:0 .1em}
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
-      <!-- (3) تقليل CLS -->
-      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" width="120" height="60" loading="lazy">
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy">
     </a>
     <nav class="main-nav"><a href="index.html">Home</a><a href="index.html">Product category</a></nav>
     <div class="header-spacer"></div>
@@ -108,11 +105,11 @@ mark{background:var(--mark); padding:0 .1em}
           <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <input id="searchBox" type="text" placeholder="Search" autocomplete="off" aria-autocomplete="list" aria-controls="searchSuggest" />
+      <input id="searchBox" type="text" placeholder="Search" autocomplete="off" />
       <button type="button" class="clear" id="clearBtn" aria-label="Clear">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div id="searchSuggest" class="search-suggest" role="listbox" hidden></div>
+      <div id="searchSuggest" class="search-suggest" hidden></div>
     </form>
   </div>
 </header>
@@ -134,47 +131,6 @@ mark{background:var(--mark); padding:0 .1em}
 <nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">0</span></div></nav>
 <section class="grid" id="grid"></section>
 
-<!-- (9) بيانات المنتجات مفصولة داخل JSON مضمّن -->
-<script type="application/json" id="products-data">
-[
-  {
-    "brand": "Grohe",
-    "model": "EURO",
-    "factory": "39703000",
-    "sap": "F19.501-1W4",
-    "photo": "https://quotation.ebaahouse.com:5443/MaterialUploads/F19.501-1W4.jpg"
-  },
-  {
-    "brand": "Grohe",
-    "model": "CUBE",
-    "factory": "3924500H",
-    "sap": "F19.503-1W",
-    "photo": "https://quotation.ebaahouse.com:5443/MaterialUploads/3924500H_1_1.jpg"
-  },
-  {
-    "brand": "Grohe",
-    "model": "BAU",
-    "factory": "39351000",
-    "sap": "F19.502-1W1",
-    "photo": "https://quotation.ebaahouse.com:5443/MaterialUploads/39351000.jpg"
-  },
-  {
-    "brand": "Laufen",
-    "model": "PRO-A",
-    "factory": "H8209560000001",
-    "sap": "F21.003-1WO",
-    "photo": "https://quotation.ebaahouse.com:5443/MaterialUploads/F21.003-1WO.jpg"
-  },
-  {
-    "brand": "Laufen",
-    "model": "PALOMBA",
-    "factory": "H8208020000001",
-    "sap": "F21.009-1W1",
-    "photo": "https://quotation.ebaahouse.com:5443/MaterialUploads/H8208020000001.JPG"
-  }
-]
-</script>
-
 <!-- Floating search -->
 <button class="search-fab" id="searchFab" aria-label="Search">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -184,51 +140,7 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
-  // (1) إصلاح نطاق title + استخدامه داخليًا
-  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
-  const title=getParam('title');
-  document.title=title+' – Catalogue';
-  document.getElementById('pageTitle').textContent=title;
-  document.getElementById('crumbTitle').textContent=title;
-
-  // (9) قراءة JSON المضمّن
-  function getProducts(){
-    try{
-      const raw=document.getElementById('products-data')?.textContent?.trim()||'[]';
-      return JSON.parse(raw);
-    }catch(e){ return []; }
-  }
-
-  // توليد كروت المنتجات من البيانات الحقيقية فقط
-  const grid=document.getElementById('grid');
-  const PRODUCTS=getProducts();
-
-  function escapeHtml(s){return (s||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));}
-
-  function renderProducts(list){
-    const html=list.map(it=>{
-      const displayName  = `${escapeHtml(it.model||'')} \u2013 ${escapeHtml(it.brand||'')}`.trim();
-      const displayCodes = `${escapeHtml(it.factory||'')}<br>${escapeHtml(it.sap||'')}`;
-      const img = (it.photo && it.photo.length) ? it.photo
-                : `https://placehold.co/800x600?text=${encodeURIComponent(it.model||'Model')}+${encodeURIComponent(it.brand||'Brand')}`;
-      return `
-        <article class="card">
-          <a class="pic" href="#">
-            <!-- (3) لو بتعرف أبعاد ثابتة لصورك حط width/height -->
-            <img src="${img}" alt="${displayName}" loading="lazy" decoding="async">
-          </a>
-          <div class="meta">Category • ${escapeHtml(title)}</div>
-          <h3><a href="#">${displayName}</a></h3>
-          <p>${displayCodes}</p>
-        </article>`;
-    }).join('');
-    grid.innerHTML = html;
-    document.getElementById('prodCount').textContent = list.length;
-  }
-
-  renderProducts(PRODUCTS);
-
-  // ===== بحث واقتراحات (6) + تنقل كيبورد =====
+  // بيانات التصنيفات (للاقتراحات)
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
     {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
@@ -244,6 +156,14 @@ mark{background:var(--mark); padding:0 .1em}
     {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
   ];
 
+  // عنوان الصفحة من الـ query
+  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
+  const title=getParam('title');
+  document.title=title+' – Catalogue';
+  document.getElementById('pageTitle').textContent=title;
+  document.getElementById('crumbTitle').textContent=title;
+
+  // بحث واقتراحات أعلى الصفحة
   const searchBox=document.getElementById('searchBox');
   const clearBtn=document.getElementById('clearBtn');
   const searchTrigger=document.getElementById('searchTrigger');
@@ -251,8 +171,9 @@ mark{background:var(--mark); padding:0 .1em}
   const searchFab=document.getElementById('searchFab');
   searchBox.value='';
 
-  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+  function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
   function norm(s){return (s||'').toLowerCase().trim()}
+  function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
 
   function buildResults(q){
     q=norm(q); if(!q) return [];
@@ -273,28 +194,16 @@ mark{background:var(--mark); padding:0 .1em}
     });
     return out.sort((a,b)=>b.score-a.score).slice(0,12);
   }
-
-  let activeIndex=-1;
   function renderSuggest(q){
     const items=buildResults(q);
-    if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; activeIndex=-1; return; }
-    function mark(t,q){return t.replace(new RegExp('('+escRe(q)+')','ig'),'<mark>$1</mark>')}
-    suggest.innerHTML=items.map((it,i)=>`
-      <div class="item" role="option" id="sugg-${i}" data-url="${it.url}" aria-selected="${i===0?'true':'false'}">
+    if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
+    suggest.innerHTML=items.map(it=>`
+      <div class="item" data-url="${it.url}">
         <div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div>
         <div class="cat">${it.sub?it.cat:'Category'}</div>
       </div>`).join('');
-    suggest.hidden=false; activeIndex=0;
+    suggest.hidden=false;
     [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
-    searchBox.setAttribute('aria-activedescendant', 'sugg-0');
-  }
-  function moveActive(delta){
-    const items=[...suggest.querySelectorAll('.item')];
-    if(!items.length) return;
-    activeIndex=(activeIndex+delta+items.length)%items.length;
-    items.forEach((n,i)=>n.setAttribute('aria-selected', i===activeIndex?'true':'false'));
-    searchBox.setAttribute('aria-activedescendant', `sugg-${activeIndex}`);
-    items[activeIndex].scrollIntoView({block:'nearest'});
   }
   function handleInput(){ renderSuggest(searchBox.value); }
   searchBox.addEventListener('input',handleInput);
@@ -303,17 +212,40 @@ mark{background:var(--mark); padding:0 .1em}
   clearBtn.addEventListener('click',()=>{ searchBox.value=''; renderSuggest(''); searchBox.focus(); });
   searchBox.addEventListener('keydown',e=>{
     if(e.key==='Escape'){ suggest.hidden=true; }
-    else if(e.key==='ArrowDown'){ e.preventDefault(); moveActive(1); }
-    else if(e.key==='ArrowUp'){ e.preventDefault(); moveActive(-1); }
     else if(e.key==='Enter'){
-      const cur=suggest.querySelector(`#sugg-${activeIndex}`) || suggest.querySelector('.item');
-      if(cur){ location.href = cur.dataset.url; }
+      const items=suggest.querySelectorAll('.item');
+      if(items.length){ location.href=items[0].dataset.url; }
     }
   });
   document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
-
-  // زر البحث العائم
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+
+  // --- REAL PRODUCTS ---
+  const PRODUCTS = [
+    { brand:"Grohe", model:"EURO",    factory:"39703000",  sap:"F19.501-1W4", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/F19.501-1W4.jpg" },
+    { brand:"Grohe", model:"CUBE",    factory:"3924500H",  sap:"F19.503-1W",  photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/3924500H_1_1.jpg" },
+    { brand:"Grohe", model:"BAU",     factory:"39351000",  sap:"F19.502-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/39351000.jpg" },
+    { brand:"Laufen",model:"PRO-A",   factory:"H8209560000001", sap:"F21.003-1WO", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/F21.003-1WO.jpg" },
+    { brand:"Laufen",model:"PALOMBA", factory:"H8208020000001", sap:"F21.009-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/H8208020000001.JPG" }
+  ];
+
+  const grid=document.getElementById('grid');
+  const titleForMeta=title;
+  grid.innerHTML = PRODUCTS.map((it,idx)=>{
+    const displayName  = `${it.model} – ${it.brand}`;
+    const displayCodes = `${it.factory||""}<br>${it.sap||""}`;
+    const img = (it.photo && it.photo.length)
+      ? it.photo
+      : `https://placehold.co/800x600?text=${encodeURIComponent(it.model+' '+it.brand)}`;
+    return `
+      <article class="card">
+        <a class="pic" href="#"><img src="${img}" alt="${displayName}" loading="lazy" decoding="async"></a>
+        <div class="meta">Category • ${titleForMeta}</div>
+        <h3><a href="#">${displayName}</a></h3>
+        <p>${displayCodes}</p>
+      </article>`;
+  }).join('');
+  document.getElementById('prodCount').textContent = PRODUCTS.length;
 })();
 </script>
 </body>
