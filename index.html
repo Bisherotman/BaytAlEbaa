@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bayt Al‑Ebaa | بيت الإباء</title>
+<title>Bayt Al-Ebaa | Home</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 <style>
 :root{
@@ -24,24 +24,23 @@ img{max-width:100%; display:block}
 .main-nav a{font-weight:700; color:#0b1222; border-bottom:2px solid transparent; padding-bottom:2px; transition:.2s}
 .main-nav a:hover{border-color:#cbd5e1; color:var(--brand)}
 .header-spacer{flex:1}
-.lang-switch{display:flex; gap:10px; align-items:center}
-.lang-switch button{border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:10px; cursor:pointer; font-weight:700}
-.lang-switch button.is-active{background:var(--brand); color:#fff; border-color:var(--brand)}
 
 /* Drawer trigger */
-.side-open{position:fixed; left:0; top:50%; transform:translate(-40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
+.side-open{position:fixed; right:0; top:50%; transform:translate(40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-right:none; border-radius:14px 0 0 14px; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
 .side-open span{font-weight:800; color:#374151; font-size:15px}
 .side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s ease}
-body.is-side-open .side-open svg{transform:rotate(90deg)}
+body.is-side-open .side-open svg{transform:rotate(-90deg)}
 
 /* Drawer + overlay */
-.sidebar-drawer{position:fixed; inset:0 auto 0 0; width:min(320px, 86vw); background:var(--side-bg); border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
+.sidebar-drawer{position:fixed; inset:0 0 0 auto; width:min(320px, 86vw); background:var(--side-bg); border-left:1px solid var(--line); transform:translateX(100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
 .sidebar-drawer .inner{padding:14px; overflow:auto; height:100%}
 .backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:75}
 body.is-side-open .sidebar-drawer{transform:translateX(0)}
 body.is-side-open .backdrop{opacity:1; pointer-events:auto}
+
+/* Drawer content */
 .side-group{margin:6px 0; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden}
-.side-group>button{width:100%; text-align:start; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer}
+.side-group>button{width:100%; text-align:left; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer}
 .side-sub{margin:0; padding:6px; list-style:none}
 .side-sub li a{display:flex; justify-content:space-between; gap:10px; color:#1f2937; padding:8px 10px; border-radius:8px}
 .side-sub li a:hover{background:#e9edf3}
@@ -102,11 +101,6 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 .footer .wrap{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center}
 .social{display:flex; gap:10px}
 .social a{border:1px solid #2a3a4a; padding:8px 10px; border-radius:10px}
-
-/* RTL/LTR helpers */
-html[dir="ltr"] .side-open{left:auto; right:0; transform:translate(40%, -50%)}
-html[dir="ltr"] .sidebar-drawer{inset:0 0 0 auto; transform:translateX(100%)}
-html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 </style>
 </head>
 <body>
@@ -114,14 +108,14 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 <!-- Drawer trigger -->
 <button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-  <span>القائمة</span>
+  <span>Menu</span>
 </button>
 <div class="backdrop" id="backdrop" hidden></div>
 
 <!-- Drawer -->
 <aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Site menu" id="drawer" aria-hidden="true">
   <div class="inner">
-    <div class="side-group"><button>التصنيفات</button>
+    <div class="side-group"><button type="button">Products</button>
       <ul class="side-sub">
         <li><a href="product-category.html#cat-wc">WC</a></li>
         <li><a href="product-category.html#cat-wash">Wash Basins</a></li>
@@ -132,53 +126,73 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
   </div>
 </aside>
 
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo">
+    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy" />
     </a>
-    <nav class="main-nav">
-      <a href="index.html">الرئيسية</a>
-      <a href="product-category.html">التصنيفات</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="product-category.html">Products</a>
     </nav>
     <div class="header-spacer"></div>
-    <div class="lang-switch">
-      <button class="is-active">AR</button>
-      <button>EN</button>
-    </div>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" aria-label="Hero">
   <div class="hero-inner">
-    <div class="kicker">بيت الإباء / Bayt Al‑Ebaa</div>
-    <h1>بيت الإباء، منذ 1985</h1>
-    <p>تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها...</p>
+    <div class="kicker">Bayt Al-Ebaa — Since 1985</div>
+    <h1>World-class finishing & sanitary solutions</h1>
+    <p>Premium products and turnkey execution by expert teams, aligned with Saudi Vision 2030.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="product-category.html">تصفح المنتجات</a>
-      <a class="btn btn-ghost" href="#contact">تواصل معنا</a>
+      <a class="btn btn-primary" href="product-category.html">Browse products</a>
+      <a class="btn btn-ghost" href="#contact">Contact us</a>
     </div>
   </div>
 </section>
 
+<!-- About -->
 <section class="section" id="about">
   <div class="wrap">
-    <h2>نبذة عنّا</h2>
-    <p class="lead">قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة.</p>
-    <ul>
-      <li>ضمان معتمد على المنتجات والخدمات.</li>
-      <li>سرعة توريد وتوفير المواد للمشاريع في الوقت المحدد.</li>
-      <li>شهادات جودة من علامات تجارية عالمية.</li>
-      <li>فريق متخصص بخبرة في تنفيذ المشاريع الكبرى.</li>
-      <li>حلول متكاملة من التصميم حتى التركيب والدعم الفني.</li>
-      <li>التزام بالمعايير ومتطلبات رؤية السعودية 2030.</li>
-    </ul>
+    <h2>About us</h2>
+    <p class="lead">The Sanitary Projects division delivers integrated, high-quality solutions backed by certified brands and experienced teams.</p>
+    <div class="cards" style="margin-top:12px">
+      <div class="card"><div class="body"><h3>✔ Certified warranty</h3><p>On products and services.</p></div></div>
+      <div class="card"><div class="body"><h3>✔ Fast supply</h3><p>On-time project delivery.</p></div></div>
+      <div class="card"><div class="body"><h3>✔ Global quality</h3><p>Top brands and standards.</p></div></div>
+      <div class="card"><div class="body"><h3>✔ Expert team</h3><p>Experience in mega projects.</p></div></div>
+      <div class="card"><div class="body"><h3>✔ End-to-end</h3><p>From design to installation.</p></div></div>
+      <div class="card"><div class="body"><h3>✔ Vision 2030 ready</h3><p>Compliance and alignment.</p></div></div>
+    </div>
   </div>
 </section>
 
+<!-- Key categories -->
+<section class="section" id="services">
+  <div class="wrap">
+    <h2>Key categories</h2>
+    <div class="cards">
+      <a class="card" href="subcategory.html?title=WC%20-%20Floor-Standing">
+        <div class="media"><img src="assets/img/WC_500x560.jpg" alt="WC" /></div>
+        <div class="body"><h3>WC</h3><p>Floor-Standing / Wall-Hung ...</p></div>
+      </a>
+      <a class="card" href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">
+        <div class="media"><img src="assets/img/Faucets_500x560.jpg" alt="Faucets" /></div>
+        <div class="body"><h3>Faucets</h3><p>Basin / Kitchen / Shower ...</p></div>
+      </a>
+      <a class="card" href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">
+        <div class="media"><img src="assets/img/Showers_500x5604.jpg" alt="Showers & Bathtubs" /></div>
+        <div class="body"><h3>Showers & Bathtubs</h3><p>Free-standing / Drop-in ...</p></div>
+      </a>
+    </div>
+    <div style="margin-top:14px"><a class="btn btn-primary" href="product-category.html">All products</a></div>
+  </div>
+</section>
+
+<!-- Partners (logos grid) -->
 <section class="section" id="partners">
   <div class="wrap">
-    <h2>شركاؤنا</h2>
+    <h2>Our partners</h2>
     <div class="partners-logos">
       <img src="assets/img/partners/grohe.png" alt="Grohe">
       <img src="assets/img/partners/kohler.png" alt="Kohler">
@@ -187,63 +201,78 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
       <img src="assets/img/partners/novellini.png" alt="Novellini">
       <img src="assets/img/partners/ariston.png" alt="Ariston">
       <img src="assets/img/partners/rodi.png" alt="Rodi">
-      <img src="assets/img/partners/loffen.png" alt="Loffen">
+      <img src="assets/img/partners/loffen.png" alt="Laufen/Loffen">
     </div>
   </div>
 </section>
 
+<!-- Team -->
 <section class="section" id="team">
   <div class="wrap">
-    <h2>فريق العمل</h2>
+    <h2>Our team</h2>
     <div class="team">
       <div class="member">
-        <img src="assets/img/team1.jpg" alt="عبدالمعين نبيل حاكمي">
+        <img src="assets/img/team1.jpg" alt="Abdulmoeen Nabeel Hakami">
         <div class="info">
-          <h4>عبدالمعين نبيل حاكمي</h4>
-          <p>المدير التنفيذي</p>
+          <h4>Abdulmoeen Nabeel Hakami</h4>
+          <p>Chief Executive Officer</p>
         </div>
       </div>
       <div class="member">
-        <img src="assets/img/team2.jpg" alt="عبدالحميد عبد العال">
+        <img src="assets/img/team2.jpg" alt="Abdelhamid Abdel Aal">
         <div class="info">
-          <h4>عبدالحميد عبد العال</h4>
-          <p>مدير المشاريع</p>
+          <h4>Abdelhamid Abdel Aal</h4>
+          <p>Projects Manager</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Contact -->
 <section class="section" id="contact">
-  <div class="wrap contact-grid">
-    <div class="contact-card">
-      <h2>تواصل معنا</h2>
-      <div class="contact-row"><span class="badge">📍</span><span>السعودية – جدة</span></div>
-      <div class="contact-row"><span class="badge">📞</span><span>920029007</span></div>
-      <div class="contact-row"><span class="badge">✉️</span><span>csteam@baytalebaa.com</span></div>
-      <div class="contact-row"><span class="badge">⏰</span><span>الرد خلال 24 ساعة، الجمعة عطلة</span></div>
-    </div>
-    <div class="map">
-      <iframe src="https://www.google.com/maps/embed?..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <div class="wrap">
+    <h2>Contact us</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-row"><span class="badge">Phone</span><div><a href="tel:920029007">920029007</a></div></div>
+        <div class="contact-row"><span class="badge">Email</span><div><a href="mailto:csteam@baytalebaa.com">csteam@baytalebaa.com</a></div></div>
+        <div class="contact-row"><span class="badge">Instagram</span><div><a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">@baytalebaa</a></div></div>
+        <div class="contact-row"><span class="badge">Hours</span><div>9am – 5pm (Fri off)</div></div>
+      </div>
+      <div class="map">
+        <iframe title="Bayt Al-Ebaa" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Jeddah%20Bayt%20Al%20Ebaa&output=embed"></iframe>
+      </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="wrap">
-    <div>© 2025 بيت الإباء</div>
+    <div>© <span id="y"></span> Bayt Al-Ebaa</div>
     <div class="social">
-      <a href="https://www.instagram.com/baytalebaa/">Instagram</a>
+      <a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">Instagram</a>
+      <a href="product-category.html">Products</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
 
 <script>
-// Drawer toggle
-const openBtn=document.getElementById('openDrawer');
-const drawer=document.getElementById('drawer');
-const backdrop=document.getElementById('backdrop');
-function openDrawer(){document.body.classList.add('is-side-open');backdrop.hidden=false;}
-function closeDrawer(){document.body.classList.remove('is-side-open');backdrop.hidden=true;}
-openBtn.addEventListener('click',()=>{document.body.classList.contains('is-side-open')?closeDrawer():openDrawer()});
-back
+(function(){
+  // Year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Drawer
+  const openBtn=document.getElementById('openDrawer');
+  const drawer=document.getElementById('drawer');
+  const backdrop=document.getElementById('backdrop');
+  function openDrawerFn(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawerFn(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawerFn():openDrawerFn(); });
+  backdrop.addEventListener('click',closeDrawerFn);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawerFn(); });
+})();
+</script>
+</body>
+</html>
