@@ -7,14 +7,15 @@
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0;
-  --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3
+  --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3;
+  --overlay:rgba(0,0,0,.35); --side-bg:#f1f3f6
 }
 *{box-sizing:border-box}
 body{margin:0; font-family:"Tajawal","Poppins",system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
 a{color:inherit; text-decoration:none}
 
 /* Header */
-.site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:50; border-bottom:1px solid var(--line)}
+.site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
 .brand img{height:60px; position:relative; top:5px}
 .main-nav{display:flex; align-items:center; gap:22px}
@@ -24,16 +25,37 @@ a{color:inherit; text-decoration:none}
 
 /* Search */
 .header-search{position:relative; width:min(520px, 46vw)}
-.header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s, background-color .15s}
+.header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit; color:var(--ink); background:#fff; outline:none; transition:border-color .15s, box-shadow .15s}
 .header-search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--hover-bg)}
 .header-search .icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:#374151; display:grid; place-items:center; cursor:pointer}
 .header-search .clear{position:absolute; right:10px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--line); border-radius:9px; background:#f6f7f9; color:#555; cursor:pointer}
 .header-search .clear svg{width:14px; height:14px}
-.search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:55}
-.search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px; color:#0f172a}
+.search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:65}
+.search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px}
 .search-suggest .item:hover{background:#f2f4f8}
 .search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
+
+/* Drawer trigger */
+.side-open{position:fixed; left:0; top:50%; transform:translate(-40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
+.side-open span{font-weight:800; color:#374151; font-size:15px; letter-spacing:.2px}
+.side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s ease}
+body.is-side-open .side-open svg{transform:rotate(90deg)}
+
+/* Drawer + overlay */
+.sidebar-drawer{position:fixed; inset:0 auto 0 0; width:min(320px, 86vw); background:var(--side-bg); border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
+.sidebar-drawer .inner{padding:14px; overflow:auto; height:100%}
+.backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:75}
+body.is-side-open .sidebar-drawer{transform:translateX(0)}
+body.is-side-open .backdrop{opacity:1; pointer-events:auto}
+
+/* Drawer content */
+.side-group{margin:6px 0; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.side-group>button{width:100%; text-align:left; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer}
+.side-group>button:hover{background:var(--hover-bg)}
+.side-sub{margin:0; padding:6px; list-style:none}
+.side-sub li a{display:flex; justify-content:space-between; gap:10px; color:#1f2937; padding:8px 10px; border-radius:8px}
+.side-sub li a:hover{background:#e9edf3}
 
 /* Breadcrumb + title */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
@@ -53,8 +75,9 @@ a{color:inherit; text-decoration:none}
 .tab .cnt{font-size:12px; background:#eef2f7; padding:2px 8px; border-radius:999px}
 .tab:after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:#111827}
 
-/* Grid of products */
-.grid{max-width:1200px; margin:0 auto 60px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
+/* Grid */
+.grid-wrap{max-width:1200px; margin:0 auto 60px}
+.grid{padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
@@ -64,14 +87,17 @@ a{color:inherit; text-decoration:none}
 @media(max-width:820px){ .card:nth-child(3n){border-right:1px solid var(--line)} .card:nth-child(2n){border-right:none} }
 .card .pic{width:100%; aspect-ratio:4/3; background:#e5e7eb; border-radius:10px; overflow:hidden; display:block}
 .card .pic img{width:100%; height:100%; object-fit:contain; display:block}
-.meta{margin-top:10px; color:#6b7280; font-size:12px}
 .card h3{margin:6px 0 6px; font-size:15px; line-height:1.25}
 .card p{margin:6px 0 0; color:#374151; font-size:13px}
 .card h3 a{color:#0f172a}
 .card h3 a:hover{text-decoration:underline}
-
-/* mark */
 mark{background:var(--mark); padding:0 .1em}
+
+/* Pagination */
+.pager{display:flex; align-items:center; justify-content:center; gap:6px; padding:16px 24px}
+.pager a,.pager button{min-width:36px; height:36px; padding:0 12px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line); background:#fff; border-radius:10px; font-weight:700; cursor:pointer}
+.pager .is-active{background:#111827; color:#fff; border-color:#111827}
+.pager .disabled{opacity:.45; pointer-events:none}
 
 /* Floating search */
 .search-fab{position:fixed; right:18px; bottom:18px; z-index:90; width:50px; height:50px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); display:grid; place-items:center; cursor:pointer}
@@ -79,6 +105,150 @@ mark{background:var(--mark); padding:0 .1em}
 </style>
 </head>
 <body>
+
+<!-- Drawer trigger (مكرّر بكل الصفحات) -->
+<button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <span>Menu</span>
+</button>
+<div class="backdrop" id="backdrop" hidden></div>
+
+<!-- Drawer -->
+<aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Catalogue navigation" id="drawer" aria-hidden="true">
+  <div class="inner">
+    <div class="side-group">
+      <button type="button">WC</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=WC%20-%20Floor-Standing">Floor-Standing</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Close-coupled">Close-coupled</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Wall-Hung">Wall-Hung</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Concealed%20tank">Concealed tank</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Flush%20valve%20%28Ex.%29">Flush valve (Ex.)</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Seats%20%26%20covers">Seats &amp; covers</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Eastern">Eastern</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Handicapped">Handicapped</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Bidet</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Bidet%20-%20Floor-Standing">Floor-Standing</a></li>
+        <li><a href="subcategory.html?title=Bidet%20-%20Wall-hung">Wall-hung</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Urinal</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Urinal%20-%20Top%20inlet">Top inlet</a></li>
+        <li><a href="subcategory.html?title=Urinal%20-%20Rear%20inlet">Rear inlet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Wash Basins</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals">Wall-mount &amp; Pedestals</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20One%20piece">One piece</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Floor-standing">Floor-standing</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Over%20counter">Over counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Under%20counter">Under counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Top%20counter">Top counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Cabinet">Cabinet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Showers and Bathtubs</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">Free-standing</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Drop-in">Drop-in</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Hydromassage">Hydromassage</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20tray">Shower tray</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet">Shower cabinet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Faucets</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">Basin Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bath%20%26%20Shower%20Mixers">Bath &amp; Shower Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20systems">Shower systems</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20Jets">Shower Jets</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Kitchen%20Mixers">Kitchen Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bidet%20Mixers">Bidet Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Ablution%20Mixers">Ablution Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Taps">Taps</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Fittings</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Fittings%20-%20Angle%20Valves">Angle Valves</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Showers">Showers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Flexible%20hoses">Flexible hoses</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Traps">Traps</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Strainers">Strainers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Pop-ups">Pop-ups</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Sinks</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls">Stainless steel bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Cast%20iron%20bowls">Cast iron bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Vitreous%20China">Vitreous China</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Service">Service</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Drains</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Drains%20-%20Floor%20drains">Floor drains</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Clean-outs">Clean-outs</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Shower%20Channels">Shower Channels</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Cisterns</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs">Concealed for WCs</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20Urinals">Concealed for Urinals</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Exposed">Exposed</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Elements">Elements</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Flush%20Valves">Flush Valves</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Actuator%20plates">Actuator plates</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Accessories</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Accessories%20-%20Sets">Sets</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Singles">Singles</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Electronic">Electronic</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Mirrors">Mirrors</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Handicapped">Handicapped</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Water Heater</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Wall-hung">Wall-hung</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Central">Central</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Solar">Solar</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
@@ -88,9 +258,7 @@ mark{background:var(--mark); padding:0 .1em}
     <div class="header-spacer"></div>
     <form class="header-search" role="search" aria-label="Search" onsubmit="return false;">
       <div class="icon" id="searchTrigger">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <input id="searchBox" type="text" placeholder="Search" autocomplete="off" />
       <button type="button" class="clear" id="clearBtn" aria-label="Clear">
@@ -104,7 +272,6 @@ mark{background:var(--mark); padding:0 .1em}
 <section class="page-head">
   <div class="wrap">
     <div class="breadcrumb">
-      <!-- أيقونة Home صغيرة -->
       <svg class="home-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1v-10.5Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -116,8 +283,12 @@ mark{background:var(--mark); padding:0 .1em}
 </section>
 
 <div class="title-row"><h1 id="pageTitle">Subcategory</h1></div>
-<nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">8</span></div></nav>
-<section class="grid" id="grid"></section>
+<nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">0</span></div></nav>
+
+<div class="grid-wrap">
+  <section class="grid" id="grid"></section>
+  <nav class="pager" id="pager" aria-label="Pagination"></nav>
+</div>
 
 <!-- Floating search -->
 <button class="search-fab" id="searchFab" aria-label="Search">
@@ -128,7 +299,46 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
-  // بيانات التصنيفات (للاقتراحات)
+  /* ---------- Helpers ---------- */
+  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)}
+  function setParam(url, key, val){
+    const u=new URL(url, location.origin);
+    if(val==null) u.searchParams.delete(key); else u.searchParams.set(key,val);
+    return u.pathname + u.search + u.hash;
+  }
+  function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+  function norm(s){return (s||'').toLowerCase().trim()}
+  function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
+
+  /* ---------- Page title ---------- */
+  const titleRaw = getParam('title') || 'Subcategory';
+  document.title = titleRaw +' – Catalogue';
+  document.getElementById('pageTitle').textContent = titleRaw;
+  document.getElementById('crumbTitle').textContent = titleRaw;
+
+  /* ---------- Dataset (Demo 20 items ⇒ 16+4) ---------- */
+  // بتقدر لاحقاً تستبدلها ببيانات حقيقية من JSON.
+  const MODELS = Array.from({length:20}).map((_,i)=>{
+    const idx=i+1;
+    const model = `Model Name ${String(idx).padStart(2,'0')}`;
+    const brand = `Brand ${String((idx%5)||5)}`;
+    return {
+      img: `https://placehold.co/800x600?text=${encodeURIComponent(titleRaw)}+${idx}`,
+      name: `${model} – ${brand}`,
+      factory: `Factory Code ${String(1000+idx)}`,
+      sap: `SAP Code ${String(5000+idx)}`
+    };
+  });
+
+  /* ---------- Search state ---------- */
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const searchTrigger=document.getElementById('searchTrigger');
+  const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
+  searchBox.value='';
+
+  /* ---------- Site-wide suggestions (تنتقل بين الصفحات) ---------- */
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
     {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
@@ -143,89 +353,155 @@ mark{background:var(--mark); padding:0 .1em}
     {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
     {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
   ];
-
-  // قراءة العنوان من Query
-  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
-  const title=getParam('title');
-  document.title=title+' – Catalogue';
-  document.getElementById('pageTitle').textContent=title;
-  document.getElementById('crumbTitle').textContent=title;
-
-  // توليد 8 منتجات بنفس التنسيق المطلوب
-  const sample=Array.from({length:8}).map((_,i)=>({
-    img:`https://placehold.co/800x600?text=${encodeURIComponent(title)}+${i+1}`,
-    name:`Model Name – Brand`,
-    desc:`Factory Code<br>SAP Code`
-  }));
-
-  const grid=document.getElementById('grid');
-  grid.innerHTML=sample.map(it=>`
-    <article class="card">
-      <a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy" decoding="async"></a>
-      <div class="meta">Category • ${title}</div>
-      <h3><a href="#">${it.name}</a></h3>
-      <p>${it.desc}</p>
-    </article>`).join('');
-  document.getElementById('prodCount').textContent=sample.length;
-
-  // بحث واقتراحات
-  const searchBox=document.getElementById('searchBox');
-  const clearBtn=document.getElementById('clearBtn');
-  const searchTrigger=document.getElementById('searchTrigger');
-  const suggest=document.getElementById('searchSuggest');
-  const searchFab=document.getElementById('searchFab');
-  searchBox.value='';
-
-  function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
-  function norm(s){return (s||'').toLowerCase().trim()}
-  function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
-
   function buildResults(q){
     q=norm(q); if(!q) return [];
     const out=[]; const seen=new Set();
     CATALOG.forEach(c=>{
       c.subs.forEach(s=>{
-        const combo=(c.cat+' - '+s);
-        const lc=combo.toLowerCase(); let score=0;
-        if(lc.startsWith(q)) score+=3; else if(lc.includes(q)) score+=1;
+        const combo=`${c.cat} - ${s}`; const l=combo.toLowerCase(); let score=0;
+        if(l.startsWith(q)) score+=3; else if(l.includes(q)) score+=1;
         if(c.cat.toLowerCase().startsWith(q)) score+=2;
         if(s.toLowerCase().startsWith(q)) score+=2;
         if(score>0 && !seen.has(combo)){ seen.add(combo); out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`}); }
       });
       if(c.cat.toLowerCase().includes(q)){
-        const key=`#${c.id}`;
-        if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`}); }
+        const key=`#${c.id}`; if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`index.html#cat-${c.id}`}); }
       }
     });
     return out.sort((a,b)=>b.score-a.score).slice(0,12);
   }
   function renderSuggest(q){
     const items=buildResults(q);
-    if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
-    suggest.innerHTML=items.map(it=>`
+    if(!q || items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
+    suggest.innerHTML = items.map(it=>`
       <div class="item" data-url="${it.url}">
-        <div class="sub">${mark(it.sub?it.sub:it.cat,q)}</div>
+        <div class="sub">${mark(it.sub?it.sub:it.cat, q)}</div>
         <div class="cat">${it.sub?it.cat:'Category'}</div>
       </div>`).join('');
     suggest.hidden=false;
     [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
   }
-  function handleInput(){ renderSuggest(searchBox.value); }
-  searchBox.addEventListener('input',handleInput);
-  searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));
-  searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
-  clearBtn.addEventListener('click',()=>{ searchBox.value=''; renderSuggest(''); searchBox.focus(); });
-  searchBox.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){ suggest.hidden=true; }
-    else if(e.key==='Enter'){
-      const items=suggest.querySelectorAll('.item');
-      if(items.length){ location.href=items[0].dataset.url; }
+
+  /* ---------- Filter inside subcategory (يشتغل محلياً) ---------- */
+  function filterLocal(list, q){
+    q=norm(q);
+    if(!q) return {list, query:q};
+    const filtered = list.filter(x=> norm(x.name).includes(q) || norm(x.factory).includes(q) || norm(x.sap).includes(q) );
+    return {list:filtered, query:q};
+  }
+
+  /* ---------- Pagination ---------- */
+  const PAGE_SIZE = 16; // الحد الأقصى
+  const pagerEl = document.getElementById('pager');
+  const grid=document.getElementById('grid');
+  const countEl=document.getElementById('prodCount');
+
+  function render(list, page){
+    const total=list.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    page = Math.min(Math.max(1, page), totalPages);
+    const start = (page-1)*PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    const slice = list.slice(start, end);
+
+    // رسم الكروت (بدون سطر "Category • ...")
+    grid.innerHTML = slice.map((it,idx)=>`
+      <article class="card">
+        <a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy" decoding="async"></a>
+        <h3><a href="#">${it.name}</a></h3>
+        <p>${mark(it.factory, currentQuery)}<br>${mark(it.sap, currentQuery)}</p>
+      </article>
+    `).join('');
+
+    // العداد بالتاب
+    countEl.textContent = total;
+
+    // بناء الشريط
+    const curUrl = location.href;
+    function pageLink(n){ return setParam(setParam(curUrl,'page',n),'q', currentQuery || null); }
+
+    let html = '';
+    html += `<a class="${page<=1?'disabled':''}" href="${page<=1?'#':pageLink(page-1)}" aria-label="Previous">«</a>`;
+    for(let p=1;p<=totalPages;p++){
+      html += `<a href="${pageLink(p)}" class="${p===page?'is-active':''}" aria-label="Page ${p}">${p}</a>`;
     }
+    html += `<a class="${page>=totalPages?'disabled':''}" href="${page>=totalPages?'#':pageLink(page+1)}" aria-label="Next">»</a>`;
+    pagerEl.innerHTML = html;
+  }
+
+  // قراءة الحالة من العنوان (page + q)
+  let currentPage = parseInt(getParam('page')||'1',10);
+  let currentQuery = getParam('q') || '';
+
+  // رندر أولي
+  const initial = filterLocal(MODELS, currentQuery);
+  if(currentQuery){ searchBox.value=currentQuery; }
+  render(initial.list, currentPage);
+
+  /* ---------- Search wiring ---------- */
+  function doSearch(){
+    currentQuery = searchBox.value.trim();
+    const filtered = filterLocal(MODELS, currentQuery);
+    currentPage = 1; // بداية من الصفحة الأولى عند البحث
+    // تحديث العنوان (حتى لو حدّث الصفحة ترجع نفس النتيجة)
+    const newUrl = setParam(setParam(location.href,'page',currentPage),'q', currentQuery || null);
+    history.replaceState(null,'',newUrl);
+    suggest.hidden=true;
+    render(filtered.list, currentPage);
+  }
+
+  searchBox.addEventListener('input', ()=>{
+    renderSuggest(searchBox.value);
+    // فلترة مباشرة أثناء الكتابة
+    doSearch();
   });
+  searchBox.addEventListener('focus', ()=> renderSuggest(searchBox.value));
+  searchBox.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){ suggest.hidden=true; }
+  });
+  clearBtn.addEventListener('click', ()=>{
+    searchBox.value='';
+    doSearch();
+    searchBox.focus();
+  });
+  searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
   document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
+
+  // أزرار الصفحة (نسمح بالتنقل بدون إعادة تحميل)
+  pagerEl.addEventListener('click', (e)=>{
+    const a = e.target.closest('a[href]');
+    if(!a || a.classList.contains('disabled')) return;
+    e.preventDefault();
+    const url=new URL(a.href, location.origin);
+    const p = parseInt(url.searchParams.get('page')||'1',10);
+    currentPage = p;
+    history.pushState(null,'',a.href);
+    const filtered = filterLocal(MODELS, currentQuery);
+    render(filtered.list, currentPage);
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
 
   // زر البحث العائم
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+
+  // Drawer
+  const openBtn=document.getElementById('openDrawer');
+  const drawer=document.getElementById('drawer');
+  const backdrop=document.getElementById('backdrop');
+  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
+  backdrop.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
+
+  // التعامل مع رجوع/تقدم المتصفح
+  window.addEventListener('popstate', ()=>{
+    currentPage = parseInt(getParam('page')||'1',10);
+    currentQuery = getParam('q') || '';
+    searchBox.value = currentQuery;
+    const filtered = filterLocal(MODELS, currentQuery);
+    render(filtered.list, currentPage);
+  });
 })();
 </script>
 </body>
