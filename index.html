@@ -5,18 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Catalogue</title>
 
-<!-- CSP: السماح بالـ inline scripts -->
-<meta http-equiv="Content-Security-Policy"
-  content="default-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;">
-<meta name="robots" content="index,follow" />
-
 <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 
 <style>
 :root{
@@ -33,7 +25,7 @@ a{color:inherit; text-decoration:none}
   outline:2px solid var(--accent); outline-offset:2px; border-radius:10px;
 }
 
-/* Header (sticky فقط للهيدر) */
+/* Header */
 .site-header{background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; gap:24px}
 .brand{display:flex; align-items:center; gap:12px}
@@ -112,30 +104,24 @@ body.all-open .tile{border-color:#dfe4ea}
 .tiles-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; align-items:stretch}
 @media(max-width:980px){.tiles-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.tiles-grid{grid-template-columns:1fr}}
-
 .tile{background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; transition:border-color .15s, transform .15s, box-shadow .15s; position:relative; display:flex; flex-direction:column; min-height:100%; scroll-margin-top:90px}
 .tile:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--hover-bg)}
 @media(hover:hover) and (pointer:fine){.tile:hover{transform:translateY(-2px) scale(1.01); box-shadow:0 10px 26px rgba(0,0,0,.08)}}
-
 .tile-media{width:100%; aspect-ratio:25/28; background:#dfe4ea; position:relative; flex:none}
 .tile-media img{width:100%; height:100%; object-fit:cover; display:block}
-
 .tile-body{flex:1; padding:14px 14px 20px; position:relative; background:#f3f4f6; display:flex; flex-direction:column}
 .tile-title{margin:0 0 8px; font-size:18px; font-weight:900; color:#0f172a; display:flex; align-items:center; gap:8px}
 .tile-title .nolink{color:inherit}
-
 .sublist{margin:0; padding:0; list-style:none}
 .sublist li{margin:8px 0}
 .tile:not(.is-open) .sublist li:nth-child(n+4){display:none}
 @media(hover:hover) and (pointer:fine){.tile:hover .sublist li{display:list-item !important}}
 .sublist a{display:block; color:var(--ink); padding:8px 10px; border-radius:10px; border:1px solid transparent; transition:background-color .15s, border-color .15s, color .15s}
 .sublist a:hover,.sublist a:focus-visible{background:var(--hover-bg); border-color:var(--accent-2); outline:none; color:var(--accent)}
-
 .tile-toggle{position:absolute; right:12px; bottom:12px; width:42px; height:42px; border:1px solid var(--line); border-radius:999px; background:#fff; color:#1b2433; cursor:pointer; display:grid; place-items:center; transition:filter .15s, transform .15s, border-color .15s, background-color .15s, box-shadow .15s; box-shadow:0 2px 10px rgba(0,0,0,.08)}
 .tile-toggle:hover{filter:brightness(.98); background:#eef2f7; border-color:#d9dfea}
 .tile-toggle svg{transition:transform .2s; transform:rotate(0deg)}
 .tile.is-open .tile-toggle svg{transform:rotate(180deg)}
-
 .no-results{padding:22px; color:#555; font-size:14px}
 mark{background:var(--mark); padding:0 .1em}
 
@@ -144,44 +130,29 @@ mark{background:var(--mark); padding:0 .1em}
 .search-fab:hover{transform:translateY(-2px)}
 .search-fab svg{width:22px; height:22px; color:#374151}
 
-/* HERO (خارج الـ header الآن) */
-.hero {
-  background: url('assets/img/hero-banner.jpg') center/cover no-repeat;
-  height: 360px;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; color: white; position: relative;
-}
-.hero::after {content:""; position:absolute; inset:0; background:rgba(0,0,0,.35)}
-.hero-content {position:relative; z-index:2; padding:0 16px}
-.hero h1 {font-size:36px; margin:0; font-weight:800; letter-spacing:.2px}
-.hero p {font-size:18px; margin-top:10px; color:#f3f4f6}
+/* HERO */
+.hero{background:url('assets/img/hero-banner.jpg') center/cover no-repeat; height:360px; display:flex; align-items:center; justify-content:center; text-align:center; color:white; position:relative}
+.hero::after{content:""; position:absolute; inset:0; background:rgba(0,0,0,.35)}
+.hero-content{position:relative; z-index:2; padding:0 16px}
+.hero h1{font-size:36px; margin:0; font-weight:800; letter-spacing:.2px}
+.hero p{font-size:18px; margin-top:10px; color:#f3f4f6}
 @media (max-width:640px){ .hero{height:280px} .hero h1{font-size:28px} .hero p{font-size:15px} }
-  .breadcrumb .home-ico {
-  width: 14px !important;
-  height: 14px !important;
-  flex-shrink: 0;
-}
+.breadcrumb .home-ico{width:14px !important; height:14px !important; flex-shrink:0}
+/* Breadcrumb fix */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
 .page-head .wrap{max-width:1200px; margin:0 auto; padding:16px 24px}
-
-.breadcrumb{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  color:#6b7280;
-  font-size:13px;
-}
-.breadcrumb a{
-  color:#4b5563;
-  border-bottom:1px solid transparent;
-  font-weight:600;
-}
+.breadcrumb{display:flex; align-items:center; gap:10px; flex-wrap:wrap; color:#6b7280; font-size:13px}
+.breadcrumb a{color:#4b5563; border-bottom:1px solid transparent; font-weight:600}
 .breadcrumb a:hover{border-color:#9ca3af}
 .breadcrumb span[aria-hidden="true"]{opacity:.55}
+
+/* Reduce motion */
+@media(prefers-reduced-motion:reduce){
+  .tile,.tile-toggle svg,.sublist a,.header-search .icon,.header-search .clear,.header-search,.sidebar-drawer,.backdrop,.side-open,.search-suggest,.search-fab{transition:none}
+}
 </style>
 
-<link rel="preload" as="image" href="assets/img/hero-banner.jpg" imagesizes="100vw">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 </head>
 <body>
 
@@ -192,11 +163,9 @@ mark{background:var(--mark); padding:0 .1em}
 </button>
 <div class="backdrop" id="backdrop" hidden></div>
 
-<!-- Drawer -->
+<!-- Drawer (كل البيانات موجودة) -->
 <aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Catalogue navigation" id="drawer" aria-hidden="true">
   <div class="inner">
-    <!-- القوائم ... (بدون تغيير) -->
-    <!-- ... نفس القوائم كما كانت ... -->
     <div class="side-group">
       <button type="button">WC</button>
       <ul class="side-sub">
@@ -210,15 +179,119 @@ mark{background:var(--mark); padding:0 .1em}
         <li><a href="subcategory.html?title=WC%20-%20Handicapped">Handicapped</a></li>
       </ul>
     </div>
-    <!-- باقي المجموعات... -->
-    <!-- (المحتوى كما في نسختك الأصلية) -->
+    <div class="side-group">
+      <button type="button">Bidet</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Bidet%20-%20Floor-Standing">Floor-Standing</a></li>
+        <li><a href="subcategory.html?title=Bidet%20-%20Wall-hung">Wall-hung</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Urinal</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Urinal%20-%20Top%20inlet">Top inlet</a></li>
+        <li><a href="subcategory.html?title=Urinal%20-%20Rear%20inlet">Rear inlet</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Wash Basins</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals">Wall-mount &amp; Pedestals</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20One%20piece">One piece</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Floor-standing">Floor-standing</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Over%20counter">Over counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Under%20counter">Under counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Top%20counter">Top counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Cabinet">Cabinet</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Showers and Bathtubs</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">Free-standing</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Drop-in">Drop-in</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Hydromassage">Hydromassage</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20tray">Shower tray</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet">Shower cabinet</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Faucets</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">Basin Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bath%20%26%20Shower%20Mixers">Bath &amp; Shower Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20systems">Shower systems</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20Jets">Shower Jets</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Kitchen%20Mixers">Kitchen Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bidet%20Mixers">Bidet Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Ablution%20Mixers">Ablution Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Taps">Taps</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Fittings</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Fittings%20-%20Angle%20Valves">Angle Valves</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Showers">Showers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Flexible%20hoses">Flexible hoses</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Traps">Traps</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Strainers">Strainers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Pop-ups">Pop-ups</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Sinks</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls">Stainless steel bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Cast%20iron%20bowls">Cast iron bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Vitreous%20China">Vitreous China</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Service">Service</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Drains</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Drains%20-%20Floor%20drains">Floor drains</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Clean-outs">Clean-outs</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Shower%20Channels">Shower Channels</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Cisterns</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs">Concealed for WCs</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20Urinals">Concealed for Urinals</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Exposed">Exposed</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Elements">Elements</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Flush%20Valves">Flush Valves</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Actuator%20plates">Actuator plates</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Accessories</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Accessories%20-%20Sets">Sets</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Singles">Singles</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Electronic">Electronic</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Mirrors">Mirrors</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Handicapped">Handicapped</a></li>
+      </ul>
+    </div>
+    <div class="side-group">
+      <button type="button">Water Heater</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Wall-hung">Wall-hung</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Central">Central</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Solar">Solar</a></li>
+      </ul>
+    </div>
   </div>
 </aside>
 
 <header class="site-header" role="banner">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
-      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" width="152" height="76" loading="lazy" decoding="async">
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy" decoding="async">
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
@@ -242,7 +315,7 @@ mark{background:var(--mark); padding:0 .1em}
   </div>
 </header>
 
-<section class="hero" role="img" aria-label="Modern bathroom catalogue hero image">
+<section class="hero">
   <div class="hero-content">
     <h1>Catalogue</h1>
     <p>تصفّح كل الفئات بسرعة ووضوح — على كل الأجهزة.</p>
@@ -271,9 +344,9 @@ mark{background:var(--mark); padding:0 .1em}
     </div>
 
     <div id="tilesGrid" class="tiles-grid">
-      <!-- WC -->
+      <!-- Cards -->
       <article id="cat-wc" class="tile" data-img="assets/img/WC_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="wc-list" aria-expanded="false"><img alt="WC cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="wc-list" aria-expanded="false"><img alt="WC cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">WC</span></h3>
           <ul id="wc-list" class="sublist">
@@ -292,9 +365,8 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
-      <!-- Bidet -->
       <article id="cat-bidet" class="tile" data-img="assets/img/Bidet_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="bidet-list" aria-expanded="false"><img alt="Bidet cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="bidet-list" aria-expanded="false"><img alt="Bidet cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Bidet</span></h3>
           <ul id="bidet-list" class="sublist">
@@ -307,9 +379,8 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
-      <!-- Urinal -->
       <article id="cat-urinal" class="tile" data-img="assets/img/Urinal_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="urinal-list" aria-expanded="false"><img alt="Urinal cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="urinal-list" aria-expanded="false"><img alt="Urinal cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Urinal</span></h3>
           <ul id="urinal-list" class="sublist">
@@ -324,7 +395,7 @@ mark{background:var(--mark); padding:0 .1em}
 
       <!-- Wash Basins -->
       <article id="cat-wash" class="tile" data-img="assets/img/Wash_Basin_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="wash-list" aria-expanded="false"><img alt="Wash Basins cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="wash-list" aria-expanded="false"><img alt="Wash Basins cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Wash Basins</span></h3>
           <ul id="wash-list" class="sublist">
@@ -342,9 +413,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
-      <!-- Showers and Bathtubs (تم تصحيح اسم الصورة) -->
+      <!-- Showers and Bathtubs -->
       <article id="cat-bath" class="tile" data-img="assets/img/Showers_500x5604.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="bathtubs-list" aria-expanded="false"><img alt="Showers and Bathtubs cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="bathtubs-list" aria-expanded="false"><img alt="Showers and Bathtubs cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Showers and Bathtubs</span></h3>
           <ul id="bathtubs-list" class="sublist">
@@ -360,9 +431,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
-      <!-- باقي البطاقات كما كانت مع width/height -->
+      <!-- Faucets -->
       <article id="cat-mixers" class="tile" data-img="assets/img/Faucets_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="mixers-list" aria-expanded="false"><img alt="Faucets cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="mixers-list" aria-expanded="false"><img alt="Faucets cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Faucets</span></h3>
           <ul id="mixers-list" class="sublist">
@@ -381,8 +452,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Fittings -->
       <article id="cat-fittings" class="tile" data-img="assets/img/Fittings_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="fittings-list" aria-expanded="false"><img alt="Fittings cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="fittings-list" aria-expanded="false"><img alt="Fittings cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Fittings</span></h3>
           <ul id="fittings-list" class="sublist">
@@ -399,8 +471,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Sinks -->
       <article id="cat-sinks" class="tile" data-img="assets/img/Sink_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="sinks-list" aria-expanded="false"><img alt="Sinks cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="sinks-list" aria-expanded="false"><img alt="Sinks cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Sinks</span></h3>
           <ul id="sinks-list" class="sublist">
@@ -415,8 +488,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Drains -->
       <article id="cat-drains" class="tile" data-img="assets/img/Drain_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="drains-list" aria-expanded="false"><img alt="Drains cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="drains-list" aria-expanded="false"><img alt="Drains cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Drains</span></h3>
           <ul id="drains-list" class="sublist">
@@ -430,8 +504,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Cisterns -->
       <article id="cat-cisterns" class="tile" data-img="assets/img/Cisterns_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="cisterns-list" aria-expanded="false"><img alt="Cisterns cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="cisterns-list" aria-expanded="false"><img alt="Cisterns cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Cisterns</span></h3>
           <ul id="cisterns-list" class="sublist">
@@ -448,8 +523,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Accessories -->
       <article id="cat-acc" class="tile" data-img="assets/img/Accessories_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="acc-list" aria-expanded="false"><img alt="Accessories cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="acc-list" aria-expanded="false"><img alt="Accessories cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Accessories</span></h3>
           <ul id="acc-list" class="sublist">
@@ -465,8 +541,9 @@ mark{background:var(--mark); padding:0 .1em}
         </div>
       </article>
 
+      <!-- Water Heater -->
       <article id="cat-wh" class="tile" data-img="assets/img/Water_Heater_500x560.jpg">
-        <div class="tile-media" role="button" tabindex="0" aria-controls="wh-list" aria-expanded="false"><img alt="Water Heater cover" width="500" height="560" loading="lazy" decoding="async"></div>
+        <div class="tile-media" role="button" tabindex="0" aria-controls="wh-list" aria-expanded="false"><img alt="Water Heater cover" loading="lazy" decoding="async"></div>
         <div class="tile-body">
           <h3 class="tile-title"><span class="nolink hl">Water Heater</span></h3>
           <ul id="wh-list" class="sublist">
@@ -494,7 +571,6 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
-  // تفريغ صندوق البحث عند التحميل
   const searchBox=document.getElementById('searchBox');
   const clearBtn=document.getElementById('clearBtn');
   const noResults=document.getElementById('noResults');
@@ -503,7 +579,7 @@ mark{background:var(--mark); padding:0 .1em}
   const searchFab=document.getElementById('searchFab');
   searchBox.value='';
 
-  // تعبئة صور الكروت
+  // صور الكروت من data-img
   document.querySelectorAll('.tile').forEach(t=>{
     const s=t.getAttribute('data-img');
     const i=t.querySelector('img');
@@ -545,7 +621,6 @@ mark{background:var(--mark); padding:0 .1em}
     });
   }
 
-  // مساعدات البحث/التظليل
   function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
   function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
   function highlight(q){ hlNodes.forEach(n=>{ const base=n.dataset.orig||n.textContent; n.innerHTML=q?mark(base,q):base; }); }
@@ -583,7 +658,7 @@ mark{background:var(--mark); padding:0 .1em}
     noResults.style.display=any?'none':'';
   }
 
-  // اقتراحات البحث (مختصرة)
+  // اقتراحات
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
     {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
@@ -641,7 +716,7 @@ mark{background:var(--mark); padding:0 .1em}
     }
   });
 
-  // Drawer
+  // Drawer open/close
   const openBtn=document.getElementById('openDrawer');
   const drawer=document.getElementById('drawer');
   const backdrop=document.getElementById('backdrop');
@@ -664,7 +739,6 @@ mark{background:var(--mark); padding:0 .1em}
   }
   showAllBtn.addEventListener('click',()=>{ const next = showAllBtn.getAttribute('aria-pressed') !== 'true'; setGlobalOpen(next); });
 
-  // زر البحث العائم
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
 
   // init
@@ -673,4 +747,3 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
-
