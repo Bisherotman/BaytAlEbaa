@@ -140,6 +140,35 @@ mark{background:var(--mark); padding:0 .1em}
 
 @media(prefers-reduced-motion:reduce){
   .tile,.tile-toggle svg,.sublist a,.header-search .icon,.header-search .clear,.header-search,.sidebar-drawer,.backdrop,.side-open,.search-suggest,.search-fab{transition:none}
+.hero {
+  background: url('assets/img/hero-banner.jpg') center/cover no-repeat;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* dark overlay */
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+.hero h1 {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 800;
+}
+.hero p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #eee;
 }
 </style>
  <!-- Favicon -->
@@ -189,6 +218,14 @@ mark{background:var(--mark); padding:0 .1em}
       <div id="searchSuggest" class="search-suggest" hidden></div>
     </form>
   </div>
+  <!-- Hero Banner Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>منتجات بيت الآباء</h1>
+    <p>عرض شامل لأفضل منتجاتنا الصحية – من أجل تجربة عرض راقية لعملائك</p>
+  </div>
+</section>
+
 </header>
 
 <section class="page-head" aria-label="Page header">
@@ -643,6 +680,7 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
+
 
 
 
