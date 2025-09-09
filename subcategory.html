@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Subcategory</title>
 
-<!-- CSP: سماح بالـ inline scripts عشان يشتغل السكربت اللي يرسُم المنتجات -->
+<!-- CSP: السماح بالـ inline scripts عشان يشتغل السكربت -->
 <meta http-equiv="Content-Security-Policy"
   content="default-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;">
 <meta name="robots" content="index,follow" />
@@ -20,7 +20,8 @@
 <style>
 :root{
   --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0;
-  --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3
+  --accent:#374151; --hover-bg:rgba(156,163,175,.15); --mark:#fff3a3;
+  --side-bg:#f1f3f6; --overlay:rgba(0,0,0,.35)
 }
 *{box-sizing:border-box}
 body{margin:0; font-family:"Tajawal","Poppins",system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
@@ -48,6 +49,29 @@ a{color:inherit; text-decoration:none}
 .search-suggest .sub{color:#374151; font-weight:700}
 .search-suggest .cat{color:#6b7280; font-size:12px}
 
+/* Drawer trigger (رجّعناه) */
+.side-open{position:fixed; left:0; top:50%; transform:translate(-40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease}
+.side-open span{font-weight:800; color:#374151; font-size:15px; letter-spacing:.2px}
+.side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s ease}
+.side-open:hover{transform:translate(-40%, -50%) scale(1.05)}
+.side-open:active{transform:translate(-40%, -50%) scale(.96)}
+body.is-side-open .side-open svg{transform:rotate(90deg)}
+
+/* Drawer + overlay */
+.sidebar-drawer{position:fixed; inset:0 auto 0 0; width:min(320px, 86vw); background:var(--side-bg); border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
+.sidebar-drawer .inner{padding:14px; overflow:auto; height:100%}
+.backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:75}
+body.is-side-open .sidebar-drawer{transform:translateX(0)}
+body.is-side-open .backdrop{opacity:1; pointer-events:auto}
+
+/* Drawer content */
+.side-group{margin:6px 0; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.side-group>button{width:100%; text-align:left; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer; transition:background-color .15s}
+.side-group>button:hover{background:var(--hover-bg)}
+.side-sub{margin:0; padding:6px; list-style:none}
+.side-sub li a{display:flex; justify-content:space-between; gap:10px; color:#1f2937; padding:8px 10px; border-radius:8px; transition:background-color .15s}
+.side-sub li a:hover{background:#e9edf3}
+
 /* Breadcrumb + title */
 .page-head{background:#fff; border-bottom:1px solid var(--line)}
 .page-head .wrap{max-width:1200px; margin:0 auto; padding:16px 24px}
@@ -67,7 +91,7 @@ a{color:inherit; text-decoration:none}
 .tab:after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:#111827}
 
 /* Grid of products */
-.grid{max-width:1200px; margin:0 auto 60px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
+.grid{max-width:1200px; margin:0 auto 16px; padding:0 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line)}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
@@ -75,13 +99,20 @@ a{color:inherit; text-decoration:none}
 .card:nth-child(4n){border-right:none}
 @media(max-width:1100px){ .card:nth-child(4n){border-right:1px solid var(--line)} .card:nth-child(3n){border-right:none} }
 @media(max-width:820px){ .card:nth-child(3n){border-right:1px solid var(--line)} .card:nth-child(2n){border-right:none} }
-.card .pic{width:100%; aspect-ratio:4/3; background:#e5e7eb; border-radius:10px; overflow:hidden; display:block}
-.card .pic img{width:100%; height:100%; object-fit:contain; display:block}
+/* صور شفافة/متلائمة */
+.card .pic{width:100%; aspect-ratio:4/3; background:transparent; border-radius:10px; overflow:hidden; display:block}
+.card .pic img{width:100%; height:100%; object-fit:contain; display:block; background:transparent}
 .meta{margin-top:10px; color:#6b7280; font-size:12px}
 .card h3{margin:6px 0 6px; font-size:15px; line-height:1.25}
 .card p{margin:6px 0 0; color:#374151; font-size:13px}
 .card h3 a{color:#0f172a}
 .card h3 a:hover{text-decoration:underline}
+
+/* Pagination */
+.pager{max-width:1200px; margin:0 auto 48px; padding:0 24px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap}
+.pager button{min-width:38px; height:38px; padding:0 12px; border:1px solid var(--line); background:#fff; border-radius:10px; font-weight:700; cursor:pointer}
+.pager button[disabled]{opacity:.5; cursor:default}
+.pager .is-active{border-color:#9ca3af; box-shadow:0 0 0 3px rgba(156,163,175,.2)}
 
 /* mark */
 mark{background:var(--mark); padding:0 .1em}
@@ -92,6 +123,150 @@ mark{background:var(--mark); padding:0 .1em}
 </style>
 </head>
 <body>
+
+<!-- Drawer trigger -->
+<button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <span>Menu</span>
+</button>
+<div class="backdrop" id="backdrop" hidden></div>
+
+<!-- Drawer (القائمة الجانبية) -->
+<aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Catalogue navigation" id="drawer" aria-hidden="true">
+  <div class="inner">
+    <div class="side-group">
+      <button type="button">WC</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=WC%20-%20Floor-Standing">Floor-Standing</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Close-coupled">Close-coupled</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Wall-Hung">Wall-Hung</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Concealed%20tank">Concealed tank</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Flush%20valve%20%28Ex.%29">Flush valve (Ex.)</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Seats%20%26%20covers">Seats &amp; covers</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Eastern">Eastern</a></li>
+        <li><a href="subcategory.html?title=WC%20-%20Handicapped">Handicapped</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Bidet</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Bidet%20-%20Floor-Standing">Floor-Standing</a></li>
+        <li><a href="subcategory.html?title=Bidet%20-%20Wall-hung">Wall-hung</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Urinal</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Urinal%20-%20Top%20inlet">Top inlet</a></li>
+        <li><a href="subcategory.html?title=Urinal%20-%20Rear%20inlet">Rear inlet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Wash Basins</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals">Wall-mount &amp; Pedestals</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20One%20piece">One piece</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Floor-standing">Floor-standing</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Over%20counter">Over counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Under%20counter">Under counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Top%20counter">Top counter</a></li>
+        <li><a href="subcategory.html?title=Wash%20Basins%20-%20Cabinet">Cabinet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Showers and Bathtubs</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">Free-standing</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Drop-in">Drop-in</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Hydromassage">Hydromassage</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20tray">Shower tray</a></li>
+        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet">Shower cabinet</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Faucets</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">Basin Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bath%20%26%20Shower%20Mixers">Bath &amp; Shower Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20systems">Shower systems</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20Jets">Shower Jets</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Kitchen%20Mixers">Kitchen Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Bidet%20Mixers">Bidet Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Ablution%20Mixers">Ablution Mixers</a></li>
+        <li><a href="subcategory.html?title=Faucets%20-%20Taps">Taps</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Fittings</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Fittings%20-%20Angle%20Valves">Angle Valves</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Showers">Showers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Flexible%20hoses">Flexible hoses</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Traps">Traps</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Strainers">Strainers</a></li>
+        <li><a href="subcategory.html?title=Fittings%20-%20Pop-ups">Pop-ups</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Sinks</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls">Stainless steel bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Cast%20iron%20bowls">Cast iron bowls</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Vitreous%20China">Vitreous China</a></li>
+        <li><a href="subcategory.html?title=Sinks%20-%20Service">Service</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Drains</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Drains%20-%20Floor%20drains">Floor drains</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Clean-outs">Clean-outs</a></li>
+        <li><a href="subcategory.html?title=Drains%20-%20Shower%20Channels">Shower Channels</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Cisterns</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs">Concealed for WCs</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Concealed%20for%20Urinals">Concealed for Urinals</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Exposed">Exposed</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Elements">Elements</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Flush%20Valves">Flush Valves</a></li>
+        <li><a href="subcategory.html?title=Cisterns%20-%20Actuator%20plates">Actuator plates</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Accessories</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Accessories%20-%20Sets">Sets</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Singles">Singles</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Electronic">Electronic</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Mirrors">Mirrors</a></li>
+        <li><a href="subcategory.html?title=Accessories%20-%20Handicapped">Handicapped</a></li>
+      </ul>
+    </div>
+
+    <div class="side-group">
+      <button type="button">Water Heater</button>
+      <ul class="side-sub">
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Wall-hung">Wall-hung</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Central">Central</a></li>
+        <li><a href="subcategory.html?title=Water%20Heater%20-%20Solar">Solar</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
@@ -131,6 +306,9 @@ mark{background:var(--mark); padding:0 .1em}
 <nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">0</span></div></nav>
 <section class="grid" id="grid"></section>
 
+<!-- Pagination -->
+<nav class="pager" id="pager" aria-label="Pages"></nav>
+
 <!-- Floating search -->
 <button class="search-fab" id="searchFab" aria-label="Search">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -140,6 +318,16 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
+  // Drawer
+  const openBtn=document.getElementById('openDrawer');
+  const drawer=document.getElementById('drawer');
+  const backdrop=document.getElementById('backdrop');
+  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
+  backdrop.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
+
   // بيانات التصنيفات (للاقتراحات)
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
@@ -220,8 +408,8 @@ mark{background:var(--mark); padding:0 .1em}
   document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
 
-  // --- REAL PRODUCTS ---
-  const PRODUCTS = [
+  // --- REAL PRODUCTS (Wall-hung WC فقط) ---
+  const REAL_PRODUCTS = [
     { brand:"Grohe", model:"EURO",    factory:"39703000",  sap:"F19.501-1W4", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/F19.501-1W4.jpg" },
     { brand:"Grohe", model:"CUBE",    factory:"3924500H",  sap:"F19.503-1W",  photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/3924500H_1_1.jpg" },
     { brand:"Grohe", model:"BAU",     factory:"39351000",  sap:"F19.502-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/39351000.jpg" },
@@ -229,23 +417,69 @@ mark{background:var(--mark); padding:0 .1em}
     { brand:"Laufen",model:"PALOMBA", factory:"H8208020000001", sap:"F21.009-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/H8208020000001.JPG" }
   ];
 
+  // عينات (بخلفية شفافة) لباقي الصفحات
+  function makeSamples(n){
+    return Array.from({length:n}).map((_,i)=>({
+      brand:"Brand", model:"Model", factory:"Factory Code", sap:"SAP Code",
+      photo:`https://placehold.co/800x600.png?text=${encodeURIComponent(title)}+${i+1}&bg=transparent`
+    }));
+  }
+
+  const isWallHung = title.toLowerCase() === 'wc - wall-hung';
+
+  // مصدر البيانات بحسب العنوان
+  const ALL_ITEMS = isWallHung ? REAL_PRODUCTS : makeSamples(40); // 40 مثال لعرض الصفحات
+
+  // Pagination
+  const PAGE_SIZE = 16;
+  let currentPage = 1;
+  const totalPages = Math.max(1, Math.ceil(ALL_ITEMS.length / PAGE_SIZE));
+
   const grid=document.getElementById('grid');
+  const pager=document.getElementById('pager');
   const titleForMeta=title;
-  grid.innerHTML = PRODUCTS.map((it,idx)=>{
-    const displayName  = `${it.model} – ${it.brand}`;
-    const displayCodes = `${it.factory||""}<br>${it.sap||""}`;
-    const img = (it.photo && it.photo.length)
-      ? it.photo
-      : `https://placehold.co/800x600?text=${encodeURIComponent(it.model+' '+it.brand)}`;
-    return `
-      <article class="card">
-        <a class="pic" href="#"><img src="${img}" alt="${displayName}" loading="lazy" decoding="async"></a>
-        <div class="meta">Category • ${titleForMeta}</div>
-        <h3><a href="#">${displayName}</a></h3>
-        <p>${displayCodes}</p>
-      </article>`;
-  }).join('');
-  document.getElementById('prodCount').textContent = PRODUCTS.length;
+
+  function renderGrid(page){
+    const start = (page-1)*PAGE_SIZE;
+    const items = ALL_ITEMS.slice(start, start+PAGE_SIZE);
+    grid.innerHTML = items.map((it)=>{
+      const displayName  = `${it.model} – ${it.brand}`;
+      const displayCodes = `${it.factory||""}<br>${it.sap||""}`;
+      const img = (it.photo && it.photo.length)
+        ? it.photo
+        : `https://placehold.co/800x600.png?text=${encodeURIComponent(it.model+' '+it.brand)}&bg=transparent`;
+      return `
+        <article class="card">
+          <a class="pic" href="#"><img src="${img}" alt="${displayName}" loading="lazy" decoding="async"></a>
+          <div class="meta">Category • ${titleForMeta}</div>
+          <h3><a href="#">${displayName}</a></h3>
+          <p>${displayCodes}</p>
+        </article>`;
+    }).join('');
+    document.getElementById('prodCount').textContent = ALL_ITEMS.length;
+  }
+
+  function renderPager(){
+    const btn = (label, page, disabled=false, active=false, aria='') =>
+      `<button ${disabled?'disabled':''} data-page="${page||''}" class="${active?'is-active':''}" ${aria}>${label}</button>`;
+    let html = '';
+    html += btn('«', Math.max(1, currentPage-1), currentPage===1, false, 'aria-label="Previous"');
+    for(let p=1;p<=totalPages;p++){
+      html += btn(p, p, false, p===currentPage, `aria-label="Page ${p}"`);
+    }
+    html += btn('»', Math.min(totalPages, currentPage+1), currentPage===totalPages, false, 'aria-label="Next"');
+    pager.innerHTML = html;
+    pager.querySelectorAll('button[data-page]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const p = parseInt(b.getAttribute('data-page'),10);
+        if(!isNaN(p) && p!==currentPage){ currentPage=p; renderGrid(currentPage); renderPager(); window.scrollTo({top:0,behavior:'smooth'}); }
+      });
+    });
+  }
+
+  // أول رسم
+  renderGrid(currentPage);
+  renderPager();
 })();
 </script>
 </body>
