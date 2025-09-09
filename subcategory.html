@@ -116,7 +116,7 @@ mark{background:var(--mark); padding:0 .1em}
 </section>
 
 <div class="title-row"><h1 id="pageTitle">Subcategory</h1></div>
-<nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">0</span></div></nav>
+<nav class="tabs" aria-label="Products tabs"><div class="tab">Products <span class="cnt" id="prodCount">8</span></div></nav>
 <section class="grid" id="grid"></section>
 
 <!-- Floating search -->
@@ -128,50 +128,7 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
-  // نفس منطق صفحتك: قراءة العنوان من Query وتعبئته في العناوين:contentReference[oaicite:2]{index=2}
-  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
-  const title=getParam('title');
-  document.title=title+' – Catalogue';
-  document.getElementById('pageTitle').textContent=title;
-  document.getElementById('crumbTitle').textContent=title;
-
-  /* ================== بيانات حقيقية بدلاً من الـ sample ================== */
-  // خاناتك القديمة كانت تولّد 8 عناصر Placeholder:contentReference[oaicite:3]{index=3}
-  // هنا المصفوفة الحقيقية (تقدر تضيف/تحذف سطور بحرية)
-  const PRODUCTS = [
-    {brand:"Grohe",  model:"EURO",    factory:"39703000",       sap:"F19.501-1W4", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/F19.501-1W4.jpg"},
-    {brand:"Grohe",  model:"CUBE",    factory:"3924500H",       sap:"F19.503-1W",  photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/3924500H_1_1.jpg"},
-    {brand:"Grohe",  model:"BAU",     factory:"39351000",       sap:"F19.502-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/39351000.jpg"},
-    {brand:"Laufen", model:"PRO-A",   factory:"H8209560000001", sap:"F21.003-1WO", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/F21.003-1WO.jpg"},
-    {brand:"Laufen", model:"PALOMBA", factory:"H8208020000001", sap:"F21.009-1W1", photo:"https://quotation.ebaahouse.com:5443/MaterialUploads/H8208020000001.JPG"}
-  ];
-
-  // رندر المنتجات
-  const grid=document.getElementById('grid');
-  grid.innerHTML=PRODUCTS.map(it=>{
-    const name = `${it.model} – ${it.brand}`;
-    const codes = `${it.factory||""}<br>${it.sap||""}`;
-    const img = it.photo && it.photo.length ? it.photo
-      : `https://placehold.co/800x600?text=${encodeURIComponent(it.model)}+${encodeURIComponent(it.brand)}`;
-    return `
-      <article class="card">
-        <a class="pic" href="#"><img src="${img}" alt="${name}" loading="lazy" decoding="async"></a>
-        <div class="meta">Category • ${title}</div>
-        <h3><a href="#">${name}</a></h3>
-        <p>${codes}</p>
-      </article>`;
-  }).join('');
-  document.getElementById('prodCount').textContent=PRODUCTS.length;
-  /* ======================================================================= */
-
-  // بحث واقتراحات (كما في نسختك):contentReference[oaicite:4]{index=4}
-  const searchBox=document.getElementById('searchBox');
-  const clearBtn=document.getElementById('clearBtn');
-  const searchTrigger=document.getElementById('searchTrigger');
-  const suggest=document.getElementById('searchSuggest');
-  const searchFab=document.getElementById('searchFab');
-  searchBox.value='';
-
+  // بيانات التصنيفات (للاقتراحات)
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
     {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
@@ -187,9 +144,42 @@ mark{background:var(--mark); padding:0 .1em}
     {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
   ];
 
-  function esc(s){return s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')}
+  // قراءة العنوان من Query
+  function getParam(n){const u=new URL(location.href);return u.searchParams.get(n)||'Subcategory'}
+  const title=getParam('title');
+  document.title=title+' – Catalogue';
+  document.getElementById('pageTitle').textContent=title;
+  document.getElementById('crumbTitle').textContent=title;
+
+  // توليد 8 منتجات بنفس التنسيق المطلوب
+  const sample=Array.from({length:8}).map((_,i)=>({
+    img:`https://placehold.co/800x600?text=${encodeURIComponent(title)}+${i+1}`,
+    name:`Model Name – Brand`,
+    desc:`Factory Code<br>SAP Code`
+  }));
+
+  const grid=document.getElementById('grid');
+  grid.innerHTML=sample.map(it=>`
+    <article class="card">
+      <a class="pic" href="#"><img src="${it.img}" alt="${it.name}" loading="lazy" decoding="async"></a>
+      <div class="meta">Category • ${title}</div>
+      <h3><a href="#">${it.name}</a></h3>
+      <p>${it.desc}</p>
+    </article>`).join('');
+  document.getElementById('prodCount').textContent=sample.length;
+
+  // بحث واقتراحات
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const searchTrigger=document.getElementById('searchTrigger');
+  const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
+  searchBox.value='';
+
+  function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
   function norm(s){return (s||'').toLowerCase().trim()}
   function mark(t,q){if(!q)return t;return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>')}
+
   function buildResults(q){
     q=norm(q); if(!q) return [];
     const out=[]; const seen=new Set();
@@ -232,9 +222,68 @@ mark{background:var(--mark); padding:0 .1em}
       if(items.length){ location.href=items[0].dataset.url; }
     }
   });
-  const searchFab=document.getElementById('searchFab');
+  document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')){ suggest.hidden=true; } });
+
+  // زر البحث العائم
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
 })();
+// --- REAL PRODUCTS (from user's Google Sheet) ---
+const PRODUCTS = [
+  {
+    brand: "Grohe",
+    model: "EURO",
+    factory: "39703000",
+    sap: "F19.501-1W4",
+    photo: "https://quotation.ebaahouse.com:5443/MaterialUploads/F19.501-1W4.jpg"
+  },
+  {
+    brand: "Grohe",
+    model: "CUBE",
+    factory: "3924500H",
+    sap: "F19.503-1W",
+    photo: "https://quotation.ebaahouse.com:5443/MaterialUploads/3924500H_1_1.jpg"
+  },
+  {
+    brand: "Grohe",
+    model: "BAU",
+    factory: "39351000",
+    sap: "F19.502-1W1",
+    photo: "https://quotation.ebaahouse.com:5443/MaterialUploads/39351000.jpg"
+  },
+  {
+    brand: "Laufen",
+    model: "PRO-A",
+    factory: "H8209560000001",
+    sap: "F21.003-1WO",
+    photo: "https://quotation.ebaahouse.com:5443/MaterialUploads/F21.003-1WO.jpg"
+  },
+  {
+    brand: "Laufen",
+    model: "PALOMBA",
+    factory: "H8208020000001",
+    sap: "F21.009-1W1",
+    photo: "https://quotation.ebaahouse.com:5443/MaterialUploads/H8208020000001.JPG"
+  }
+];
+
+// Render from PRODUCTS
+const grid = document.getElementById('grid');
+const titleForMeta = title;
+grid.innerHTML = PRODUCTS.map((it) => {
+  const displayName  = `${it.model} – ${it.brand}`;
+  const displayCodes = `${it.factory||""}<br>${it.sap||""}`;
+  const img = it.photo && it.photo.length ? it.photo
+            : `https://placehold.co/800x600?text=${encodeURIComponent(it.model)}+${encodeURIComponent(it.brand)}`;
+  return `
+    <article class="card">
+      <a class="pic" href="#"><img src="${img}" alt="${displayName}" loading="lazy" decoding="async"></a>
+      <div class="meta">Category • ${titleForMeta}</div>
+      <h3><a href="#">${displayName}</a></h3>
+      <p>${displayCodes}</p>
+    </article>`;
+}).join('');
+document.getElementById('prodCount').textContent = PRODUCTS.length;
+
 </script>
 </body>
 </html>
