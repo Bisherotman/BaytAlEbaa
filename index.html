@@ -3,33 +3,51 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bayt Al-Ebaa | Home</title>
+<title>Bayt Al-Ebaa — Home</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 <style>
 :root{
-  --brand:#003353; --brand-2:#920000; --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0;
+  --brand:#003353; --brand2:#920000;
+  --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --muted:#616a77; --line:#e6e9f0;
   --hover:rgba(0,0,0,.06); --overlay:rgba(0,0,0,.35); --side-bg:#f1f3f6
 }
 *{box-sizing:border-box}
-html,body{margin:0; font-family:"Tajawal","Poppins",system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
+html,body{margin:0; font-family:"Inter","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--bg)}
 a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
 
-/* Header */
+/* Header (unified) */
 .site-header{background:#fff; position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line); box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .site-header .wrap{max-width:1200px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:16px}
-.brand{display:flex; align-items:center; gap:10px}
 .brand img{height:60px}
 .main-nav{display:flex; align-items:center; gap:18px}
 .main-nav a{font-weight:700; color:#0b1222; border-bottom:2px solid transparent; padding-bottom:2px; transition:.2s}
 .main-nav a:hover{border-color:#cbd5e1; color:var(--brand)}
 .header-spacer{flex:1}
 
+/* Search (unified) */
+.header-search{position:relative; width:min(520px, 46vw)}
+.header-search input{width:100%; height:42px; border:1px solid var(--line); border-radius:10px; padding:0 76px 0 42px; font:inherit}
+.header-search .icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--brand)}
+.header-search .clear{position:absolute; right:10px; top:50%; transform:translateY(-50%); width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--line); border-radius:9px; background:#f6f7f9}
+.header-search .clear svg{width:14px; height:14px}
+.search-suggest{position:absolute; left:0; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 28px rgba(0,0,0,.12); padding:6px; max-height:320px; overflow:auto; z-index:65}
+.search-suggest .item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; font-size:14px}
+.search-suggest .item:hover{background:#f2f4f8}
+.search-suggest .sub{color:#111; font-weight:700}
+.search-suggest .cat{color:#6b7280; font-size:12px}
+
+/* Lang switch */
+.lang-switch{display:flex; gap:10px; align-items:center}
+.lang-switch button{border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:10px; cursor:pointer; font-weight:700}
+.lang-switch button.is-active{background:var(--brand); color:#fff; border-color:var(--brand)}
+
 /* Drawer trigger */
-.side-open{position:fixed; right:0; top:50%; transform:translate(40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-right:none; border-radius:14px 0 0 14px; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
+.side-open{position:fixed; left:auto; right:0; top:50%; transform:translate(40%, -50%); z-index:70; background:#fff; border:1px solid var(--line); border-right:none; border-radius:14px 0 0 14px; box-shadow:0 6px 22px rgba(0,0,0,.1); padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer}
 .side-open span{font-weight:800; color:#374151; font-size:15px}
 .side-open svg{width:20px; height:20px; color:#374151; transition:transform .2s ease}
 body.is-side-open .side-open svg{transform:rotate(-90deg)}
+html[dir="rtl"] .side-open{left:0; right:auto; transform:translate(-40%, -50%); border-right:1px solid var(--line); border-left:none; border-radius:0 14px 14px 0}
 
 /* Drawer + overlay */
 .sidebar-drawer{position:fixed; inset:0 0 0 auto; width:min(320px, 86vw); background:var(--side-bg); border-left:1px solid var(--line); transform:translateX(100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
@@ -37,70 +55,42 @@ body.is-side-open .side-open svg{transform:rotate(-90deg)}
 .backdrop{position:fixed; inset:0; background:var(--overlay); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:75}
 body.is-side-open .sidebar-drawer{transform:translateX(0)}
 body.is-side-open .backdrop{opacity:1; pointer-events:auto}
+html[dir="rtl"] .sidebar-drawer{inset:0 auto 0 0; border-left:none; border-right:1px solid var(--line); transform:translateX(-100%)}
+html[dir="rtl"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 
 /* Drawer content */
 .side-group{margin:6px 0; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden}
-.side-group>button{width:100%; text-align:left; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer}
+.side-group>button{width:100%; text-align:start; background:transparent; border:none; padding:12px; font-weight:800; color:#111; cursor:pointer}
 .side-sub{margin:0; padding:6px; list-style:none}
 .side-sub li a{display:flex; justify-content:space-between; gap:10px; color:#1f2937; padding:8px 10px; border-radius:8px}
 .side-sub li a:hover{background:#e9edf3}
 
-/* Hero */
+/* Hero (separate section, not sticky) */
 .hero{position:relative; min-height:56vh; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden}
-.hero::before{content:""; position:absolute; inset:0; background:url('assets/img/hero-banner.jpg') center/cover no-repeat; filter:contrast(1.05)}
+.hero::before{content:""; position:absolute; inset:0; background:url('assets/img/hero-banner.jpg') center/cover no-repeat}
 .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45))}
 .hero-inner{position:relative; z-index:2; max-width:1000px; padding:40px 24px}
 .kicker{display:inline-block; font-weight:900; letter-spacing:.6px; padding:6px 10px; border:1px solid rgba(255,255,255,.5); border-radius:999px; margin-bottom:12px}
 .hero h1{margin:0 0 12px; font-size:36px; line-height:1.2}
 .hero p{margin:0 auto 16px; max-width:820px; font-size:18px; color:#f1f5f9}
-.cta{display:inline-flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center}
 .btn{appearance:none; border:none; border-radius:12px; padding:12px 18px; font-weight:800; cursor:pointer}
 .btn-primary{background:var(--brand); color:#fff}
-.btn-primary:hover{filter:brightness(1.05)}
 .btn-ghost{background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.35)}
-.btn-ghost:hover{background:rgba(255,255,255,.18)}
 
-/* Sections */
-.section{padding:48px 0; background:var(--bg)}
+/* Basic sections */
+.section{padding:48px 0}
 .wrap{max-width:1200px; margin:0 auto; padding:0 24px}
 .section h2{margin:0 0 14px; font-size:26px}
-.lead{color:#374151}
+.card{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden}
 .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
 @media(max-width:980px){.cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.cards{grid-template-columns:1fr}}
-.card{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden}
-.card .media{aspect-ratio:25/28; background:#e5e7eb}
-.card .body{padding:14px}
-.card h3{margin:0 0 6px; font-size:18px}
-.card p{margin:0; color:#616a77; font-size:14px}
-
-/* Partners */
 .partners-logos{display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:20px; align-items:center; justify-items:center}
 .partners-logos img{max-height:60px; width:auto; object-fit:contain; filter:grayscale(100%); opacity:.85; transition:.2s}
 .partners-logos img:hover{filter:none; opacity:1; transform:scale(1.05)}
 
-/* Team */
-.team{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
-@media(max-width:820px){.team{grid-template-columns:1fr}}
-.member{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; gap:12px; align-items:center; padding:12px}
-.member img{width:88px; height:88px; border-radius:12px; object-fit:cover; background:#e5e7eb}
-.member .info h4{margin:0 0 6px; font-size:18px}
-.member .info p{margin:0; color:#616a77}
-
-/* Contact */
-.contact-grid{display:grid; grid-template-columns:2fr 1fr; gap:14px}
-@media(max-width:980px){.contact-grid{grid-template-columns:1fr}}
-.contact-card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px}
-.contact-row{display:grid; grid-template-columns:1fr 2fr; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line)}
-.contact-row:last-child{border:none}
-.badge{display:inline-block; padding:4px 8px; border-radius:999px; background:rgba(0,51,83,.08); color:var(--brand); font-weight:800}
-.map{min-height:260px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
-
-/* Footer */
 .footer{background:#0b1a28; color:#cbd5e1; padding:22px 0; margin-top:30px}
 .footer .wrap{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center}
-.social{display:flex; gap:10px}
-.social a{border:1px solid #2a3a4a; padding:8px 10px; border-radius:10px}
 </style>
 </head>
 <body>
@@ -108,141 +98,83 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 <!-- Drawer trigger -->
 <button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-  <span>Menu</span>
+  <span data-txt-en="Menu" data-txt-ar="القائمة">Menu</span>
 </button>
 <div class="backdrop" id="backdrop" hidden></div>
 
 <!-- Drawer -->
 <aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Site menu" id="drawer" aria-hidden="true">
-  <div class="inner">
-    <div class="side-group"><button type="button">Products</button>
-      <ul class="side-sub">
-        <li><a href="product-category.html#cat-wc">WC</a></li>
-        <li><a href="product-category.html#cat-wash">Wash Basins</a></li>
-        <li><a href="product-category.html#cat-mixers">Faucets</a></li>
-        <li><a href="product-category.html#cat-acc">Accessories</a></li>
-      </ul>
-    </div>
-  </div>
+  <div class="inner" id="drawerInner"></div>
 </aside>
 
 <header class="site-header" role="banner">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
-      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy" />
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy">
     </a>
     <nav class="main-nav" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="product-category.html">Products</a>
+      <a href="index.html" data-txt-en="Home" data-txt-ar="الرئيسية">Home</a>
+      <a href="product-category.html" data-txt-en="Products" data-txt-ar="التصنيفات">Products</a>
     </nav>
     <div class="header-spacer"></div>
+    <form class="header-search" role="search" aria-label="Search" onsubmit="return false;">
+      <div class="icon" id="searchTrigger">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <input id="searchBox" type="text" placeholder="Search" autocomplete="off" />
+      <button type="button" class="clear" id="clearBtn" aria-label="Clear">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="searchSuggest" class="search-suggest" hidden></div>
+    </form>
+    <div class="lang-switch" aria-label="Language">
+      <button id="btnEn" class="is-active">EN</button>
+      <button id="btnAr">ع</button>
+    </div>
   </div>
 </header>
 
+<!-- Hero (outside header so it doesn't stick) -->
 <section class="hero" aria-label="Hero">
   <div class="hero-inner">
-    <div class="kicker">Bayt Al-Ebaa — Since 1985</div>
-    <h1>World-class finishing & sanitary solutions</h1>
-    <p>Premium products and turnkey execution by expert teams, aligned with Saudi Vision 2030.</p>
+    <div class="kicker" data-txt-en="Since 1985" data-txt-ar="منذ 1985">Since 1985</div>
+    <h1 data-txt-en="Bayt Al-Ebaa — World-class finishing solutions" data-txt-ar="بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية">
+      Bayt Al-Ebaa — World-class finishing solutions
+    </h1>
+    <p data-txt-en="Founded in 1985, Bayt Al-Ebaa delivers premium finishing solutions. Our Sanitary Projects division provides cutting-edge products and turnkey execution aligned with Saudi Vision 2030."
+       data-txt-ar="بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030.">
+      Founded in 1985, Bayt Al-Ebaa delivers premium finishing solutions. Our Sanitary Projects division provides cutting-edge products and turnkey execution aligned with Saudi Vision 2030.
+    </p>
     <div class="cta">
-      <a class="btn btn-primary" href="product-category.html">Browse products</a>
-      <a class="btn btn-ghost" href="#contact">Contact us</a>
+      <a class="btn btn-primary" href="product-category.html" data-txt-en="Browse products" data-txt-ar="تصفّح المنتجات">Browse products</a>
+      <a class="btn btn-ghost" href="#contact" data-txt-en="Contact us" data-txt-ar="تواصل معنا">Contact us</a>
     </div>
   </div>
 </section>
 
-<!-- About -->
-<section class="section" id="about">
-  <div class="wrap">
-    <h2>About us</h2>
-    <p class="lead">The Sanitary Projects division delivers integrated, high-quality solutions backed by certified brands and experienced teams.</p>
-    <div class="cards" style="margin-top:12px">
-      <div class="card"><div class="body"><h3>✔ Certified warranty</h3><p>On products and services.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ Fast supply</h3><p>On-time project delivery.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ Global quality</h3><p>Top brands and standards.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ Expert team</h3><p>Experience in mega projects.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ End-to-end</h3><p>From design to installation.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ Vision 2030 ready</h3><p>Compliance and alignment.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- Key categories -->
-<section class="section" id="services">
-  <div class="wrap">
-    <h2>Key categories</h2>
-    <div class="cards">
-      <a class="card" href="subcategory.html?title=WC%20-%20Floor-Standing">
-        <div class="media"><img src="assets/img/WC_500x560.jpg" alt="WC" /></div>
-        <div class="body"><h3>WC</h3><p>Floor-Standing / Wall-Hung ...</p></div>
-      </a>
-      <a class="card" href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">
-        <div class="media"><img src="assets/img/Faucets_500x560.jpg" alt="Faucets" /></div>
-        <div class="body"><h3>Faucets</h3><p>Basin / Kitchen / Shower ...</p></div>
-      </a>
-      <a class="card" href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">
-        <div class="media"><img src="assets/img/Showers_500x5604.jpg" alt="Showers & Bathtubs" /></div>
-        <div class="body"><h3>Showers & Bathtubs</h3><p>Free-standing / Drop-in ...</p></div>
-      </a>
-    </div>
-    <div style="margin-top:14px"><a class="btn btn-primary" href="product-category.html">All products</a></div>
-  </div>
-</section>
-
-<!-- Partners (logos grid) -->
 <section class="section" id="partners">
   <div class="wrap">
-    <h2>Our partners</h2>
+    <h2 data-txt-en="Our partners" data-txt-ar="شركاؤنا">Our partners</h2>
     <div class="partners-logos">
-      <img src="assets/img/partners/grohe.png" alt="Grohe">
-      <img src="assets/img/partners/kohler.png" alt="Kohler">
+      <img src="assets/img/partners/grohe.png"   alt="Grohe">
+      <img src="assets/img/partners/kohler.png"  alt="Kohler">
       <img src="assets/img/partners/geberit.png" alt="Geberit">
-      <img src="assets/img/partners/ideal.png" alt="Ideal Standard">
+      <img src="assets/img/partners/ideal.png"   alt="Ideal Standard">
       <img src="assets/img/partners/novellini.png" alt="Novellini">
       <img src="assets/img/partners/ariston.png" alt="Ariston">
-      <img src="assets/img/partners/rodi.png" alt="Rodi">
-      <img src="assets/img/partners/loffen.png" alt="Laufen/Loffen">
+      <img src="assets/img/partners/rodi.png"    alt="Rodi">
+      <img src="assets/img/partners/loffen.png"  alt="Laufen/Loffen">
     </div>
   </div>
 </section>
 
-<!-- Team -->
-<section class="section" id="team">
-  <div class="wrap">
-    <h2>Our team</h2>
-    <div class="team">
-      <div class="member">
-        <img src="assets/img/team1.jpg" alt="Abdulmoeen Nabeel Hakami">
-        <div class="info">
-          <h4>Abdulmoeen Nabeel Hakami</h4>
-          <p>Chief Executive Officer</p>
-        </div>
-      </div>
-      <div class="member">
-        <img src="assets/img/team2.jpg" alt="Abdelhamid Abdel Aal">
-        <div class="info">
-          <h4>Abdelhamid Abdel Aal</h4>
-          <p>Projects Manager</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
 <section class="section" id="contact">
   <div class="wrap">
-    <h2>Contact us</h2>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-row"><span class="badge">Phone</span><div><a href="tel:920029007">920029007</a></div></div>
-        <div class="contact-row"><span class="badge">Email</span><div><a href="mailto:csteam@baytalebaa.com">csteam@baytalebaa.com</a></div></div>
-        <div class="contact-row"><span class="badge">Instagram</span><div><a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">@baytalebaa</a></div></div>
-        <div class="contact-row"><span class="badge">Hours</span><div>9am – 5pm (Fri off)</div></div>
-      </div>
-      <div class="map">
-        <iframe title="Bayt Al-Ebaa" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Jeddah%20Bayt%20Al%20Ebaa&output=embed"></iframe>
-      </div>
+    <h2 data-txt-en="Contact us" data-txt-ar="تواصل معنا">Contact us</h2>
+    <div class="card" style="padding:16px">
+      <p><strong>Phone:</strong> <a href="tel:920029007">920029007</a></p>
+      <p><strong>Email:</strong> <a href="mailto:csteam@baytalebaa.com">csteam@baytalebaa.com</a></p>
+      <p data-txt-en="Hours: 9am – 5pm (Fri off)" data-txt-ar="الدوام: 9 ص – 5 م (الجمعة عطلة)">Hours: 9am – 5pm (Fri off)</p>
     </div>
   </div>
 </section>
@@ -250,11 +182,7 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 <footer class="footer">
   <div class="wrap">
     <div>© <span id="y"></span> Bayt Al-Ebaa</div>
-    <div class="social">
-      <a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">Instagram</a>
-      <a href="product-category.html">Products</a>
-      <a href="#contact">Contact</a>
-    </div>
+    <div><a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">Instagram</a></div>
   </div>
 </footer>
 
@@ -263,15 +191,190 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
   // Year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Drawer
+  // ===== Drawer content (FULL catalogue) =====
+  const drawerInner=document.getElementById('drawerInner');
+  drawerInner.innerHTML = `
+    ${group('WC',[
+      ['Floor-Standing','subcategory.html?title=WC%20-%20Floor-Standing'],
+      ['Close-coupled','subcategory.html?title=WC%20-%20Close-coupled'],
+      ['Wall-Hung','subcategory.html?title=WC%20-%20Wall-Hung'],
+      ['Concealed tank','subcategory.html?title=WC%20-%20Concealed%20tank'],
+      ['Flush valve (Ex.)','subcategory.html?title=WC%20-%20Flush%20valve%20(Ex.)'],
+      ['Seats & covers','subcategory.html?title=WC%20-%20Seats%20%26%20covers'],
+      ['Eastern','subcategory.html?title=WC%20-%20Eastern'],
+      ['Handicapped','subcategory.html?title=WC%20-%20Handicapped']
+    ])}
+    ${group('Bidet',[
+      ['Floor-Standing','subcategory.html?title=Bidet%20-%20Floor-Standing'],
+      ['Wall-hung','subcategory.html?title=Bidet%20-%20Wall-hung']
+    ])}
+    ${group('Urinal',[
+      ['Top inlet','subcategory.html?title=Urinal%20-%20Top%20inlet'],
+      ['Rear inlet','subcategory.html?title=Urinal%20-%20Rear%20inlet']
+    ])}
+    ${group('Wash Basins',[
+      ['Wall-mount & Pedestals','subcategory.html?title=Wash%20Basins%20-%20Wall-mount%20%26%20Pedestals'],
+      ['One piece','subcategory.html?title=Wash%20Basins%20-%20One%20piece'],
+      ['Floor-standing','subcategory.html?title=Wash%20Basins%20-%20Floor-standing'],
+      ['Over counter','subcategory.html?title=Wash%20Basins%20-%20Over%20counter'],
+      ['Under counter','subcategory.html?title=Wash%20Basins%20-%20Under%20counter'],
+      ['Top counter','subcategory.html?title=Wash%20Basins%20-%20Top%20counter'],
+      ['Cabinet','subcategory.html?title=Wash%20Basins%20-%20Cabinet']
+    ])}
+    ${group('Showers and Bathtubs',[
+      ['Free-standing','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing'],
+      ['Drop-in','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Drop-in'],
+      ['Hydromassage','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Hydromassage'],
+      ['Shower tray','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20tray'],
+      ['Shower cabinet','subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet']
+    ])}
+    ${group('Faucets',[
+      ['Basin Mixers','subcategory.html?title=Faucets%20-%20Basin%20Mixers'],
+      ['Bath & Shower Mixers','subcategory.html?title=Faucets%20-%20Bath%20%26%20Shower%20Mixers'],
+      ['Shower systems','subcategory.html?title=Faucets%20-%20Shower%20systems'],
+      ['Shower Jets','subcategory.html?title=Faucets%20-%20Shower%20Jets'],
+      ['Kitchen Mixers','subcategory.html?title=Faucets%20-%20Kitchen%20Mixers'],
+      ['Bidet Mixers','subcategory.html?title=Faucets%20-%20Bidet%20Mixers'],
+      ['Ablution Mixers','subcategory.html?title=Faucets%20-%20Ablution%20Mixers'],
+      ['Taps','subcategory.html?title=Faucets%20-%20Taps']
+    ])}
+    ${group('Fittings',[
+      ['Angle Valves','subcategory.html?title=Fittings%20-%20Angle%20Valves'],
+      ['Showers','subcategory.html?title=Fittings%20-%20Showers'],
+      ['Flexible hoses','subcategory.html?title=Fittings%20-%20Flexible%20hoses'],
+      ['Traps','subcategory.html?title=Fittings%20-%20Traps'],
+      ['Strainers','subcategory.html?title=Fittings%20-%20Strainers'],
+      ['Pop-ups','subcategory.html?title=Fittings%20-%20Pop-ups']
+    ])}
+    ${group('Sinks',[
+      ['Stainless steel bowls','subcategory.html?title=Sinks%20-%20Stainless%20steel%20bowls'],
+      ['Cast iron bowls','subcategory.html?title=Sinks%20-%20Cast%20iron%20bowls'],
+      ['Vitreous China','subcategory.html?title=Sinks%20-%20Vitreous%20China'],
+      ['Service','subcategory.html?title=Sinks%20-%20Service']
+    ])}
+    ${group('Drains',[
+      ['Floor drains','subcategory.html?title=Drains%20-%20Floor%20drains'],
+      ['Clean-outs','subcategory.html?title=Drains%20-%20Clean-outs'],
+      ['Shower Channels','subcategory.html?title=Drains%20-%20Shower%20Channels']
+    ])}
+    ${group('Cisterns',[
+      ['Concealed for WCs','subcategory.html?title=Cisterns%20-%20Concealed%20for%20WCs'],
+      ['Concealed for Urinals','subcategory.html?title=Cisterns%20-%20Concealed%20for%20Urinals'],
+      ['Exposed','subcategory.html?title=Cisterns%20-%20Exposed'],
+      ['Elements','subcategory.html?title=Cisterns%20-%20Elements'],
+      ['Flush Valves','subcategory.html?title=Cisterns%20-%20Flush%20Valves'],
+      ['Actuator plates','subcategory.html?title=Cisterns%20-%20Actuator%20plates']
+    ])}
+    ${group('Accessories',[
+      ['Sets','subcategory.html?title=Accessories%20-%20Sets'],
+      ['Singles','subcategory.html?title=Accessories%20-%20Singles'],
+      ['Electronic','subcategory.html?title=Accessories%20-%20Electronic'],
+      ['Mirrors','subcategory.html?title=Accessories%20-%20Mirrors'],
+      ['Handicapped','subcategory.html?title=Accessories%20-%20Handicapped']
+    ])}
+    ${group('Water Heater',[
+      ['Wall-hung','subcategory.html?title=Water%20Heater%20-%20Wall-hung'],
+      ['Central','subcategory.html?title=Water%20Heater%20-%20Central'],
+      ['Solar','subcategory.html?title=Water%20Heater%20-%20Solar']
+    ])}
+  `;
+  function group(title, items){
+    return `
+      <div class="side-group">
+        <button type="button">${title}</button>
+        <ul class="side-sub">
+          ${items.map(([t,href])=>`<li><a href="${href}">${t}</a></li>`).join('')}
+        </ul>
+      </div>`;
+  }
+
+  // Drawer open/close
   const openBtn=document.getElementById('openDrawer');
-  const drawer=document.getElementById('drawer');
+  const drawer=document.querySelector('.sidebar-drawer');
   const backdrop=document.getElementById('backdrop');
-  function openDrawerFn(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
-  function closeDrawerFn(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
-  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawerFn():openDrawerFn(); });
-  backdrop.addEventListener('click',closeDrawerFn);
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawerFn(); });
+  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
+  backdrop.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
+
+  // Search suggestions (same across pages)
+  const CATALOG=[
+    {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
+    {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
+    {id:'urinal',cat:'Urinal',subs:['Top inlet','Rear inlet']},
+    {id:'wash',cat:'Wash Basins',subs:['Wall-mount & Pedestals','One piece','Floor-standing','Over counter','Under counter','Top counter','Cabinet']},
+    {id:'bath',cat:'Showers and Bathtubs',subs:['Free-standing','Drop-in','Hydromassage','Shower tray','Shower cabinet']},
+    {id:'mixers',cat:'Faucets',subs:['Basin Mixers','Bath & Shower Mixers','Shower systems','Shower Jets','Kitchen Mixers','Bidet Mixers','Ablution Mixers','Taps']},
+    {id:'fittings',cat:'Fittings',subs:['Angle Valves','Showers','Flexible hoses','Traps','Strainers','Pop-ups']},
+    {id:'sinks',cat:'Sinks',subs:['Stainless steel bowls','Cast iron bowls','Vitreous China','Service']},
+    {id:'drains',cat:'Drains',subs:['Floor drains','Clean-outs','Shower Channels']},
+    {id:'cisterns',cat:'Cisterns',subs:['Concealed for WCs','Concealed for Urinals','Exposed','Elements','Flush Valves','Actuator plates']},
+    {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
+    {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
+  ];
+  const esc=s=>s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&');
+  const norm=s=>(s||'').toLowerCase().trim();
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const suggest=document.getElementById('searchSuggest');
+  const searchTrigger=document.getElementById('searchTrigger');
+  searchBox.value='';
+  function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
+  function buildResults(q){
+    q=norm(q); if(!q) return [];
+    const out=[]; const seen=new Set();
+    CATALOG.forEach(c=>{
+      c.subs.forEach(s=>{
+        const combo=`${c.cat} - ${s}`;
+        const lcombo=combo.toLowerCase(); let score=0;
+        if(lcombo.startsWith(q)) score+=3; else if(lcombo.includes(q)) score+=1;
+        if(c.cat.toLowerCase().startsWith(q)) score+=2;
+        if(s.toLowerCase().startsWith(q)) score+=2;
+        if(score>0 && !seen.has(combo)){ seen.add(combo); out.push({cat:c.cat,sub:s,score,url:`subcategory.html?title=${encodeURIComponent(combo)}`}); }
+      });
+      if(c.cat.toLowerCase().includes(q)){
+        const key=`#${c.id}`; if(!seen.has(key)){ seen.add(key); out.push({cat:c.cat,sub:null,score:1.2,url:`product-category.html#cat-${c.id}`}); }
+      }
+    });
+    return out.sort((a,b)=>b.score-a.score).slice(0,12);
+  }
+  function renderSuggest(q){
+    const items=buildResults(q);
+    if(!q||items.length===0){ suggest.hidden=true; suggest.innerHTML=''; return; }
+    suggest.innerHTML=items.map(it=>`
+      <div class="item" data-url="${it.url}">
+        <div class="sub">${mark(it.sub?it.sub:it.cat, q)}</div>
+        <div class="cat">${it.sub?it.cat:'Category'}</div>
+      </div>`).join('');
+    suggest.hidden=false;
+    [...suggest.querySelectorAll('.item')].forEach(n=>n.addEventListener('click',()=>{location.href=n.dataset.url}));
+  }
+  function handleInput(){ renderSuggest(searchBox.value); }
+  searchBox.addEventListener('input',handleInput);
+  searchBox.addEventListener('focus',()=>renderSuggest(searchBox.value));
+  searchTrigger.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+  clearBtn.addEventListener('click',()=>{ searchBox.value=''; renderSuggest(''); searchBox.focus(); });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.header-search')) suggest.hidden=true; });
+
+  // Language toggle (default EN)
+  const btnEn=document.getElementById('btnEn'), btnAr=document.getElementById('btnAr');
+  function setLang(code){
+    const isAr = code==='ar';
+    document.documentElement.lang = isAr?'ar':'en';
+    document.documentElement.dir  = isAr?'rtl':'ltr';
+    document.querySelectorAll('[data-txt-en]').forEach(el=>{
+      const ar = el.getAttribute('data-txt-ar');
+      const en = el.getAttribute('data-txt-en');
+      el.textContent = isAr ? (ar||el.textContent) : (en||el.textContent);
+    });
+    searchBox.placeholder = isAr ? 'بحث' : 'Search';
+    btnEn.classList.toggle('is-active', !isAr);
+    btnAr.classList.toggle('is-active', isAr);
+  }
+  btnEn.addEventListener('click',()=>setLang('en'));
+  btnAr.addEventListener('click',()=>setLang('ar'));
+  setLang('en'); // default
 })();
 </script>
 </body>
