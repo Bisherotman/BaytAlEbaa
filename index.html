@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bayt Al‑Ebaa | بيت الإباء</title>
+<title>Bayt Al-Ebaa | بيت الإباء</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 <style>
 :root{
@@ -75,11 +75,10 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 .card h3{margin:0 0 6px; font-size:18px}
 .card p{margin:0; color:#616a77; font-size:14px}
 
-/* Partners */
-.partners{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:center}
-@media(max-width:820px){.partners{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.partners{grid-template-columns:repeat(2,1fr)}}
-.partner{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; display:grid; place-items:center; min-height:86px; font-weight:800; color:#111}
+/* Partners (logos grid) */
+.partners-logos{display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:20px; align-items:center; justify-items:center}
+.partners-logos img{max-height:60px; width:auto; object-fit:contain; filter:grayscale(100%); opacity:.85; transition:.2s}
+.partners-logos img:hover{filter:none; opacity:1; transform:scale(1.05)}
 
 /* Team */
 .team{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
@@ -174,8 +173,11 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 <section class="hero" aria-label="Hero">
   <div class="hero-inner">
     <div class="kicker" data-txt-ar="منذ 1985" data-txt-en="Since 1985">منذ 1985</div>
-    <h1 data-txt-ar="بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية" data-txt-en="Bayt Al‑Ebaa — World‑class finishing solutions">بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية</h1>
-    <p data-txt-ar="بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030." data-txt-en="Founded in 1985, Bayt Al‑Ebaa delivers premium finishing solutions. Our Sanitary Projects division provides cutting‑edge products and turnkey execution aligned with Saudi Vision 2030.">بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030.</p>
+    <h1 data-txt-ar="بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية" data-txt-en="Bayt Al-Ebaa — World-class finishing solutions">بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية</h1>
+    <p data-txt-ar="بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030."
+       data-txt-en="Founded in 1985, Bayt Al-Ebaa delivers premium finishing solutions. Our Sanitary Projects division provides cutting-edge products and turnkey execution aligned with Saudi Vision 2030.">
+       بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030.
+    </p>
     <div class="cta">
       <a class="btn btn-primary" href="product-category.html" data-txt-ar="تصفّح المنتجات" data-txt-en="Browse products">تصفّح المنتجات</a>
       <a class="btn btn-ghost" href="#contact" data-txt-ar="تواصل معنا" data-txt-en="Contact us">تواصل معنا</a>
@@ -187,7 +189,10 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 <section class="section" id="about">
   <div class="wrap">
     <h2 data-txt-ar="نبذة عنّا" data-txt-en="About us">نبذة عنّا</h2>
-    <p class="lead" data-txt-ar="قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة" data-txt-en="Our Sanitary Projects division delivers integrated, high‑quality solutions with a clear vision for execution.">قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة</p>
+    <p class="lead" data-txt-ar="قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة"
+       data-txt-en="Our Sanitary Projects division delivers integrated, high-quality solutions with a clear vision for execution.">
+       قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة
+    </p>
     <div class="cards" style="margin-top:12px">
       <div class="card"><div class="body"><h3>✔ ضمان معتمد</h3><p>على المنتجات والخدمات.</p></div></div>
       <div class="card"><div class="body"><h3>✔ سرعة توريد</h3><p>تسليم في الوقت المحدد.</p></div></div>
@@ -206,7 +211,7 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
     <div class="cards">
       <a class="card" href="subcategory.html?title=WC%20-%20Floor-Standing">
         <div class="media"><img src="assets/img/WC_500x560.jpg" alt="WC" /></div>
-        <div class="body"><h3>WC</h3><p>Floor‑Standing / Wall‑Hung ...</p></div>
+        <div class="body"><h3>WC</h3><p>Floor-Standing / Wall-Hung ...</p></div>
       </a>
       <a class="card" href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">
         <div class="media"><img src="assets/img/Faucets_500x560.jpg" alt="Faucets" /></div>
@@ -214,26 +219,26 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
       </a>
       <a class="card" href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">
         <div class="media"><img src="assets/img/Showers_500x5604.jpg" alt="Showers & Bathtubs" /></div>
-        <div class="body"><h3>Showers & Bathtubs</h3><p>Free‑standing / Drop‑in ...</p></div>
+        <div class="body"><h3>Showers & Bathtubs</h3><p>Free-standing / Drop-in ...</p></div>
       </a>
     </div>
     <div style="margin-top:14px"><a class="btn btn-primary" href="product-category.html" data-txt-ar="كل التصنيفات" data-txt-en="All products">كل التصنيفات</a></div>
   </div>
 </section>
 
-<!-- Partners -->
+<!-- Partners (logos grid) -->
 <section class="section" id="partners">
   <div class="wrap">
     <h2 data-txt-ar="شركاؤنا" data-txt-en="Our partners">شركاؤنا</h2>
-    <div class="partners">
-      <div class="partner">GROHE</div>
-      <div class="partner">KOHLER</div>
-      <div class="partner">GEBERIT</div>
-      <div class="partner">IDEAL STANDARD</div>
-      <div class="partner">NOVELLINI</div>
-      <div class="partner">ARISTON</div>
-      <div class="partner">RODI</div>
-      <div class="partner">LOFEN</div>
+    <div class="partners-logos">
+      <img src="assets/img/partners/grohe.png" alt="Grohe">
+      <img src="assets/img/partners/kohler.png" alt="Kohler">
+      <img src="assets/img/partners/geberit.png" alt="Geberit">
+      <img src="assets/img/partners/ideal.png" alt="Ideal Standard">
+      <img src="assets/img/partners/novellini.png" alt="Novellini">
+      <img src="assets/img/partners/ariston.png" alt="Ariston">
+      <img src="assets/img/partners/rodi.png" alt="Rodi">
+      <img src="assets/img/partners/loffen.png" alt="Laufen/Loffen">
     </div>
   </div>
 </section>
@@ -273,7 +278,7 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
         <div class="contact-row"><span class="badge">الساعات</span><div data-txt-ar="من 9 صباحًا حتى 5 مساءً — الجمعة عطلة" data-txt-en="9am – 5pm, Friday off">من 9 صباحًا حتى 5 مساءً — الجمعة عطلة</div></div>
       </div>
       <div class="map">
-        <iframe title="Bayt Al‑Ebaa" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Jeddah%20Bayt%20Al%20Ebaa&output=embed"></iframe>
+        <iframe title="Bayt Al-Ebaa" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Jeddah%20Bayt%20Al%20Ebaa&output=embed"></iframe>
       </div>
     </div>
   </div>
@@ -281,7 +286,7 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 
 <footer class="footer">
   <div class="wrap">
-    <div>© <span id="y"></span> Bayt Al‑Ebaa</div>
+    <div>© <span id="y"></span> Bayt Al-Ebaa</div>
     <div class="social">
       <a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">Instagram</a>
       <a href="product-category.html" data-txt-ar="التصنيفات" data-txt-en="Products">التصنيفات</a>
@@ -302,7 +307,6 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
     const isAr = code==='ar';
     document.documentElement.lang = isAr?'ar':'en';
     document.documentElement.dir = isAr?'rtl':'ltr';
-    // swap texts
     document.querySelectorAll('[data-txt-ar]').forEach(el=>{
       el.textContent = isAr ? el.getAttribute('data-txt-ar') : (el.getAttribute('data-txt-en')||el.textContent);
     });
