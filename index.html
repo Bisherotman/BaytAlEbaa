@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bayt Al-Ebaa | بيت الإباء</title>
+<title>Bayt Al‑Ebaa | بيت الإباء</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
 <style>
 :root{
@@ -21,8 +21,8 @@ img{max-width:100%; display:block}
 .brand{display:flex; align-items:center; gap:10px}
 .brand img{height:60px}
 .main-nav{display:flex; align-items:center; gap:18px}
-.main-nav a{font-weight:700; color:#0b1222; border-bottom:2px solid transparent; padding-bottom:2px}
-.main-nav a:hover{border-color:#cbd5e1}
+.main-nav a{font-weight:700; color:#0b1222; border-bottom:2px solid transparent; padding-bottom:2px; transition:.2s}
+.main-nav a:hover{border-color:#cbd5e1; color:var(--brand)}
 .header-spacer{flex:1}
 .lang-switch{display:flex; gap:10px; align-items:center}
 .lang-switch button{border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:10px; cursor:pointer; font-weight:700}
@@ -75,7 +75,7 @@ body.is-side-open .backdrop{opacity:1; pointer-events:auto}
 .card h3{margin:0 0 6px; font-size:18px}
 .card p{margin:0; color:#616a77; font-size:14px}
 
-/* Partners (logos grid) */
+/* Partners */
 .partners-logos{display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:20px; align-items:center; justify-items:center}
 .partners-logos img{max-height:60px; width:auto; object-fit:contain; filter:grayscale(100%); opacity:.85; transition:.2s}
 .partners-logos img:hover{filter:none; opacity:1; transform:scale(1.05)}
@@ -114,122 +114,71 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
 <!-- Drawer trigger -->
 <button class="side-open" id="openDrawer" aria-label="Open menu" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-  <span data-txt-ar="القائمة" data-txt-en="Menu">القائمة</span>
+  <span>القائمة</span>
 </button>
 <div class="backdrop" id="backdrop" hidden></div>
 
 <!-- Drawer -->
-<aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Catalogue navigation" id="drawer" aria-hidden="true">
+<aside class="sidebar-drawer" role="dialog" aria-modal="true" aria-label="Site menu" id="drawer" aria-hidden="true">
   <div class="inner">
-    <!-- أقسام مختصرة تربط لصفحة التصنيفات -->
-    <div class="side-group">
-      <button type="button">WC</button>
+    <div class="side-group"><button>التصنيفات</button>
       <ul class="side-sub">
-        <li><a href="subcategory.html?title=WC%20-%20Floor-Standing">Floor-Standing</a></li>
-        <li><a href="subcategory.html?title=WC%20-%20Close-coupled">Close-coupled</a></li>
-        <li><a href="subcategory.html?title=WC%20-%20Wall-Hung">Wall-Hung</a></li>
-      </ul>
-    </div>
-    <div class="side-group">
-      <button type="button">Faucets</button>
-      <ul class="side-sub">
-        <li><a href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">Basin Mixers</a></li>
-        <li><a href="subcategory.html?title=Faucets%20-%20Shower%20systems">Shower systems</a></li>
-      </ul>
-    </div>
-    <div class="side-group">
-      <button type="button">Showers & Bathtubs</button>
-      <ul class="side-sub">
-        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">Free-standing</a></li>
-        <li><a href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Shower%20cabinet">Shower cabinet</a></li>
-      </ul>
-    </div>
-    <div class="side-group">
-      <button type="button">Product Category</button>
-      <ul class="side-sub">
-        <li><a href="product-category.html">All Products</a></li>
+        <li><a href="product-category.html#cat-wc">WC</a></li>
+        <li><a href="product-category.html#cat-wash">Wash Basins</a></li>
+        <li><a href="product-category.html#cat-mixers">Faucets</a></li>
+        <li><a href="product-category.html#cat-acc">Accessories</a></li>
       </ul>
     </div>
   </div>
 </aside>
 
-<header class="site-header" role="banner">
+<header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Bayt Al Ebaa">
-      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo" loading="lazy" />
+    <a class="brand" href="index.html">
+      <img src="assets/img/1.jpg" alt="Bayt Al Ebaa Logo">
     </a>
-    <nav class="main-nav" aria-label="Primary">
-      <a href="index.html" data-txt-ar="الرئيسية" data-txt-en="Home">الرئيسية</a>
-      <a href="product-category.html" data-txt-ar="التصنيفات" data-txt-en="Product category">التصنيفات</a>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="product-category.html">التصنيفات</a>
     </nav>
     <div class="header-spacer"></div>
-    <div class="lang-switch" aria-label="Language">
-      <button id="btnAr" class="is-active">ع</button>
-      <button id="btnEn">EN</button>
+    <div class="lang-switch">
+      <button class="is-active">AR</button>
+      <button>EN</button>
     </div>
   </div>
 </header>
 
-<section class="hero" aria-label="Hero">
+<section class="hero">
   <div class="hero-inner">
-    <div class="kicker" data-txt-ar="منذ 1985" data-txt-en="Since 1985">منذ 1985</div>
-    <h1 data-txt-ar="بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية" data-txt-en="Bayt Al-Ebaa — World-class finishing solutions">بيت الإباء – حلول تشطيب وأكساء بمعايير عالمية</h1>
-    <p data-txt-ar="بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030."
-       data-txt-en="Founded in 1985, Bayt Al-Ebaa delivers premium finishing solutions. Our Sanitary Projects division provides cutting-edge products and turnkey execution aligned with Saudi Vision 2030.">
-       بيت الإباء، منذ تأسيسها عام 1985، تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها، حيث يوفّر أحدث المنتجات العالمية وخدمات متخصصة لتنفيذ مشاريع متكاملة بجودة عالية، عبر كوادر مؤهلة وتقنيات متطورة، بما يواكب تطلعات رؤية السعودية 2030.
-    </p>
+    <div class="kicker">بيت الإباء / Bayt Al‑Ebaa</div>
+    <h1>بيت الإباء، منذ 1985</h1>
+    <p>تميّزت بتقديم أفضل حلول التشطيب والأكساء. واليوم يبرز قسم مشاريع الأدوات الصحية كأحد أقوى أقسامها...</p>
     <div class="cta">
-      <a class="btn btn-primary" href="product-category.html" data-txt-ar="تصفّح المنتجات" data-txt-en="Browse products">تصفّح المنتجات</a>
-      <a class="btn btn-ghost" href="#contact" data-txt-ar="تواصل معنا" data-txt-en="Contact us">تواصل معنا</a>
+      <a class="btn btn-primary" href="product-category.html">تصفح المنتجات</a>
+      <a class="btn btn-ghost" href="#contact">تواصل معنا</a>
     </div>
   </div>
 </section>
 
-<!-- About -->
 <section class="section" id="about">
   <div class="wrap">
-    <h2 data-txt-ar="نبذة عنّا" data-txt-en="About us">نبذة عنّا</h2>
-    <p class="lead" data-txt-ar="قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة"
-       data-txt-en="Our Sanitary Projects division delivers integrated, high-quality solutions with a clear vision for execution.">
-       قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة
-    </p>
-    <div class="cards" style="margin-top:12px">
-      <div class="card"><div class="body"><h3>✔ ضمان معتمد</h3><p>على المنتجات والخدمات.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ سرعة توريد</h3><p>تسليم في الوقت المحدد.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ شهادات جودة</h3><p>من علامات عالمية.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ فريق متخصص</h3><p>خبرة في المشاريع الكبرى.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ حلول متكاملة</h3><p>من التصميم حتى التركيب.</p></div></div>
-      <div class="card"><div class="body"><h3>✔ التزام بالرؤية</h3><p>متطلبات رؤية 2030.</p></div></div>
-    </div>
+    <h2>نبذة عنّا</h2>
+    <p class="lead">قسم مشاريع الأدوات الصحية في بيت الإباء يوفّر أحدث الحلول المتكاملة بجودة عالية لتنفيذ المشاريع وفق رؤية واضحة.</p>
+    <ul>
+      <li>ضمان معتمد على المنتجات والخدمات.</li>
+      <li>سرعة توريد وتوفير المواد للمشاريع في الوقت المحدد.</li>
+      <li>شهادات جودة من علامات تجارية عالمية.</li>
+      <li>فريق متخصص بخبرة في تنفيذ المشاريع الكبرى.</li>
+      <li>حلول متكاملة من التصميم حتى التركيب والدعم الفني.</li>
+      <li>التزام بالمعايير ومتطلبات رؤية السعودية 2030.</li>
+    </ul>
   </div>
 </section>
 
-<!-- Services / link to catalog categories -->
-<section class="section" id="services">
-  <div class="wrap">
-    <h2 data-txt-ar="أقسامنا الرئيسية" data-txt-en="Key categories">أقسامنا الرئيسية</h2>
-    <div class="cards">
-      <a class="card" href="subcategory.html?title=WC%20-%20Floor-Standing">
-        <div class="media"><img src="assets/img/WC_500x560.jpg" alt="WC" /></div>
-        <div class="body"><h3>WC</h3><p>Floor-Standing / Wall-Hung ...</p></div>
-      </a>
-      <a class="card" href="subcategory.html?title=Faucets%20-%20Basin%20Mixers">
-        <div class="media"><img src="assets/img/Faucets_500x560.jpg" alt="Faucets" /></div>
-        <div class="body"><h3>Faucets</h3><p>Basin / Kitchen / Shower ...</p></div>
-      </a>
-      <a class="card" href="subcategory.html?title=Showers%20and%20Bathtubs%20-%20Free-standing">
-        <div class="media"><img src="assets/img/Showers_500x5604.jpg" alt="Showers & Bathtubs" /></div>
-        <div class="body"><h3>Showers & Bathtubs</h3><p>Free-standing / Drop-in ...</p></div>
-      </a>
-    </div>
-    <div style="margin-top:14px"><a class="btn btn-primary" href="product-category.html" data-txt-ar="كل التصنيفات" data-txt-en="All products">كل التصنيفات</a></div>
-  </div>
-</section>
-
-<!-- Partners (logos grid) -->
 <section class="section" id="partners">
   <div class="wrap">
-    <h2 data-txt-ar="شركاؤنا" data-txt-en="Our partners">شركاؤنا</h2>
+    <h2>شركاؤنا</h2>
     <div class="partners-logos">
       <img src="assets/img/partners/grohe.png" alt="Grohe">
       <img src="assets/img/partners/kohler.png" alt="Kohler">
@@ -238,94 +187,63 @@ html[dir="ltr"] body.is-side-open .sidebar-drawer{transform:translateX(0)}
       <img src="assets/img/partners/novellini.png" alt="Novellini">
       <img src="assets/img/partners/ariston.png" alt="Ariston">
       <img src="assets/img/partners/rodi.png" alt="Rodi">
-      <img src="assets/img/partners/loffen.png" alt="Laufen/Loffen">
+      <img src="assets/img/partners/loffen.png" alt="Loffen">
     </div>
   </div>
 </section>
 
-<!-- Team -->
 <section class="section" id="team">
   <div class="wrap">
-    <h2 data-txt-ar="فريق العمل" data-txt-en="Our team">فريق العمل</h2>
+    <h2>فريق العمل</h2>
     <div class="team">
       <div class="member">
-        <img src="https://placehold.co/176x176" alt="عبدالمعين نبيل حاكمي"/>
+        <img src="assets/img/team1.jpg" alt="عبدالمعين نبيل حاكمي">
         <div class="info">
           <h4>عبدالمعين نبيل حاكمي</h4>
-          <p data-txt-ar="المدير التنفيذي" data-txt-en="Chief Executive Officer">المدير التنفيذي</p>
+          <p>المدير التنفيذي</p>
         </div>
       </div>
       <div class="member">
-        <img src="https://placehold.co/176x176" alt="عبدالحميد عبد العال"/>
+        <img src="assets/img/team2.jpg" alt="عبدالحميد عبد العال">
         <div class="info">
           <h4>عبدالحميد عبد العال</h4>
-          <p data-txt-ar="مدير المشاريع" data-txt-en="Projects Manager">مدير المشاريع</p>
+          <p>مدير المشاريع</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
 <section class="section" id="contact">
-  <div class="wrap">
-    <h2 data-txt-ar="تواصل معنا" data-txt-en="Contact us">تواصل معنا</h2>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-row"><span class="badge">الهاتف</span><div><a href="tel:920029007">920029007</a></div></div>
-        <div class="contact-row"><span class="badge">الإيميل</span><div><a href="mailto:csteam@baytalebaa.com">csteam@baytalebaa.com</a></div></div>
-        <div class="contact-row"><span class="badge">Instagram</span><div><a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">@baytalebaa</a></div></div>
-        <div class="contact-row"><span class="badge">الساعات</span><div data-txt-ar="من 9 صباحًا حتى 5 مساءً — الجمعة عطلة" data-txt-en="9am – 5pm, Friday off">من 9 صباحًا حتى 5 مساءً — الجمعة عطلة</div></div>
-      </div>
-      <div class="map">
-        <iframe title="Bayt Al-Ebaa" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Jeddah%20Bayt%20Al%20Ebaa&output=embed"></iframe>
-      </div>
+  <div class="wrap contact-grid">
+    <div class="contact-card">
+      <h2>تواصل معنا</h2>
+      <div class="contact-row"><span class="badge">📍</span><span>السعودية – جدة</span></div>
+      <div class="contact-row"><span class="badge">📞</span><span>920029007</span></div>
+      <div class="contact-row"><span class="badge">✉️</span><span>csteam@baytalebaa.com</span></div>
+      <div class="contact-row"><span class="badge">⏰</span><span>الرد خلال 24 ساعة، الجمعة عطلة</span></div>
+    </div>
+    <div class="map">
+      <iframe src="https://www.google.com/maps/embed?..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="wrap">
-    <div>© <span id="y"></span> Bayt Al-Ebaa</div>
+    <div>© 2025 بيت الإباء</div>
     <div class="social">
-      <a href="https://instagram.com/baytalebaa" target="_blank" rel="noopener">Instagram</a>
-      <a href="product-category.html" data-txt-ar="التصنيفات" data-txt-en="Products">التصنيفات</a>
-      <a href="#contact" data-txt-ar="تواصل" data-txt-en="Contact">تواصل</a>
+      <a href="https://www.instagram.com/baytalebaa/">Instagram</a>
     </div>
   </div>
 </footer>
 
 <script>
-(function(){
-  // Year
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  // Language toggle (lightweight)
-  const btnAr=document.getElementById('btnAr');
-  const btnEn=document.getElementById('btnEn');
-  function setLang(code){
-    const isAr = code==='ar';
-    document.documentElement.lang = isAr?'ar':'en';
-    document.documentElement.dir = isAr?'rtl':'ltr';
-    document.querySelectorAll('[data-txt-ar]').forEach(el=>{
-      el.textContent = isAr ? el.getAttribute('data-txt-ar') : (el.getAttribute('data-txt-en')||el.textContent);
-    });
-    btnAr.classList.toggle('is-active', isAr);
-    btnEn.classList.toggle('is-active', !isAr);
-  }
-  btnAr.addEventListener('click',()=>setLang('ar'));
-  btnEn.addEventListener('click',()=>setLang('en'));
-
-  // Drawer
-  const openBtn=document.getElementById('openDrawer');
-  const drawer=document.getElementById('drawer');
-  const backdrop=document.getElementById('backdrop');
-  function openDrawer(){ document.body.classList.add('is-side-open'); backdrop.hidden=false; openBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
-  function closeDrawer(){ document.body.classList.remove('is-side-open'); backdrop.hidden=true; openBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
-  openBtn.addEventListener('click',()=>{ document.body.classList.contains('is-side-open')?closeDrawer():openDrawer(); });
-  backdrop.addEventListener('click',closeDrawer);
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('is-side-open')) closeDrawer(); });
-})();
-</script>
-</body>
-</html>
+// Drawer toggle
+const openBtn=document.getElementById('openDrawer');
+const drawer=document.getElementById('drawer');
+const backdrop=document.getElementById('backdrop');
+function openDrawer(){document.body.classList.add('is-side-open');backdrop.hidden=false;}
+function closeDrawer(){document.body.classList.remove('is-side-open');backdrop.hidden=true;}
+openBtn.addEventListener('click',()=>{document.body.classList.contains('is-side-open')?closeDrawer():openDrawer()});
+back
