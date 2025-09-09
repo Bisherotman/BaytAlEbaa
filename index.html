@@ -594,23 +594,25 @@ mark{background:var(--mark); padding:0 .1em}
 
 <script>
 (function(){
-  // نفس سكريبتك السابق (لمساته الخفيفة فقط)
-  document.getElementById('searchBox').value='';
+  // تفريغ صندوق البحث عند التحميل
+  const searchBox=document.getElementById('searchBox');
+  const clearBtn=document.getElementById('clearBtn');
+  const noResults=document.getElementById('noResults');
+  const searchTrigger=document.getElementById('searchTrigger'); // تعريف مرّة واحدة فقط
+  const suggest=document.getElementById('searchSuggest');
+  const searchFab=document.getElementById('searchFab');
+  searchBox.value='';
 
-  // صور الكروت
+  // تعبئة صور الكروت (إصلاح توقفها)
   document.querySelectorAll('.tile').forEach(t=>{
-    const s=t.getAttribute('data-img'); const i=t.querySelector('img'); if(s&&i){ i.src=s; i.setAttribute('decoding','async'); }
+    const s=t.getAttribute('data-img');
+    const i=t.querySelector('img');
+    if(s&&i){ i.src=s; i.setAttribute('decoding','async'); i.loading='lazy'; }
   });
 
   const tiles=[...document.querySelectorAll('.tile')];
   const toggles=[...document.querySelectorAll('.tile-toggle')];
   const medias=[...document.querySelectorAll('.tile-media')];
-  const searchBox=document.getElementById('searchBox');
-  const clearBtn=document.getElementById('clearBtn');
-  const noResults=document.getElementById('noResults');
-  const searchTrigger=document.getElementById('searchTrigger');
-  const suggest=document.getElementById('searchSuggest');
-  const searchFab=document.getElementById('searchFab');
 
   const hlNodes=[...document.querySelectorAll('.hl')];
   hlNodes.forEach(n=>n.dataset.orig=n.textContent);
@@ -643,9 +645,10 @@ mark{background:var(--mark); padding:0 .1em}
     });
   }
 
+  // مساعدات البحث/التظليل
   function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
   function mark(t,q){ if(!q) return t; return t.replace(new RegExp('('+esc(q)+')','ig'),'<mark>$1</mark>'); }
-  function highlight(q){ [...hlNodes].forEach(n=>{ const base=n.dataset.orig||n.textContent; n.innerHTML=q?mark(base,q):base; }); }
+  function highlight(q){ hlNodes.forEach(n=>{ const base=n.dataset.orig||n.textContent; n.innerHTML=q?mark(base,q):base; }); }
   function norm(s){return (s||'').toLowerCase().trim()}
 
   function filterTiles(){
@@ -680,7 +683,7 @@ mark{background:var(--mark); padding:0 .1em}
     noResults.style.display=any?'none':'';
   }
 
-  // اقتراحات (مختصرة للحجم)
+  // اقتراحات البحث (مختصرة)
   const CATALOG=[
     {id:'wc',cat:'WC',subs:['Floor-Standing','Close-coupled','Wall-Hung','Concealed tank','Flush valve (Ex.)','Seats & covers','Eastern','Handicapped']},
     {id:'bidet',cat:'Bidet',subs:['Floor-Standing','Wall-hung']},
@@ -695,9 +698,6 @@ mark{background:var(--mark); padding:0 .1em}
     {id:'acc',cat:'Accessories',subs:['Sets','Singles','Electronic','Mirrors','Handicapped']},
     {id:'wh',cat:'Water Heater',subs:['Wall-hung','Central','Solar']}
   ];
-  const searchTrigger=document.getElementById('searchTrigger');
-  const suggest=document.getElementById('searchSuggest');
-
   function buildResults(q){
     q=norm(q); if(!q) return [];
     const out=[]; const seen=new Set();
@@ -741,7 +741,7 @@ mark{background:var(--mark); padding:0 .1em}
     }
   });
 
-  // Drawer
+  // Drawer (زر الـ Menu يرجع يشتغل)
   const openBtn=document.getElementById('openDrawer');
   const drawer=document.getElementById('drawer');
   const backdrop=document.getElementById('backdrop');
@@ -764,8 +764,8 @@ mark{background:var(--mark); padding:0 .1em}
   }
   showAllBtn.addEventListener('click',()=>{ const next = showAllBtn.getAttribute('aria-pressed') !== 'true'; setGlobalOpen(next); });
 
-  // Floating search button
-  document.getElementById('searchFab').addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
+  // زر البحث العائم
+  searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
 
   // init
   filterTiles();
@@ -773,3 +773,4 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
+
