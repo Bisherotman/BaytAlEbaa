@@ -162,7 +162,25 @@ mark{background:var(--mark); padding:0 .1em}
   height: 14px !important;
   flex-shrink: 0;
 }
+/* Breadcrumb fix */
+.page-head{background:#fff; border-bottom:1px solid var(--line)}
+.page-head .wrap{max-width:1200px; margin:0 auto; padding:16px 24px}
 
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;        /* لو صغرت الشاشة ما بيتكسر شكله */
+  color:#6b7280;
+  font-size:13px;
+}
+.breadcrumb a{
+  color:#4b5563;
+  border-bottom:1px solid transparent;
+  font-weight:600;       /* ترجع قوة النص مثل قبل */
+}
+.breadcrumb a:hover{border-color:#9ca3af}
+.breadcrumb span[aria-hidden="true"]{opacity:.55}
 </style>
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=4">
@@ -779,5 +797,6 @@ mark{background:var(--mark); padding:0 .1em}
 </script>
 </body>
 </html>
+
 
 
