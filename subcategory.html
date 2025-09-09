@@ -227,6 +227,36 @@ mark{background:var(--mark); padding:0 .1em}
   // زر البحث العائم
   searchFab.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); searchBox.focus(); });
 })();
+// --- REAL PRODUCTS (from user list) ---
+const PRODUCTS = [
+  {brand:"Grohe", model:"EURO",  factory:"39703000",  sap:"F19.501-1W4"},
+  {brand:"Grohe", model:"CUBE",  factory:"3924500H",  sap:"F19.503-1W"},
+  {brand:"Grohe", model:"BAU",   factory:"39351000",  sap:"F19.502-1W1"},
+  // The next two were read from a screenshot; please verify exact codes:
+  {brand:"Laufen", model:"PRO-A",    factory:"H8209560000C",  sap:"F21.003-1WO"}, // verify: last char 'O'?
+  {brand:"Laufen", model:"PALOMBA",  factory:"H82080200000C", sap:"F21.009-1W1"}, // verify factory code
+];
+
+// You can add more like:
+// PRODUCTS.push({brand:"Brand", model:"Model", factory:"", sap:""});
+
+// Generate cards from PRODUCTS
+const grid = document.getElementById('grid');
+const titleForMeta = title; // from earlier
+grid.innerHTML = PRODUCTS.map((it, i) => {
+  const displayName = `${it.model} – ${it.brand}`;
+  const displayCodes = `${it.factory ? it.factory : ""}<br>${it.sap ? it.sap : ""}`;
+  const img = `https://placehold.co/800x600?text=${encodeURIComponent(it.model)}+${encodeURIComponent(it.brand)}`;
+  return `
+    <article class="card">
+      <a class="pic" href="#"><img src="${img}" alt="${displayName}" loading="lazy" decoding="async"></a>
+      <div class="meta">Category • ${titleForMeta}</div>
+      <h3><a href="#">${displayName}</a></h3>
+      <p>${displayCodes}</p>
+    </article>`;
+}).join('');
+document.getElementById('prodCount').textContent = PRODUCTS.length;
+
 </script>
 </body>
 </html>
